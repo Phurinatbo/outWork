@@ -18,7 +18,7 @@
     <style>
         :root {
             --primary-navy: #1f3b5c;
-            --bg-yellow: #FFFAE4; /* สีพื้นหลังหลัก */
+            --bg-yellow: #FFFAE4; 
             --box-red: #dc3545;
             --box-green: #28a745;
             --box-yellow: #FCE686;
@@ -28,7 +28,6 @@
         body {
             font-family: 'Prompt', sans-serif;
             background-color: var(--bg-yellow);
-            /* เพิ่มลายตาราง (Grid Pattern) สีเทาอ่อนๆ ให้ดูมีมิติเหมือนสมุดกราฟ/เกม */
             background-image: 
                 linear-gradient(rgba(0, 0, 0, 0.03) 2px, transparent 2px),
                 linear-gradient(90deg, rgba(0, 0, 0, 0.03) 2px, transparent 2px);
@@ -38,7 +37,6 @@
             position: relative;
         }
 
-        /* เพิ่มวงกลมเบลอๆ ลอยอยู่ด้านหลังเพื่อสร้างมิติ (Glow Effect) */
         body::before {
             content: '';
             position: absolute;
@@ -72,7 +70,6 @@
             50% { transform: translateY(30px) scale(1.1); }
         }
 
-        /* Auto-hide Navbar */
         #header {
             transition: all 0.4s ease-in-out;
             background: rgba(255, 255, 255, 0.98);
@@ -80,7 +77,6 @@
         }
         .header-hidden { transform: translateY(-100%); }
 
-        /* Main Form Container */
         .assessment-container {
             background-color: rgba(255, 255, 255, 0.85); 
             backdrop-filter: blur(10px); 
@@ -103,7 +99,6 @@
             text-shadow: 2px 2px 0px #fff;
         }
 
-        /* Styling for Questions */
         .question-block {
             background-color: #fff; 
             border: 2px solid #e2e8f0;
@@ -135,7 +130,6 @@
             line-height: 1.6;
         }
 
-        /* Checkbox Option Styles */
         .opt-wrapper {
             display: flex;
             align-items: center;
@@ -162,12 +156,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.8rem; /* เพิ่มขนาดเครื่องหมายถูก */
+            line-height: 1;
             color: #000;
             font-weight: bold;
             transition: all 0.2s;
             box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
+        
+        /* ปรับตำแหน่งเครื่องหมายให้ตรงกลาง */
+        .bi-check-lg::before { transform: translateY(2px); }
 
         .bg-red { background-color: var(--box-red); }
         .bg-green { background-color: var(--box-green); }
@@ -178,7 +177,6 @@
             font-weight: 700;
         }
 
-        /* Evaluation Section */
         .eval-section {
             background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(252,230,134,0.3) 100%);
             border: 4px solid var(--primary-navy);
@@ -188,12 +186,11 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        /* Submit Button */
         .btn-submit {
             background-color: var(--accent-orange);
             color: #fff;
             border: 4px solid #000;
-            border-radius: 50px;
+            border-radius: 50px; 
             padding: 15px 80px;
             font-size: 1.8rem;
             font-weight: 900;
@@ -224,7 +221,7 @@
         }
         
         /* =========================================
-           RESPONSIVE (ปรับให้พอดีกับมือถือ)
+           RESPONSIVE (ปรับปรุงใหม่ตามภาพ)
            ========================================= */
         @media (max-width: 991px) {
             .assessment-container { padding: 40px 30px; margin-top: 100px; }
@@ -232,30 +229,29 @@
         }
 
         @media (max-width: 768px) {
-            .assessment-container { padding: 30px 15px; margin-top: 90px; }
-            .page-title { font-size: 2rem; margin-bottom: 30px; }
+            .assessment-container { padding: 25px 15px; margin-top: 85px; border-radius: 15px; }
+            .page-title { font-size: 1.8rem; margin-bottom: 25px; }
             
-            .question-block { padding: 20px 15px; }
-            .q-title { font-size: 1.15rem; }
-            .q-desc { font-size: 0.9rem; padding-left: 10px; }
+            .question-block { padding: 15px; border-radius: 12px; margin-bottom: 15px; }
+            .q-title { font-size: 1.1rem; line-height: 1.4; }
+            .q-desc { font-size: 0.9rem; padding-left: 10px; margin-bottom: 3px; }
 
-            /* ปรับปุ่มตัวเลือกให้สมดุลบนมือถือ */
-            .opt-wrapper { padding: 12px 15px; width: 100%; }
-            .color-box { width: 40px; height: 40px; font-size: 1.6rem; }
-            .opt-text { font-size: 1.1rem; }
+            .opt-wrapper { padding: 8px 12px; width: 100%; border-radius: 8px; margin-bottom: 8px; }
+            .color-box { width: 35px; height: 35px; font-size: 2.2rem; margin-right: 12px; border-width: 2px; box-shadow: 2px 2px 0px rgba(0,0,0,0.1); }
+            .opt-text { font-size: 1.05rem; }
 
-            .eval-section { padding: 25px 15px; margin-top: 30px; }
-            .eval-section h3 { font-size: 1.5rem; }
+            .eval-section { padding: 20px 15px; margin-top: 30px; border-radius: 12px; }
+            .eval-section h3 { font-size: 1.4rem; margin-bottom: 15px !important; }
+            .eval-section .gy-3 > div { margin-bottom: 5px; }
             
-            .btn-submit { width: 100%; padding: 15px 0; font-size: 1.5rem; }
+            .btn-submit { width: 100%; padding: 12px 0; font-size: 1.5rem; border-radius: 15px; }
         }
 
         @media (max-width: 480px) {
-            .page-title { font-size: 1.6rem; }
+            .page-title { font-size: 1.5rem; }
             .q-title { font-size: 1.05rem; }
+            .q-desc { font-size: 0.85rem; }
             .opt-text { font-size: 1rem; }
-            .color-box { width: 35px; height: 35px; font-size: 1.4rem; }
-            .opt-wrapper { margin-bottom: 10px; }
         }
     </style>
 </head>
@@ -396,14 +392,11 @@
     <script src="assets/vendor/aos/aos.js"></script>
 
     <script>
-        // เก็บสถานะการตอบคำถาม
         let answers = { q1: null, q2: null, q3: null, q4: null };
-        let hasEvaluation = false; // ต้องติ๊กประเมินผลอย่างน้อย 1 ช่อง
+        let hasEvaluation = false;
 
-        // ไอคอนเครื่องหมายถูก
         const checkIcon = '<i class="bi bi-check-lg"></i>';
 
-        // ฟังก์ชันสำหรับข้อ 1-4 (เลือกได้ข้อละ 1 อัน)
         function toggleOption(questionId, value, element) {
             document.getElementById(`${questionId}-yes`).innerHTML = '';
             document.getElementById(`${questionId}-no`).innerHTML = '';
@@ -414,7 +407,6 @@
             checkCompletion();
         }
 
-        // ฟังก์ชันสำหรับส่วนประเมินผล (ติ๊กเปิด/ปิดได้อิสระ)
         function toggleEval(evalId, element) {
             const box = document.getElementById(`eval-${evalId}`);
             
@@ -430,7 +422,6 @@
             checkCompletion();
         }
 
-        // ตรวจสอบว่าทำครบตามเงื่อนไขหรือยัง
         function checkCompletion() {
             const isAllQuestionsAnswered = answers.q1 !== null && answers.q2 !== null && answers.q3 !== null && answers.q4 !== null;
             const submitBtn = document.getElementById('btn-submit');
@@ -442,12 +433,10 @@
             }
         }
 
-        // ฟังก์ชันเมื่อกดส่งคำตอบ
         function submitAssessment() {
             window.location.href = "camt-feedback.html"; 
         }
 
-        // ระบบซ่อน Navbar
         const header = document.getElementById('header');
         window.onscroll = () => {
             if (window.scrollY > 80) header.classList.add('header-hidden');
