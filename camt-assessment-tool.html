@@ -5,14 +5,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>แบบทดสอบก่อนเรียน CAM-T (Pre-test) - SMART Nurse</title>
-        <meta name="description" content="แบบทดสอบก่อนเรียนสำหรับการประเมินภาวะสับสนเฉียบพลัน (CAM-T)">
+        <meta name="description"
+            content="แบบทดสอบก่อนเรียนสำหรับการประเมินภาวะสับสนเฉียบพลัน (CAM-T)">
+
+        <!-- Favicons -->
+        <link href="assets/img/พยาบาลศาสตร์.png" rel="icon">
+        <link href="assets/img/พยาบาลศาสตร์.png" rel="apple-touch-icon">
 
         <link href="https://fonts.googleapis.com" rel="preconnect">
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
 
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
+            rel="stylesheet">
+        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+            rel="stylesheet">
         <link href="assets/vendor/aos/aos.css" rel="stylesheet">
 
         <style>
@@ -200,15 +209,22 @@
 
     <body>
 
-        <header id="header" class="header d-flex align-items-center fixed-top shadow-sm">
-            <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+        <header id="header"
+            class="header d-flex align-items-center fixed-top shadow-sm">
+            <div
+                class="container-fluid container-xl d-flex align-items-center justify-content-between">
                 <a href="index.html" class="logo d-flex align-items-center">
-                    <img src="assets/img/สกรีนช็อต 2026-01-30 203747-Photoroom.png" alt="โลโก้พยาบาลศาสตร์" style="max-height: 50px;">
+                    <img
+                        src="assets/img/สกรีนช็อต 2026-01-30 203747-Photoroom.png"
+                        alt="โลโก้พยาบาลศาสตร์" style="max-height: 50px;">
                 </a>
                 <nav id="navmenu" class="navmenu">
                     <ul class="d-flex list-unstyled m-0">
-                        <li class="me-4"><a href="index.html" class="text-decoration-none">หน้าหลัก</a></li>
-                        <li><a href="#" class="active text-decoration-none fw-bold">แบบทดสอบก่อนเรียน (CAM-T)</a></li>
+                        <li class="me-4"><a href="index.html"
+                                class="text-decoration-none">หน้าหลัก</a></li>
+                        <li><a href="#"
+                                class="active text-decoration-none fw-bold">แบบทดสอบก่อนเรียน
+                                (CAM-T)</a></li>
                     </ul>
                 </nav>
             </div>
@@ -220,10 +236,18 @@
                 <div id="quiz-flow">
                     <div class="row">
                         <section class="col-lg-9">
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <span class="badge bg-dark fs-5 px-4 py-2 rounded-pill" id="idx-view">ข้อที่ 1 / 5</span>
-                                <div class="progress flex-grow-1 mx-4" style="height: 15px;" role="progressbar" aria-label="สถานะการทำข้อสอบ" id="progress-container">
-                                    <div id="bar-view" class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width: 20%"></div>
+                            <div
+                                class="d-flex justify-content-between align-items-center mb-4">
+                                <span
+                                    class="badge bg-dark fs-5 px-4 py-2 rounded-pill"
+                                    id="idx-view">ข้อที่ 1 / 5</span>
+                                <div class="progress flex-grow-1 mx-4"
+                                    style="height: 15px;" role="progressbar"
+                                    aria-label="สถานะการทำข้อสอบ"
+                                    id="progress-container">
+                                    <div id="bar-view"
+                                        class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                        style="width: 20%"></div>
                                 </div>
                             </div>
 
@@ -234,39 +258,70 @@
                             <div id="ui-area">
                                 <div id="tf-grid" class="row g-4 mb-4">
                                     <div class="col-6">
-                                        <button type="button" class="btn btn-game-tf btn-true-game" onclick="choose(0, this)">ถูก</button>
+                                        <button type="button"
+                                            class="btn btn-game-tf btn-true-game"
+                                            onclick="choose(0, this)">ถูก</button>
                                     </div>
                                     <div class="col-6">
-                                        <button type="button" class="btn btn-game-tf btn-false-game" onclick="choose(1, this)">ผิด</button>
+                                        <button type="button"
+                                            class="btn btn-game-tf btn-false-game"
+                                            onclick="choose(1, this)">ผิด</button>
                                     </div>
                                 </div>
 
                                 <div id="mcq-grid" class="d-none">
                                     <div class="row g-4">
-                                        <div class="col-md-6"><button type="button" class="btn btn-mcq-game" id="opt0" onclick="choose(0, this)"></button></div>
-                                        <div class="col-md-6"><button type="button" class="btn btn-mcq-game" id="opt1" onclick="choose(1, this)"></button></div>
-                                        <div class="col-md-6"><button type="button" class="btn btn-mcq-game" id="opt2" onclick="choose(2, this)"></button></div>
-                                        <div class="col-md-6"><button type="button" class="btn btn-mcq-game" id="opt3" onclick="choose(3, this)"></button></div>
+                                        <div class="col-md-6"><button
+                                                type="button"
+                                                class="btn btn-mcq-game"
+                                                id="opt0"
+                                                onclick="choose(0, this)"></button></div>
+                                        <div class="col-md-6"><button
+                                                type="button"
+                                                class="btn btn-mcq-game"
+                                                id="opt1"
+                                                onclick="choose(1, this)"></button></div>
+                                        <div class="col-md-6"><button
+                                                type="button"
+                                                class="btn btn-mcq-game"
+                                                id="opt2"
+                                                onclick="choose(2, this)"></button></div>
+                                        <div class="col-md-6"><button
+                                                type="button"
+                                                class="btn btn-mcq-game"
+                                                id="opt3"
+                                                onclick="choose(3, this)"></button></div>
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-                        <aside class="col-lg-3 mascot-aside" data-aos="fade-left">
+                        <aside class="col-lg-3 mascot-aside"
+                            data-aos="fade-left">
                             <div class="mascot-frame">
-                                <img src="assets/img/สีเหลืองใหญ่.png" alt="Mascot พยาบาล" class="img-fluid" id="mascot-img">
+                                <img src="assets/img/สีเหลืองใหญ่.png"
+                                    alt="Mascot พยาบาล" class="img-fluid"
+                                    id="mascot-img">
                             </div>
-                            <button type="button" id="next-action" class="btn btn-next-game" onclick="stepNext()" disabled>Next</button>
+                            <button type="button" id="next-action"
+                                class="btn btn-next-game" onclick="stepNext()"
+                                disabled>Next</button>
                         </aside>
                     </div>
                 </div>
 
                 <div id="result-flow" class="d-none py-5 text-center">
-                    <div class="bg-white p-4 p-md-5 rounded-4 border border-5 border-navy mx-auto" style="max-width: 600px;">
-                        <h2 class="fw-bold mb-4 fs-3">สรุปผลการทดสอบก่อนเรียน</h2>
-                        <div class="display-1 fw-bold text-success mb-2" id="score-view">0/5</div>
-                        <p class="fs-5 text-muted mb-5">คะแนนความรู้พื้นฐานของคุณ</p>
-                        <a href="eventRoot.html" class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold w-100 shadow">เข้าสู่หน้าถัดไป</a>
+                    <div
+                        class="bg-white p-4 p-md-5 rounded-4 border border-5 border-navy mx-auto"
+                        style="max-width: 600px;">
+                        <h2
+                            class="fw-bold mb-4 fs-3">สรุปผลการทดสอบก่อนเรียน</h2>
+                        <div class="display-1 fw-bold text-success mb-2"
+                            id="score-view">0/5</div>
+                        <p
+                            class="fs-5 text-muted mb-5">คะแนนความรู้พื้นฐานของคุณ</p>
+                        <a href="eventRoot.html"
+                            class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold w-100 shadow">เข้าสู่หน้าถัดไป</a>
                     </div>
                 </div>
 
@@ -274,10 +329,12 @@
         </main>
 
         <footer class="text-center py-4">
-            <p class="text-muted small m-0">© 2026 SMART Nurse - คณะพยาบาลศาสตร์ มหาวิทยาลัยขอนแก่น</p>
+            <p class="text-muted small m-0">© 2026 SMART Nurse - คณะพยาบาลศาสตร์
+                มหาวิทยาลัยขอนแก่น</p>
         </footer>
 
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script
+            src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="assets/vendor/aos/aos.js"></script>
 
         <script>
