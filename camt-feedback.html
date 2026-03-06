@@ -106,16 +106,19 @@
             line-height: 1.6;
         }
 
-        .opt-wrapper { display: flex; align-items: center; margin-bottom: 12px; padding: 10px 15px; border-radius: 12px; }
+        .opt-wrapper { 
+            display: flex; align-items: center; margin-bottom: 12px; padding: 10px 15px; 
+            border-radius: 12px; background: #f8f9fa; border: 2px solid transparent; 
+        }
         
         .color-box {
             width: 45px; height: 45px; border: 3px solid #000; margin-right: 15px;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.1); flex-shrink: 0;
         }
 
         /* เครื่องหมายติ๊กถูกใหญ่ๆ */
-        .check-icon { font-size: 3.5rem; font-weight: 900; color: #000; line-height: 0; margin-bottom: 5px; }
+        .check-icon { font-size: 2.8rem; font-weight: 900; color: #000; line-height: 1; }
 
         .bg-red { background-color: var(--box-red); }
         .bg-green { background-color: var(--box-green); }
@@ -124,7 +127,7 @@
         .opt-text { font-size: 1.15rem; font-weight: 700; }
         
         /* สไตล์สำหรับตัวเลือกที่ไม่ได้ถูกเลือก (ทำให้จางลง) */
-        .opt-dimmed { opacity: 0.3; filter: grayscale(100%); }
+        .opt-dimmed { opacity: 0.3; filter: grayscale(100%); background: transparent; border: none; }
 
         .eval-section {
             background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(252,230,134,0.3) 100%);
@@ -132,17 +135,45 @@
         }
 
         .btn-next {
-            background-color: #f8f9fa; color: #000; border: 4px solid #000; border-radius: 15px;
-            padding: 15px 80px; font-size: 2rem; font-weight: 900; box-shadow: 8px 8px 0px #000;
+            background-color: #f8f9fa; color: #000; border: 4px solid #000; border-radius: 50px;
+            padding: 15px 80px; font-size: 2rem; font-weight: 900; box-shadow: 6px 6px 0px #000;
             transition: all 0.2s; display: block; margin: 50px auto 0 auto; width: fit-content;
         }
-        .btn-next:hover { background-color: var(--primary-navy); color: #fff; transform: translate(-3px, -3px); box-shadow: 11px 11px 0px #000; }
+        .btn-next:hover { background-color: var(--primary-navy); color: #fff; transform: translate(-3px, -3px); box-shadow: 9px 9px 0px #000; }
         .btn-next:active { transform: translate(5px, 5px); box-shadow: 0px 0px 0px #000; }
 
+        /* =========================================
+           RESPONSIVE (ปรับขนาดตามหน้าจอต่างๆ)
+           ========================================= */
+        @media (max-width: 991px) {
+            .assessment-container { padding: 40px 30px; margin-top: 100px; }
+            .page-title { font-size: 2.4rem; }
+        }
+
         @media (max-width: 768px) {
-            .assessment-container { padding: 40px 20px; margin-top: 100px; }
-            .page-title { font-size: 2.2rem; }
-            .check-icon { font-size: 2.5rem; }
+            .assessment-container { padding: 30px 15px; margin-top: 90px; }
+            .page-title { font-size: 2rem; margin-bottom: 30px; }
+            
+            .question-block { padding: 20px 15px; }
+            .q-title { font-size: 1.15rem; }
+            .explanation-text { font-size: 0.9rem; padding: 12px; }
+
+            /* ปรับปุ่มตัวเลือกให้สมดุลบนมือถือ */
+            .opt-wrapper { padding: 10px 12px; width: 100%; }
+            .color-box { width: 35px; height: 35px; }
+            .check-icon { font-size: 2.2rem; }
+            .opt-text { font-size: 1.05rem; }
+
+            .eval-section { padding: 25px 15px; margin-top: 30px; }
+            .eval-section h3 { font-size: 1.5rem; }
+            
+            /* ขยายปุ่ม NEXT ให้เต็มจอในมือถือ เพื่อง่ายต่อการกด */
+            .btn-next { width: 100%; padding: 12px 0; font-size: 1.5rem; border-radius: 15px; }
+        }
+
+        @media (max-width: 480px) {
+            .page-title { font-size: 1.6rem; }
+            .q-title { font-size: 1.05rem; }
         }
     </style>
 </head>
@@ -173,8 +204,8 @@
                     - จากการซักประวัติญาติพบว่า ในช่วงเวลาก่อนหัวค่ำผู้ป่วยสามารถพูดคุยรู้เรื่องดี และไม่มีประวัติหลงลืมหรือสับสนเรื้อรังมาก่อน และอาการสับสนเริ่มเกิดขึ้นตั้งแต่เมื่อคืน และมีลักษณะเป็น ๆ หาย ๆ ภายในวันเดียว แสดงให้เห็นถึงการเปลี่ยนแปลงของสภาพจิตใจที่เกิดขึ้นอย่างเฉียบพลันจากสภาพเดิม และมีความผันแปรของอาการตามช่วงเวลา
                 </div>
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center">
-                <div class="opt-wrapper">
+            <div class="col-lg-4 d-flex flex-column justify-content-center mt-3 mt-lg-0">
+                <div class="opt-wrapper shadow-sm">
                     <div class="color-box bg-red"><span class="check-icon">✓</span></div>
                     <span class="opt-text text-danger">มีอาการ</span>
                 </div>
@@ -192,8 +223,8 @@
                     - ผู้ป่วยมีสมาธิลดลงอย่างชัดเจน โดยไม่สามารถจดจ่อกับบทสนทนาได้อย่างต่อเนื่อง มีพฤติกรรมมองไปรอบห้องและวอกแวกต่อสิ่งเร้าภายนอกได้ง่าย ผู้ป่วยไม่สามารถตอบคำถามเกี่ยวกับวันเวลาได้ และไม่สามารถนับวันในสัปดาห์ย้อนหลังได้ครบ อีกทั้งมีการหลุดจากบทสนทนาบ่อยครั้ง
                 </div>
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center">
-                <div class="opt-wrapper">
+            <div class="col-lg-4 d-flex flex-column justify-content-center mt-3 mt-lg-0">
+                <div class="opt-wrapper shadow-sm">
                     <div class="color-box bg-red"><span class="check-icon">✓</span></div>
                     <span class="opt-text text-danger">มีอาการ</span>
                 </div>
@@ -211,8 +242,8 @@
                     - ผู้ป่วยมีความคิดที่ไม่เป็นระบบ ตอบคำถามไม่สอดคล้องกับสถานการณ์ และมีการเปลี่ยนเรื่องกะทันหัน คือเมื่อถูกถามเรื่องอาหาร กลับตอบว่าต้องรีบเก็บของก่อนที่รถจะมา และผู้ป่วยยังเข้าใจผิดเกี่ยวกับสถานที่โดยคิดว่าตนเองอยู่ที่ตลาด ทั้งที่ปัจจุบันกำลังรักษาตัวอยู่ในโรงพยาบาล แสดงถึงกระบวนการคิดที่สับสน ไม่สามารถเชื่อมโยงข้อมูลกับความเป็นจริงได้อย่างเหมาะสม
                 </div>
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center">
-                <div class="opt-wrapper">
+            <div class="col-lg-4 d-flex flex-column justify-content-center mt-3 mt-lg-0">
+                <div class="opt-wrapper shadow-sm">
                     <div class="color-box bg-red"><span class="check-icon">✓</span></div>
                     <span class="opt-text text-danger">มีอาการ</span>
                 </div>
@@ -230,8 +261,8 @@
                     - ผู้ป่วยมีระดับความรู้สึกตัวเปลี่ยนแปลงไปจากปกติ โดยมีลักษณะตื่นตัวมากผิดปกติ
                 </div>
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center">
-                <div class="opt-wrapper">
+            <div class="col-lg-4 d-flex flex-column justify-content-center mt-3 mt-lg-0">
+                <div class="opt-wrapper shadow-sm">
                     <div class="color-box bg-red"><span class="check-icon">✓</span></div>
                     <span class="opt-text text-danger">มีอาการ</span>
                 </div>
@@ -247,7 +278,7 @@
             
             <div class="row gy-3">
                 <div class="col-md-6">
-                    <div class="opt-wrapper">
+                    <div class="opt-wrapper shadow-sm">
                         <div class="color-box bg-red"><span class="check-icon">✓</span></div>
                         <span class="opt-text fs-4 fw-bold text-danger">Delirium</span>
                     </div>
@@ -262,7 +293,7 @@
 
             <div class="row mt-4 gy-3">
                 <div class="col-md-4">
-                    <div class="opt-wrapper">
+                    <div class="opt-wrapper shadow-sm">
                         <div class="color-box bg-yellow-box"><span class="check-icon">✓</span></div>
                         <span class="opt-text fw-bold text-warning" style="text-shadow: 1px 1px 0 #000;">Hyperdelirium</span>
                     </div>
@@ -286,9 +317,9 @@
             </div>
         </div>
 
-        <div class="text-center position-relative">
-            <button class="btn-next" onclick="window.location.href='CAM-T-Posttest.html'">NEXT</button>
-            <p class="mt-3 fw-bold text-muted" style="font-size: 1.2rem;">* กด NEXT แล้วไปหน้า Post-test</p>
+        <div class="text-center position-relative mt-5">
+            <button class="btn-next mx-auto" onclick="window.location.href='post-test-camt.html'">NEXT</button>
+            <p class="mt-3 fw-bold text-muted" style="font-size: 1.1rem;">* กด NEXT แล้วไปหน้า Post-test</p>
         </div>
 
     </main>

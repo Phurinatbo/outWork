@@ -22,6 +22,7 @@
             --box-red: #dc3545;
             --box-green: #28a745;
             --box-yellow: #FCE686;
+            --accent-orange: #E66A19;
         }
 
         body {
@@ -43,7 +44,7 @@
             position: absolute;
             width: 500px;
             height: 500px;
-            background: rgba(252, 230, 134, 0.6); /* สีเหลืองเรืองแสง */
+            background: rgba(252, 230, 134, 0.6); 
             border-radius: 50%;
             filter: blur(80px);
             top: 10%;
@@ -57,7 +58,7 @@
             position: absolute;
             width: 400px;
             height: 400px;
-            background: rgba(31, 59, 92, 0.1); /* สีน้ำเงินเรืองแสง */
+            background: rgba(31, 59, 92, 0.1); 
             border-radius: 50%;
             filter: blur(80px);
             bottom: 10%;
@@ -81,9 +82,8 @@
 
         /* Main Form Container */
         .assessment-container {
-            /* ใส่สีขาวโปร่งแสงให้กล่องเนื้อหาหลัก เพื่อให้ตัดกับพื้นหลังตาราง */
             background-color: rgba(255, 255, 255, 0.85); 
-            backdrop-filter: blur(10px); /* ทำเบลอทะลุไปข้างหลังเล็กน้อย (Glassmorphism) */
+            backdrop-filter: blur(10px); 
             border: 4px solid var(--primary-navy);
             border-radius: 20px;
             padding: 60px 40px;
@@ -105,7 +105,7 @@
 
         /* Styling for Questions */
         .question-block {
-            background-color: #fff; /* เน้นข้อสอบให้เป็นกล่องสีขาวชัดเจน */
+            background-color: #fff; 
             border: 2px solid #e2e8f0;
             border-radius: 15px;
             padding: 25px;
@@ -193,7 +193,7 @@
             background-color: var(--accent-orange);
             color: #fff;
             border: 4px solid #000;
-            border-radius: 50px; /* ทำให้ปุ่มมนเหมือนปุ่ม Next ในเกม */
+            border-radius: 50px;
             padding: 15px 80px;
             font-size: 1.8rem;
             font-weight: 900;
@@ -223,11 +223,39 @@
             box-shadow: 1px 1px 0px #000;
         }
         
-        /* Responsive */
+        /* =========================================
+           RESPONSIVE (ปรับให้พอดีกับมือถือ)
+           ========================================= */
+        @media (max-width: 991px) {
+            .assessment-container { padding: 40px 30px; margin-top: 100px; }
+            .page-title { font-size: 2.4rem; }
+        }
+
         @media (max-width: 768px) {
-            .assessment-container { padding: 40px 20px; margin-top: 100px; }
-            .page-title { font-size: 2rem; }
+            .assessment-container { padding: 30px 15px; margin-top: 90px; }
+            .page-title { font-size: 2rem; margin-bottom: 30px; }
+            
+            .question-block { padding: 20px 15px; }
+            .q-title { font-size: 1.15rem; }
+            .q-desc { font-size: 0.9rem; padding-left: 10px; }
+
+            /* ปรับปุ่มตัวเลือกให้สมดุลบนมือถือ */
+            .opt-wrapper { padding: 12px 15px; width: 100%; }
+            .color-box { width: 40px; height: 40px; font-size: 1.6rem; }
+            .opt-text { font-size: 1.1rem; }
+
+            .eval-section { padding: 25px 15px; margin-top: 30px; }
+            .eval-section h3 { font-size: 1.5rem; }
+            
             .btn-submit { width: 100%; padding: 15px 0; font-size: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .page-title { font-size: 1.6rem; }
+            .q-title { font-size: 1.05rem; }
+            .opt-text { font-size: 1rem; }
+            .color-box { width: 35px; height: 35px; font-size: 1.4rem; }
+            .opt-wrapper { margin-bottom: 10px; }
         }
     </style>
 </head>
@@ -257,7 +285,7 @@
                 <p class="q-desc">- มีหลักฐานว่ามีการเปลี่ยนแปลงสภาพจิตใจของผู้ป่วย ไปจากเดิมอย่างเฉียบพลันหรือไม่</p>
                 <p class="q-desc">- มีพฤติกรรมที่ผิดปกติไปจากเดิม แนวโน้มอาการขึ้นๆ ลงๆ ในช่วงวัน</p>
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center">
+            <div class="col-lg-4 d-flex flex-column justify-content-center mt-2 mt-lg-0">
                 <div class="opt-wrapper" onclick="toggleOption('q1', 'yes', this)">
                     <div class="color-box bg-red" id="q1-yes"></div>
                     <span class="opt-text">มีอาการ</span>
@@ -274,7 +302,7 @@
                 <div class="q-title">2. ขาดสมาธิ (Inattention)</div>
                 <p class="q-desc">- ขาดสมาธิ เสียสมาธิได้ง่าย จดจ่อกับสิ่งได้ไม่นาน (ให้นับวันในสัปดาห์ถอยหลัง)</p>
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center">
+            <div class="col-lg-4 d-flex flex-column justify-content-center mt-2 mt-lg-0">
                 <div class="opt-wrapper" onclick="toggleOption('q2', 'yes', this)">
                     <div class="color-box bg-red" id="q2-yes"></div>
                     <span class="opt-text">มีอาการ</span>
@@ -291,7 +319,7 @@
                 <div class="q-title">3. ความคิดไม่เป็นระบบ (DISORGANIZED THINKING)</div>
                 <p class="q-desc">- ความคิดไม่เป็นระบบ ไม่ต่อเนื่อง เช่น ความคิดกระจัดกระจาย ไม่สัมพันธ์กับเรื่องที่สนทนา ไม่กระจ่างชัด ไม่เป็นเหตุเป็นผลกัน ขาดความสามารถในการคาดการณ์จากเรื่องหนึ่งไปสู่เรื่องหนึ่ง</p>
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center">
+            <div class="col-lg-4 d-flex flex-column justify-content-center mt-2 mt-lg-0">
                 <div class="opt-wrapper" onclick="toggleOption('q3', 'yes', this)">
                     <div class="color-box bg-red" id="q3-yes"></div>
                     <span class="opt-text">มีอาการ</span>
@@ -308,7 +336,7 @@
                 <div class="q-title">4. ระดับความรู้สึกตัวเปลี่ยนแปลงไป (Altered level of consciousness)</div>
                 <p class="q-desc">- Alert (normal)<br>- Vigilant (hyperalert)<br>- Lethargic (drowsy, easily aroused)<br>- Stupor (difficult to arouse)<br>- Coma (unarousable)</p>
             </div>
-            <div class="col-lg-4 d-flex flex-column justify-content-center">
+            <div class="col-lg-4 d-flex flex-column justify-content-center mt-2 mt-lg-0">
                 <div class="opt-wrapper" onclick="toggleOption('q4', 'yes', this)">
                     <div class="color-box bg-red" id="q4-yes"></div>
                     <span class="opt-text">มีอาการ</span>
@@ -377,16 +405,12 @@
 
         // ฟังก์ชันสำหรับข้อ 1-4 (เลือกได้ข้อละ 1 อัน)
         function toggleOption(questionId, value, element) {
-            // ล้างเครื่องหมายถูกในข้อเดียวกัน
             document.getElementById(`${questionId}-yes`).innerHTML = '';
             document.getElementById(`${questionId}-no`).innerHTML = '';
             
-            // ใส่เครื่องหมายถูกในกล่องที่เลือก
             document.getElementById(`${questionId}-${value}`).innerHTML = checkIcon;
             
-            // บันทึกคำตอบ
             answers[questionId] = value;
-            
             checkCompletion();
         }
 
@@ -400,7 +424,6 @@
                 box.innerHTML = '';
             }
 
-            // ตรวจสอบว่ามีช่องประเมินผลถูกติ๊กอย่างน้อย 1 ช่องหรือไม่
             const allEvalBoxes = document.querySelectorAll('.eval-box');
             hasEvaluation = Array.from(allEvalBoxes).some(b => b.innerHTML !== '');
             
@@ -410,10 +433,8 @@
         // ตรวจสอบว่าทำครบตามเงื่อนไขหรือยัง
         function checkCompletion() {
             const isAllQuestionsAnswered = answers.q1 !== null && answers.q2 !== null && answers.q3 !== null && answers.q4 !== null;
-            
             const submitBtn = document.getElementById('btn-submit');
             
-            // ถ้าตอบครบข้อ 1-4 และติ๊กประเมินผลอย่างน้อย 1 ช่อง ให้ปลดล็อกปุ่ม
             if (isAllQuestionsAnswered && hasEvaluation) {
                 submitBtn.disabled = false;
             } else {
@@ -423,7 +444,6 @@
 
         // ฟังก์ชันเมื่อกดส่งคำตอบ
         function submitAssessment() {
-            // ลิงก์ไปหน้าเฉลย (แก้ชื่อไฟล์ให้ตรงกับหน้าเฉลยของคุณ)
             window.location.href = "camt-feedback.html"; 
         }
 
