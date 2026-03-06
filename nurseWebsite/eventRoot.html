@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เลือกสถานการณ์ - SMART Nurse</title>
+    <meta name="description" content="หน้าเลือกสถานการณ์ผู้ป่วย สำหรับการประเมินสุขภาวะผู้สูงอายุ">
+
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-navy: #1f3b5c;
+            --accent-orange: #E66A19;
+            --card-yellow: #FCE686; 
+            --tag-blue: #3b5cb8;    
+            --bg-cream: #FFF9E6; /* สีพื้นหลังครีมอ่อนๆ */
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-cream);
+        }
+
+        /* Auto-hide Navbar */
+        #header {
+            transition: all 0.4s ease-in-out;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 1000;
+        }
+        .header-hidden { transform: translateY(-100%); }
+
+        /* --- พื้นหลังสไตล์ Game UI (Grid + Animation) --- */
+        .scenario-bg {
+            background-color: var(--bg-cream);
+            /* ลายตาราง (Grid Pattern) สีส้มอ่อนๆ */
+            background-image: 
+                linear-gradient(rgba(230, 106, 25, 0.07) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(230, 106, 25, 0.07) 2px, transparent 2px);
+            background-size: 40px 40px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 80px; 
+            position: relative;
+            overflow: hidden; /* ซ่อนสิ่งที่ล้นจอออกไป */
+        }
+
+        /* เอฟเฟกต์วงกลมลอยไปมาด้านหลัง */
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(252, 230, 134, 0.5); /* สีเหลืองโปร่งใส */
+            filter: blur(20px);
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        .shape-1 { width: 400px; height: 400px; top: -5%; left: -10%; }
+        .shape-2 { width: 300px; height: 300px; bottom: 5%; right: -5%; animation-delay: -3s; background: rgba(59, 92, 184, 0.1); /* สีฟ้าโปร่งใส */ }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+        }
+
+        /* ดันเนื้อหาให้อยู่เหนือพื้นหลัง */
+        .content-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* สไตล์ของการ์ดตัวละคร */
+        .character-card {
+            cursor: pointer;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* กรอบวงกลมสีเหลือง */
+        .char-circle {
+            width: 320px;
+            height: 320px;
+            background-color: var(--card-yellow);
+            border-radius: 50%;
+            border: 8px solid #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 1;
+        }
+
+        .char-circle img {
+            width: 85%;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        /* ป้ายชื่อสีน้ำเงิน */
+        .char-name {
+            background-color: var(--tag-blue);
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: 700;
+            padding: 12px 50px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: -30px; 
+            position: relative;
+            z-index: 2;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* เอฟเฟกต์ Hover เมื่อเอาเมาส์ชี้ */
+        .character-card:hover .char-circle {
+            transform: translateY(-15px) scale(1.05);
+            border-color: var(--accent-orange);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+        }
+
+        .character-card:hover .char-circle img {
+            transform: scale(1.1);
+        }
+
+        .character-card:hover .char-name {
+            background-color: #2a438c;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+        }
+
+        /* ชื่อหัวข้อด้านบน */
+        .page-heading {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary-navy);
+            /* เพิ่มขอบตัวหนังสือให้เด่นขึ้น */
+            text-shadow: 3px 3px 0px #fff, -1px -1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff, 4px 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        /* Responsive สำหรับมือถือ */
+        @media (max-width: 768px) {
+            .char-circle { width: 250px; height: 250px; }
+            .char-name { font-size: 1.4rem; padding: 10px 30px; }
+            .page-heading { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header" class="header d-flex align-items-center fixed-top shadow-sm">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/สกรีนช็อต 2026-01-30 203747-Photoroom.png" alt="โลโก้พยาบาลศาสตร์" style="max-height: 50px;">
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul class="d-flex list-unstyled m-0">
+                    <li class="me-4"><a href="index.html" class="text-decoration-none">หน้าหลัก</a></li>
+                    <li><a href="#" class="active text-decoration-none fw-bold">เลือกสถานการณ์</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="scenario-bg">
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+
+        <div class="container text-center content-container">
+            
+            <h1 class="page-heading mb-2" data-aos="fade-down">คลิกเลือกสถานการณ์</h1>
+            <h1 class="page-heading mt-0" data-aos="fade-down" data-aos-delay="100">เพื่อเล่นเกม</h1>
+
+            <div class="row justify-content-center align-items-center mt-5 gap-4 gap-lg-5">
+                
+                <div class="col-12 col-md-5 col-lg-auto character-card" data-aos="zoom-in" data-aos-delay="200" onclick="goToScenario(1)">
+                    <div class="char-circle">
+                        <img src="assets/img/สกรีนช็อต 2026-03-06 122523.png" alt="ยายสุดสวย สดใส">
+                    </div>
+                    <div class="char-name">ยายสุดสวย สดใส</div>
+                </div>
+
+                </div>
+
+        </div>
+    </main>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+
+    <script>
+        function goToScenario(scenarioNumber) {
+            if (scenarioNumber === 1) {
+                window.location.href = "camt-GameScenario01.html"; 
+            } else if (scenarioNumber === 2) {
+                window.location.href = "scenario2.html";
+            }
+        }
+
+        const header = document.getElementById('header');
+        window.onscroll = () => {
+            if (window.scrollY > 80) header.classList.add('header-hidden');
+            else header.classList.remove('header-hidden');
+        };
+        document.onmousemove = (e) => { if (e.clientY < 60) header.classList.remove('header-hidden'); };
+
+        document.addEventListener('DOMContentLoaded', () => { AOS.init(); });
+    </script>
+
+</body>
+</html>

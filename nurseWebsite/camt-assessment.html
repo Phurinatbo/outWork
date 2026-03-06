@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบประเมิน CAM-T - SMART Nurse</title>
+    <meta name="description" content="หน้าทำแบบประเมินภาวะสับสนเฉียบพลัน CAM-T">
+
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-navy: #1f3b5c;
+            --bg-yellow: #FFFAE4; /* สีพื้นหลังหลัก */
+            --box-red: #dc3545;
+            --box-green: #28a745;
+            --box-yellow: #FCE686;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--bg-yellow);
+            /* เพิ่มลายตาราง (Grid Pattern) สีเทาอ่อนๆ ให้ดูมีมิติเหมือนสมุดกราฟ/เกม */
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.03) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.03) 2px, transparent 2px);
+            background-size: 30px 30px;
+            color: #000;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* เพิ่มวงกลมเบลอๆ ลอยอยู่ด้านหลังเพื่อสร้างมิติ (Glow Effect) */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(252, 230, 134, 0.6); /* สีเหลืองเรืองแสง */
+            border-radius: 50%;
+            filter: blur(80px);
+            top: 10%;
+            left: -10%;
+            z-index: -1;
+            animation: floatGlow 8s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(31, 59, 92, 0.1); /* สีน้ำเงินเรืองแสง */
+            border-radius: 50%;
+            filter: blur(80px);
+            bottom: 10%;
+            right: -5%;
+            z-index: -1;
+            animation: floatGlow 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(30px) scale(1.1); }
+        }
+
+        /* Auto-hide Navbar */
+        #header {
+            transition: all 0.4s ease-in-out;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 1000;
+        }
+        .header-hidden { transform: translateY(-100%); }
+
+        /* Main Form Container */
+        .assessment-container {
+            /* ใส่สีขาวโปร่งแสงให้กล่องเนื้อหาหลัก เพื่อให้ตัดกับพื้นหลังตาราง */
+            background-color: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(10px); /* ทำเบลอทะลุไปข้างหลังเล็กน้อย (Glassmorphism) */
+            border: 4px solid var(--primary-navy);
+            border-radius: 20px;
+            padding: 60px 40px;
+            max-width: 1000px;
+            margin: 120px auto 60px auto;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-navy);
+            text-shadow: 2px 2px 0px #fff;
+        }
+
+        /* Styling for Questions */
+        .question-block {
+            background-color: #fff; /* เน้นข้อสอบให้เป็นกล่องสีขาวชัดเจน */
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s;
+        }
+        
+        .question-block:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-navy);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .q-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+        
+        .q-desc {
+            font-size: 0.95rem;
+            color: #4a5568;
+            padding-left: 20px;
+            margin-bottom: 5px;
+            line-height: 1.6;
+        }
+
+        /* Checkbox Option Styles */
+        .opt-wrapper {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-bottom: 12px;
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+        }
+        
+        .opt-wrapper:hover {
+            transform: scale(1.03);
+            border-color: #cbd5e1;
+            background: #fff;
+        }
+
+        .color-box {
+            width: 45px;
+            height: 45px;
+            border: 3px solid #000;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000;
+            font-weight: bold;
+            transition: all 0.2s;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+        }
+
+        .bg-red { background-color: var(--box-red); }
+        .bg-green { background-color: var(--box-green); }
+        .bg-yellow-box { background-color: var(--box-yellow); }
+
+        .opt-text {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        /* Evaluation Section */
+        .eval-section {
+            background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(252,230,134,0.3) 100%);
+            border: 4px solid var(--primary-navy);
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            background-color: var(--accent-orange);
+            color: #fff;
+            border: 4px solid #000;
+            border-radius: 50px; /* ทำให้ปุ่มมนเหมือนปุ่ม Next ในเกม */
+            padding: 15px 80px;
+            font-size: 1.8rem;
+            font-weight: 900;
+            box-shadow: 6px 6px 0px #000;
+            transition: all 0.2s;
+            display: block;
+            margin: 50px auto 0 auto;
+        }
+
+        .btn-submit:disabled {
+            background-color: #e2e8f0;
+            color: #94a3b8;
+            border-color: #cbd5e1;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .btn-submit:not(:disabled):hover {
+            background-color: #ff7a21;
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0px #000;
+            color: #fff;
+        }
+        
+        .btn-submit:not(:disabled):active {
+            transform: translate(5px, 5px);
+            box-shadow: 1px 1px 0px #000;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .assessment-container { padding: 40px 20px; margin-top: 100px; }
+            .page-title { font-size: 2rem; }
+            .btn-submit { width: 100%; padding: 15px 0; font-size: 1.5rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header" class="header d-flex align-items-center fixed-top shadow-sm">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/สกรีนช็อต 2026-01-30 203747-Photoroom.png" alt="โลโก้พยาบาลศาสตร์" style="max-height: 50px;">
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul class="d-flex list-unstyled m-0">
+                    <li class="me-4"><a href="index.html" class="text-decoration-none">หน้าหลัก</a></li>
+                    <li><a href="#" class="active text-decoration-none fw-bold">แบบประเมิน CAM-T</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="assessment-container">
+        <h1 class="page-title" data-aos="fade-down">แบบประเมิน CAM-T</h1>
+
+        <div class="row question-block" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-8 mb-3 mb-lg-0">
+                <div class="q-title">1. เริ่มต้นอาการอย่างเฉียบพลัน (Acute onset and fluctuation course)</div>
+                <p class="q-desc">- มีหลักฐานว่ามีการเปลี่ยนแปลงสภาพจิตใจของผู้ป่วย ไปจากเดิมอย่างเฉียบพลันหรือไม่</p>
+                <p class="q-desc">- มีพฤติกรรมที่ผิดปกติไปจากเดิม แนวโน้มอาการขึ้นๆ ลงๆ ในช่วงวัน</p>
+            </div>
+            <div class="col-lg-4 d-flex flex-column justify-content-center">
+                <div class="opt-wrapper" onclick="toggleOption('q1', 'yes', this)">
+                    <div class="color-box bg-red" id="q1-yes"></div>
+                    <span class="opt-text">มีอาการ</span>
+                </div>
+                <div class="opt-wrapper" onclick="toggleOption('q1', 'no', this)">
+                    <div class="color-box bg-green" id="q1-no"></div>
+                    <span class="opt-text">ไม่มีอาการ</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row question-block" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-lg-8 mb-3 mb-lg-0">
+                <div class="q-title">2. ขาดสมาธิ (Inattention)</div>
+                <p class="q-desc">- ขาดสมาธิ เสียสมาธิได้ง่าย จดจ่อกับสิ่งได้ไม่นาน (ให้นับวันในสัปดาห์ถอยหลัง)</p>
+            </div>
+            <div class="col-lg-4 d-flex flex-column justify-content-center">
+                <div class="opt-wrapper" onclick="toggleOption('q2', 'yes', this)">
+                    <div class="color-box bg-red" id="q2-yes"></div>
+                    <span class="opt-text">มีอาการ</span>
+                </div>
+                <div class="opt-wrapper" onclick="toggleOption('q2', 'no', this)">
+                    <div class="color-box bg-green" id="q2-no"></div>
+                    <span class="opt-text">ไม่มีอาการ</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row question-block" data-aos="fade-up" data-aos-delay="300">
+            <div class="col-lg-8 mb-3 mb-lg-0">
+                <div class="q-title">3. ความคิดไม่เป็นระบบ (DISORGANIZED THINKING)</div>
+                <p class="q-desc">- ความคิดไม่เป็นระบบ ไม่ต่อเนื่อง เช่น ความคิดกระจัดกระจาย ไม่สัมพันธ์กับเรื่องที่สนทนา ไม่กระจ่างชัด ไม่เป็นเหตุเป็นผลกัน ขาดความสามารถในการคาดการณ์จากเรื่องหนึ่งไปสู่เรื่องหนึ่ง</p>
+            </div>
+            <div class="col-lg-4 d-flex flex-column justify-content-center">
+                <div class="opt-wrapper" onclick="toggleOption('q3', 'yes', this)">
+                    <div class="color-box bg-red" id="q3-yes"></div>
+                    <span class="opt-text">มีอาการ</span>
+                </div>
+                <div class="opt-wrapper" onclick="toggleOption('q3', 'no', this)">
+                    <div class="color-box bg-green" id="q3-no"></div>
+                    <span class="opt-text">ไม่มีอาการ</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row question-block border-0" data-aos="fade-up" data-aos-delay="400">
+            <div class="col-lg-8 mb-3 mb-lg-0">
+                <div class="q-title">4. ระดับความรู้สึกตัวเปลี่ยนแปลงไป (Altered level of consciousness)</div>
+                <p class="q-desc">- Alert (normal)<br>- Vigilant (hyperalert)<br>- Lethargic (drowsy, easily aroused)<br>- Stupor (difficult to arouse)<br>- Coma (unarousable)</p>
+            </div>
+            <div class="col-lg-4 d-flex flex-column justify-content-center">
+                <div class="opt-wrapper" onclick="toggleOption('q4', 'yes', this)">
+                    <div class="color-box bg-red" id="q4-yes"></div>
+                    <span class="opt-text">มีอาการ</span>
+                </div>
+                <div class="opt-wrapper" onclick="toggleOption('q4', 'no', this)">
+                    <div class="color-box bg-green" id="q4-no"></div>
+                    <span class="opt-text">ไม่มีอาการ</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="eval-section" data-aos="zoom-in" data-aos-delay="500">
+            <h3 class="fw-bold mb-4">ประเมินผล <span class="fs-5 text-muted fw-normal">(ติ๊กได้อิสระ)</span></h3>
+            
+            <div class="row gy-3">
+                <div class="col-md-6">
+                    <div class="opt-wrapper" onclick="toggleEval('delirium', this)">
+                        <div class="color-box bg-red eval-box" id="eval-delirium"></div>
+                        <span class="opt-text fs-4 fw-bold">Delirium</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="opt-wrapper" onclick="toggleEval('nodelirium', this)">
+                        <div class="color-box bg-green eval-box" id="eval-nodelirium"></div>
+                        <span class="opt-text fs-4 fw-bold">No Delirium</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4 gy-3">
+                <div class="col-md-4">
+                    <div class="opt-wrapper" onclick="toggleEval('hyper', this)">
+                        <div class="color-box bg-yellow-box eval-box" id="eval-hyper"></div>
+                        <span class="opt-text">Hyperdelirium</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="opt-wrapper" onclick="toggleEval('hypo', this)">
+                        <div class="color-box bg-yellow-box eval-box" id="eval-hypo"></div>
+                        <span class="opt-text">Hypodelirium</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="opt-wrapper" onclick="toggleEval('mixed', this)">
+                        <div class="color-box bg-yellow-box eval-box" id="eval-mixed"></div>
+                        <span class="opt-text">Mixed form Delirium</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="btn-submit" class="btn-submit" onclick="submitAssessment()" disabled>ส่งคำตอบ</button>
+
+    </main>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+
+    <script>
+        // เก็บสถานะการตอบคำถาม
+        let answers = { q1: null, q2: null, q3: null, q4: null };
+        let hasEvaluation = false; // ต้องติ๊กประเมินผลอย่างน้อย 1 ช่อง
+
+        // ไอคอนเครื่องหมายถูก
+        const checkIcon = '<i class="bi bi-check-lg"></i>';
+
+        // ฟังก์ชันสำหรับข้อ 1-4 (เลือกได้ข้อละ 1 อัน)
+        function toggleOption(questionId, value, element) {
+            // ล้างเครื่องหมายถูกในข้อเดียวกัน
+            document.getElementById(`${questionId}-yes`).innerHTML = '';
+            document.getElementById(`${questionId}-no`).innerHTML = '';
+            
+            // ใส่เครื่องหมายถูกในกล่องที่เลือก
+            document.getElementById(`${questionId}-${value}`).innerHTML = checkIcon;
+            
+            // บันทึกคำตอบ
+            answers[questionId] = value;
+            
+            checkCompletion();
+        }
+
+        // ฟังก์ชันสำหรับส่วนประเมินผล (ติ๊กเปิด/ปิดได้อิสระ)
+        function toggleEval(evalId, element) {
+            const box = document.getElementById(`eval-${evalId}`);
+            
+            if (box.innerHTML === '') {
+                box.innerHTML = checkIcon;
+            } else {
+                box.innerHTML = '';
+            }
+
+            // ตรวจสอบว่ามีช่องประเมินผลถูกติ๊กอย่างน้อย 1 ช่องหรือไม่
+            const allEvalBoxes = document.querySelectorAll('.eval-box');
+            hasEvaluation = Array.from(allEvalBoxes).some(b => b.innerHTML !== '');
+            
+            checkCompletion();
+        }
+
+        // ตรวจสอบว่าทำครบตามเงื่อนไขหรือยัง
+        function checkCompletion() {
+            const isAllQuestionsAnswered = answers.q1 !== null && answers.q2 !== null && answers.q3 !== null && answers.q4 !== null;
+            
+            const submitBtn = document.getElementById('btn-submit');
+            
+            // ถ้าตอบครบข้อ 1-4 และติ๊กประเมินผลอย่างน้อย 1 ช่อง ให้ปลดล็อกปุ่ม
+            if (isAllQuestionsAnswered && hasEvaluation) {
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.disabled = true;
+            }
+        }
+
+        // ฟังก์ชันเมื่อกดส่งคำตอบ
+        function submitAssessment() {
+            // ลิงก์ไปหน้าเฉลย (แก้ชื่อไฟล์ให้ตรงกับหน้าเฉลยของคุณ)
+            window.location.href = "camt-feedback.html"; 
+        }
+
+        // ระบบซ่อน Navbar
+        const header = document.getElementById('header');
+        window.onscroll = () => {
+            if (window.scrollY > 80) header.classList.add('header-hidden');
+            else header.classList.remove('header-hidden');
+        };
+        document.onmousemove = (e) => { if (e.clientY < 60) header.classList.remove('header-hidden'); };
+
+        document.addEventListener('DOMContentLoaded', () => { AOS.init(); });
+    </script>
+
+</body>
+</html>

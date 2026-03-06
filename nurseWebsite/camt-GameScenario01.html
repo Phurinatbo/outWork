@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิดีโอสถานการณ์ - SMART Nurse</title>
+    <meta name="description" content="ดูวิดีโอสถานการณ์ผู้ป่วย เพื่อทำการประเมิน">
+
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-navy: #1f3b5c;
+            --accent-orange: #E66A19;
+            --bg-yellow: #FFFAE4; /* สีพื้นหลังตามที่เคยตกลงกันไว้ */
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--bg-yellow);
+            color: var(--primary-navy);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Auto-hide Navbar */
+        #header {
+            transition: all 0.4s ease-in-out;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 1000;
+        }
+        .header-hidden { transform: translateY(-100%); }
+
+        /* Main Content Layout */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 0 60px 0;
+        }
+
+        .scenario-box {
+            background: #fff;
+            border: 4px solid #000;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .title-text {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .warning-text {
+            font-size: 1.1rem;
+            color: #dc3545;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        /* Video Container (16:9 Aspect Ratio) */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* อัตราส่วน 16:9 */
+            height: 0;
+            overflow: hidden;
+            border: 4px solid #000;
+            border-radius: 15px;
+            background-color: #000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ปุ่มประเมินผู้ป่วย (มุมขวาล่าง) */
+        .btn-assess {
+            background-color: var(--primary-navy);
+            color: #fff;
+            border: 3px solid #000;
+            border-radius: 12px;
+            padding: 15px 50px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            box-shadow: 5px 5px 0px #000;
+            transition: all 0.3s;
+            margin-top: 30px;
+            float: right; /* จัดชิดขวาตามแบบ */
+        }
+
+        /* สถานะตอนล็อกปุ่ม */
+        .btn-assess:disabled {
+            background-color: #ccc;
+            color: #666;
+            border-color: #999;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        /* สถานะตอนปลดล็อก (พร้อมเอฟเฟกต์เด้งเตือน) */
+        .btn-assess:not(:disabled) {
+            animation: pulse-ready 2s infinite;
+        }
+
+        .btn-assess:hover:not(:disabled) {
+            background-color: var(--accent-orange);
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0px #000;
+            color: #fff;
+            animation: none; /* ปิดเด้งตอนเอาเมาส์ชี้ */
+        }
+
+        @keyframes pulse-ready {
+            0% { transform: scale(1); box-shadow: 5px 5px 0px #000; }
+            50% { transform: scale(1.05); box-shadow: 8px 8px 0px var(--accent-orange); border-color: var(--accent-orange); }
+            100% { transform: scale(1); box-shadow: 5px 5px 0px #000; }
+        }
+
+        /* Clearfix สำหรับ float */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header" class="header d-flex align-items-center fixed-top shadow-sm">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/สกรีนช็อต 2026-01-30 203747-Photoroom.png" alt="โลโก้พยาบาลศาสตร์" style="max-height: 50px;">
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul class="d-flex list-unstyled m-0">
+                    <li class="me-4"><a href="index.html" class="text-decoration-none">หน้าหลัก</a></li>
+                    <li><a href="#" class="active text-decoration-none fw-bold">สถานการณ์ผู้ป่วย</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    
+                    <div class="scenario-box" data-aos="fade-up">
+                        <div class="text-center">
+                            <h1 class="title-text">คลิปวิดีโอสถานการณ์</h1>
+                            <p class="warning-text"><i class="bi bi-exclamation-triangle-fill"></i> กรุณารับชมวิดีโอให้จบเพื่อปลดล็อกปุ่มประเมิน (ไม่สามารถกรอเวลาได้)</p>
+                        </div>
+
+                        <div class="video-wrapper">
+                            <div id="yt-player"></div>
+                        </div>
+
+                        <div class="clearfix">
+                            <button id="btn-assess" class="btn btn-assess" onclick="goToAssessment()" disabled>
+                                <i class="bi bi-clipboard2-pulse-fill me-2"></i>ประเมินผู้ป่วย
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-4 bg-white border-top">
+        <p class="text-muted small m-0">© 2026 SMART Nurse - คณะพยาบาลศาสตร์ มหาวิทยาลัยขอนแก่น</p>
+    </footer>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        let player;
+
+        // ฟังก์ชันนี้จะถูกเรียกอัตโนมัติเมื่อ YouTube API โหลดเสร็จ
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-player', {
+                videoId: 'D_Qkp_wVO3I', // ID ของวิดีโอที่คุณระบุ
+                playerVars: {
+                    'controls': 0,      // ซ่อนแถบควบคุม (เล่น/หยุด/เวลา) ป้องกันการกรอ
+                    'disablekb': 1,     // ปิดการใช้คีย์บอร์ด (เช่น ลูกศรซ้ายขวาเพื่อกรอเวลา)
+                    'rel': 0,           // ไม่แสดงวิดีโอแนะนำจากช่องอื่นตอนจบ
+                    'modestbranding': 1 // ซ่อนโลโก้ YouTube
+                },
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // ฟังก์ชันตรวจสอบสถานะของวิดีโอ
+        function onPlayerStateChange(event) {
+            // YT.PlayerState.ENDED (เลข 0) คือสถานะเมื่อวิดีโอเล่นจบ
+            if (event.data === YT.PlayerState.ENDED) {
+                unlockButton();
+            }
+        }
+
+        // ฟังก์ชันปลดล็อกปุ่มเมื่อวิดีโอจบ
+        function unlockButton() {
+            const btn = document.getElementById('btn-assess');
+            btn.disabled = false; // ปลดล็อก
+            btn.innerHTML = '<i class="bi bi-clipboard2-check-fill me-2"></i>พร้อมประเมินผู้ป่วย';
+            
+            // แจ้งเตือนผู้ใช้ด้วยเสียง (ตัวเลือกเสริม) หรือเปลี่ยนข้อความเตือน
+            document.querySelector('.warning-text').innerHTML = '<span class="text-success"><i class="bi bi-check-circle-fill"></i> รับชมจบแล้ว กรุณากดปุ่มประเมินด้านล่าง</span>';
+        }
+
+        // ฟังก์ชันเมื่อกดปุ่มประเมิน
+        function goToAssessment() {
+            // ลิงก์ไปยังหน้าแบบประเมิน CAM-T ของคุณ (เปลี่ยนชื่อไฟล์ตามจริงได้เลย)
+            window.location.href = "camt-assessment.html"; 
+        }
+
+        // ระบบซ่อน Navbar อัตโนมัติเวลาเลื่อนจอ
+        const header = document.getElementById('header');
+        window.onscroll = () => {
+            if (window.scrollY > 80) header.classList.add('header-hidden');
+            else header.classList.remove('header-hidden');
+        };
+        document.onmousemove = (e) => { if (e.clientY < 60) header.classList.remove('header-hidden'); };
+
+        document.addEventListener('DOMContentLoaded', () => { AOS.init(); });
+    </script>
+
+</body>
+</html>

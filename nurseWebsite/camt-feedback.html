@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เฉลยสถานการณ์ที่ 1 - SMART Nurse</title>
+    <meta name="description" content="หน้าเฉลยแบบประเมิน CAM-T พร้อมคำอธิบาย">
+
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-navy: #1f3b5c;
+            --bg-yellow: #FFFAE4;
+            --box-red: #dc3545;
+            --box-green: #28a745;
+            --box-yellow: #FCE686;
+            --accent-orange: #E66A19;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--bg-yellow);
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.03) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.03) 2px, transparent 2px);
+            background-size: 30px 30px;
+            color: #000;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Glow Effect แบบหน้าประเมิน */
+        body::before {
+            content: ''; position: absolute; width: 500px; height: 500px;
+            background: rgba(252, 230, 134, 0.6); border-radius: 50%; filter: blur(80px);
+            top: 10%; left: -10%; z-index: -1; animation: floatGlow 8s ease-in-out infinite;
+        }
+        body::after {
+            content: ''; position: absolute; width: 400px; height: 400px;
+            background: rgba(31, 59, 92, 0.1); border-radius: 50%; filter: blur(80px);
+            bottom: 10%; right: -5%; z-index: -1; animation: floatGlow 10s ease-in-out infinite reverse;
+        }
+        @keyframes floatGlow { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(30px) scale(1.1); } }
+
+        #header { transition: all 0.4s ease-in-out; background: rgba(255, 255, 255, 0.98); z-index: 1000; }
+        .header-hidden { transform: translateY(-100%); }
+
+        .assessment-container {
+            background-color: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(10px);
+            border: 4px solid var(--primary-navy);
+            border-radius: 20px;
+            padding: 60px 40px;
+            max-width: 1000px;
+            margin: 120px auto 60px auto;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .page-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-navy);
+            text-shadow: 2px 2px 0px #fff;
+        }
+
+        .question-block {
+            background-color: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* ขอบสีเขียวแสดงว่าตรวจแล้ว */
+        .question-block::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; height: 100%; width: 6px;
+            background-color: var(--box-green);
+        }
+
+        .q-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 10px; color: #1a202c; }
+        
+        /* กล่องคำอธิบายเฉลย */
+        .explanation-text {
+            background-color: #fcf8f2;
+            border-left: 4px solid var(--accent-orange);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .opt-wrapper { display: flex; align-items: center; margin-bottom: 12px; padding: 10px 15px; border-radius: 12px; }
+        
+        .color-box {
+            width: 45px; height: 45px; border: 3px solid #000; margin-right: 15px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+        }
+
+        /* เครื่องหมายติ๊กถูกใหญ่ๆ */
+        .check-icon { font-size: 3.5rem; font-weight: 900; color: #000; line-height: 0; margin-bottom: 5px; }
+
+        .bg-red { background-color: var(--box-red); }
+        .bg-green { background-color: var(--box-green); }
+        .bg-yellow-box { background-color: var(--box-yellow); }
+
+        .opt-text { font-size: 1.15rem; font-weight: 700; }
+        
+        /* สไตล์สำหรับตัวเลือกที่ไม่ได้ถูกเลือก (ทำให้จางลง) */
+        .opt-dimmed { opacity: 0.3; filter: grayscale(100%); }
+
+        .eval-section {
+            background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(252,230,134,0.3) 100%);
+            border: 4px solid var(--primary-navy); border-radius: 15px; padding: 40px; margin-top: 50px;
+        }
+
+        .btn-next {
+            background-color: #f8f9fa; color: #000; border: 4px solid #000; border-radius: 15px;
+            padding: 15px 80px; font-size: 2rem; font-weight: 900; box-shadow: 8px 8px 0px #000;
+            transition: all 0.2s; display: block; margin: 50px auto 0 auto; width: fit-content;
+        }
+        .btn-next:hover { background-color: var(--primary-navy); color: #fff; transform: translate(-3px, -3px); box-shadow: 11px 11px 0px #000; }
+        .btn-next:active { transform: translate(5px, 5px); box-shadow: 0px 0px 0px #000; }
+
+        @media (max-width: 768px) {
+            .assessment-container { padding: 40px 20px; margin-top: 100px; }
+            .page-title { font-size: 2.2rem; }
+            .check-icon { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="header" class="header d-flex align-items-center fixed-top shadow-sm">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/สกรีนช็อต 2026-01-30 203747-Photoroom.png" alt="โลโก้พยาบาลศาสตร์" style="max-height: 50px;">
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul class="d-flex list-unstyled m-0">
+                    <li class="me-4"><a href="index.html" class="text-decoration-none">หน้าหลัก</a></li>
+                    <li><a href="#" class="active text-decoration-none fw-bold">เฉลยสถานการณ์</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="assessment-container">
+        <h1 class="page-title" data-aos="fade-down">เฉลยสถานการณ์ที่ 1</h1>
+
+        <div class="row question-block" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-8 mb-3 mb-lg-0">
+                <div class="q-title">1. เริ่มต้นอาการอย่างเฉียบพลัน (Acute onset and fluctuation course)</div>
+                <div class="explanation-text">
+                    - จากการซักประวัติญาติพบว่า ในช่วงเวลาก่อนหัวค่ำผู้ป่วยสามารถพูดคุยรู้เรื่องดี และไม่มีประวัติหลงลืมหรือสับสนเรื้อรังมาก่อน และอาการสับสนเริ่มเกิดขึ้นตั้งแต่เมื่อคืน และมีลักษณะเป็น ๆ หาย ๆ ภายในวันเดียว แสดงให้เห็นถึงการเปลี่ยนแปลงของสภาพจิตใจที่เกิดขึ้นอย่างเฉียบพลันจากสภาพเดิม และมีความผันแปรของอาการตามช่วงเวลา
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex flex-column justify-content-center">
+                <div class="opt-wrapper">
+                    <div class="color-box bg-red"><span class="check-icon">✓</span></div>
+                    <span class="opt-text text-danger">มีอาการ</span>
+                </div>
+                <div class="opt-wrapper opt-dimmed">
+                    <div class="color-box bg-green"></div>
+                    <span class="opt-text">ไม่มีอาการ</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row question-block" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-lg-8 mb-3 mb-lg-0">
+                <div class="q-title">2. ขาดสมาธิ (Inattention)</div>
+                <div class="explanation-text">
+                    - ผู้ป่วยมีสมาธิลดลงอย่างชัดเจน โดยไม่สามารถจดจ่อกับบทสนทนาได้อย่างต่อเนื่อง มีพฤติกรรมมองไปรอบห้องและวอกแวกต่อสิ่งเร้าภายนอกได้ง่าย ผู้ป่วยไม่สามารถตอบคำถามเกี่ยวกับวันเวลาได้ และไม่สามารถนับวันในสัปดาห์ย้อนหลังได้ครบ อีกทั้งมีการหลุดจากบทสนทนาบ่อยครั้ง
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex flex-column justify-content-center">
+                <div class="opt-wrapper">
+                    <div class="color-box bg-red"><span class="check-icon">✓</span></div>
+                    <span class="opt-text text-danger">มีอาการ</span>
+                </div>
+                <div class="opt-wrapper opt-dimmed">
+                    <div class="color-box bg-green"></div>
+                    <span class="opt-text">ไม่มีอาการ</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row question-block" data-aos="fade-up" data-aos-delay="300">
+            <div class="col-lg-8 mb-3 mb-lg-0">
+                <div class="q-title">3. ความคิดไม่เป็นระบบ (DISORGANIZED THINKING)</div>
+                <div class="explanation-text">
+                    - ผู้ป่วยมีความคิดที่ไม่เป็นระบบ ตอบคำถามไม่สอดคล้องกับสถานการณ์ และมีการเปลี่ยนเรื่องกะทันหัน คือเมื่อถูกถามเรื่องอาหาร กลับตอบว่าต้องรีบเก็บของก่อนที่รถจะมา และผู้ป่วยยังเข้าใจผิดเกี่ยวกับสถานที่โดยคิดว่าตนเองอยู่ที่ตลาด ทั้งที่ปัจจุบันกำลังรักษาตัวอยู่ในโรงพยาบาล แสดงถึงกระบวนการคิดที่สับสน ไม่สามารถเชื่อมโยงข้อมูลกับความเป็นจริงได้อย่างเหมาะสม
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex flex-column justify-content-center">
+                <div class="opt-wrapper">
+                    <div class="color-box bg-red"><span class="check-icon">✓</span></div>
+                    <span class="opt-text text-danger">มีอาการ</span>
+                </div>
+                <div class="opt-wrapper opt-dimmed">
+                    <div class="color-box bg-green"></div>
+                    <span class="opt-text">ไม่มีอาการ</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row question-block" data-aos="fade-up" data-aos-delay="400">
+            <div class="col-lg-8 mb-3 mb-lg-0">
+                <div class="q-title">4. ระดับความรู้สึกตัวเปลี่ยนแปลงไป (Altered level of consciousness)</div>
+                <div class="explanation-text">
+                    - ผู้ป่วยมีระดับความรู้สึกตัวเปลี่ยนแปลงไปจากปกติ โดยมีลักษณะตื่นตัวมากผิดปกติ
+                </div>
+            </div>
+            <div class="col-lg-4 d-flex flex-column justify-content-center">
+                <div class="opt-wrapper">
+                    <div class="color-box bg-red"><span class="check-icon">✓</span></div>
+                    <span class="opt-text text-danger">มีอาการ</span>
+                </div>
+                <div class="opt-wrapper opt-dimmed">
+                    <div class="color-box bg-green"></div>
+                    <span class="opt-text">ไม่มีอาการ</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="eval-section" data-aos="zoom-in" data-aos-delay="500">
+            <h3 class="fw-bold mb-4">ประเมินผล</h3>
+            
+            <div class="row gy-3">
+                <div class="col-md-6">
+                    <div class="opt-wrapper">
+                        <div class="color-box bg-red"><span class="check-icon">✓</span></div>
+                        <span class="opt-text fs-4 fw-bold text-danger">Delirium</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="opt-wrapper opt-dimmed">
+                        <div class="color-box bg-green"></div>
+                        <span class="opt-text fs-4 fw-bold">No Delirium</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4 gy-3">
+                <div class="col-md-4">
+                    <div class="opt-wrapper">
+                        <div class="color-box bg-yellow-box"><span class="check-icon">✓</span></div>
+                        <span class="opt-text fw-bold text-warning" style="text-shadow: 1px 1px 0 #000;">Hyperdelirium</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="opt-wrapper opt-dimmed">
+                        <div class="color-box bg-yellow-box"></div>
+                        <span class="opt-text">Hypodelirium</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="opt-wrapper opt-dimmed">
+                        <div class="color-box bg-yellow-box"></div>
+                        <span class="opt-text">Mixed form Delirium</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="explanation-text mt-4">
+                <i class="bi bi-info-circle-fill text-primary me-2"></i>- ผู้ป่วยมีพฤติกรรมตื่นตัวมาก กระสับกระส่าย หวาดระแวง มีอาการประสาทหลอน พูดเสียงดัง โวยวาย และนอนไม่หลับ
+            </div>
+        </div>
+
+        <div class="text-center position-relative">
+            <button class="btn-next" onclick="window.location.href='CAM-T-Posttest.html'">NEXT</button>
+            <p class="mt-3 fw-bold text-muted" style="font-size: 1.2rem;">* กด NEXT แล้วไปหน้า Post-test</p>
+        </div>
+
+    </main>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script>
+        const header = document.getElementById('header');
+        window.onscroll = () => {
+            if (window.scrollY > 80) header.classList.add('header-hidden');
+            else header.classList.remove('header-hidden');
+        };
+        document.onmousemove = (e) => { if (e.clientY < 60) header.classList.remove('header-hidden'); };
+        document.addEventListener('DOMContentLoaded', () => { AOS.init(); });
+    </script>
+</body>
+</html>
