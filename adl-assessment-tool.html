@@ -151,7 +151,47 @@
 
         /* Progress Bar Customization */
         .progress { background-color: rgba(0,0,0,0.05); border-radius: 50px; border: 1px solid #000; }
-    </style>
+
+        /* =========================================
+           RESPONSIVE (ปรับให้พอดีกับมือถือ)
+           ========================================= */
+        @media (max-width: 991px) {
+            .quiz-article { margin-top: 100px; padding: 30px; }
+            .question-wrapper { min-height: 200px; padding: 30px; }
+            .mascot-aside { margin-top: 30px; }
+        }
+
+        @media (max-width: 768px) {
+            .quiz-article { margin-top: 90px; padding: 20px; min-height: auto; }
+            
+            /* ปรับแถบสถานะ (Progress) ด้านบน */
+            #idx-view { font-size: 1rem !important; padding: 8px 16px !important; }
+            .progress { height: 10px !important; }
+            .mx-4 { margin-left: 1rem !important; margin-right: 1rem !important; } /* ลดระยะห่าง */
+
+            /* ปรับกล่องคำถาม */
+            .question-wrapper { min-height: 150px; padding: 20px; margin-bottom: 25px; }
+            .question-wrapper h2 { font-size: 1.4rem; }
+
+            /* ปรับปุ่ม ถูก/ผิด */
+            .btn-game-tf { font-size: 1.5rem; padding: 15px; }
+
+            /* ปรับปุ่มตัวเลือก MCQ */
+            .btn-mcq-game { font-size: 1rem; padding: 12px 20px; margin-bottom: 10px; }
+
+            /* ปรับมาสคอตและปุ่ม Next */
+            .mascot-frame { width: 120px; height: 120px; margin-bottom: 15px; }
+            .btn-next-game { font-size: 1.3rem; padding: 12px 0; width: 100%; text-align: center; }
+            
+            /* หน้าสรุปผล */
+            .display-1 { font-size: 4rem; }
+        }
+
+        @media (max-width: 480px) {
+            .question-wrapper h2 { font-size: 1.2rem; }
+            .btn-game-tf { font-size: 1.3rem; padding: 12px; }
+        }
+        </style>
     </head>
 
     <body>
@@ -259,15 +299,15 @@
 
                 <div id="result-flow" class="d-none py-5 text-center">
                     <div
-                        class="bg-white p-5 rounded-4 border border-5 border-navy mx-auto"
+                        class="bg-white p-4 p-md-5 rounded-4 border border-5 border-navy mx-auto"
                         style="max-width: 600px;">
-                        <h2 class="fw-bold mb-4">สรุปผลการทดสอบก่อนเรียน</h2>
+                        <h2 class="fw-bold mb-4 fs-3">สรุปผลการทดสอบก่อนเรียน</h2>
                         <div class="display-1 fw-bold text-success mb-2"
                             id="score-view">0/5</div>
                         <p
-                            class="fs-4 text-muted mb-5">คะแนนความรู้พื้นฐานของคุณ</p>
+                            class="fs-5 text-muted mb-5">คะแนนความรู้พื้นฐานของคุณ</p>
                         <a href="gameADL.html"
-                            class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold">เข้าสู่หน้าถัดไป</a>
+                            class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold w-100">เข้าสู่หน้าถัดไป</a>
                     </div>
                 </div>
 
