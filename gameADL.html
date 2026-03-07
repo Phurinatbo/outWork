@@ -157,13 +157,20 @@
                     </div>
                     <div class="modal-body p-0 text-center">
                         
-                        <iframe id="game-frame" style="width:100%; height: 600px;" 
+                        <iframe id="game-frame" 
+                                style="width:100%; height: 600px;" 
                                 src="https://wordwall.net/embed/80c2a11422c6407f84b08393c8c1bba7?themeId=65&templateId=5&fontStackId=21" 
-                                frameborder="0" allowfullscreen>
+                                frameborder="0" 
+                                allowfullscreen="true"
+                                webkitallowfullscreen="true"
+                                mozallowfullscreen="true"
+                                sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                loading="lazy">
                         </iframe>
 
                         <div class="p-3 bg-light border-top border-4 border-dark">
-                            <div class="verify-box d-inline-block text-start">
+                            <div class="verify-box d-inline-block text-start mb-2">
                                 <p class="mb-2 fw-bold text-danger"><i class="bi bi-exclamation-triangle-fill"></i> ยืนยันสถานะการเล่น:</p>
                                 <div class="form-check">
                                     <input class="form-check-input border-dark" type="checkbox" id="check-played" onchange="checkStatus()">
@@ -174,6 +181,9 @@
                                     <label class="form-check-label" for="check-done">ฉันพร้อมที่จะทำแบบทดสอบหลังเรียน (Post-test)</label>
                                 </div>
                             </div>
+                            
+                            <p class="text-muted small mb-0"><i class="bi bi-info-circle-fill text-primary"></i> หากหน้าเกมไม่โหลด แนะนำให้ลองเปิดด้วย Google Chrome หรือเบราว์เซอร์อื่น</p>
+                            
                             <div id="unlock-msg" class="mt-2 fw-bold text-secondary">กรุณาเล่นเกมและติ๊กยืนยันเพื่อปิดหน้าต่างนี้</div>
                         </div>
                     </div>
@@ -187,7 +197,6 @@
         let gameModal = new bootstrap.Modal(document.getElementById('gameModal'));
 
         function openGame() {
-            // ไม่ต้องใส่ .src ด้วย JS แล้ว ปล่อยให้มันโหลดจาก HTML มาเลย
             document.getElementById('check-played').checked = false;
             document.getElementById('check-done').checked = false;
             document.getElementById('close-game-btn').style.display = 'none';
