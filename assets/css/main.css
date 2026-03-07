@@ -1883,3 +1883,185 @@ section,
     color: #278ACA !important;
 }
 
+/* =========================================
+   Custom Features Section (ADL/IADL Tab)
+   ========================================= */
+
+/* จัดการรายการ Checkmark ให้มีระยะห่างที่สวยงาม */
+.feature-list li {
+    transition: transform 0.3s ease;
+}
+.feature-list li:hover {
+    transform: translateX(8px);
+}
+.feature-list strong {
+    font-size: 1.05rem;
+}
+
+/* จัดการรูปภาพฝั่งขวาให้เป็นวงกลมสวยงาม */
+.feature-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* ขนาดสูงสุดของรูป */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.custom-circle-img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* บังคับให้เป็นสี่เหลี่ยมจัตุรัสเพื่อทำวงกลม */
+    object-fit: cover; /* ตัดส่วนที่เกินออกโดยไม่ทำให้รูปเบี้ยว */
+    border-radius: 50%; /* ทำให้เป็นวงกลม */
+    background-color: var(--box-yellow, #FCE686); /* ใส่สีพื้นหลังเหลืองเผื่อรูปเป็น PNG ใส */
+    border: 5px solid #fff; /* ขอบสีขาวบางๆ */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* เงาฟุ้งๆ ให้ดูมีมิติ */
+    transition: transform 0.4s ease;
+}
+
+.feature-image-wrapper:hover .custom-circle-img {
+    transform: scale(1.03); /* เอาเมาส์ชี้แล้วขยายเล็กน้อย */
+}
+
+/* ปรับแต่งปุ่มให้หน้าตาเหมือนต้นฉบับ */
+#features-tab-1 .btn {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    transition: all 0.3s ease;
+}
+#features-tab-1 .btn-primary {
+    background-color: #0d6efd;
+    border: none;
+}
+#features-tab-1 .btn-primary:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(13, 110, 253, 0.3) !important;
+}
+#features-tab-1 .btn-outline-secondary {
+    border: 2px solid #ced4da;
+    color: #6c757d;
+}
+#features-tab-1 .btn-outline-secondary:hover {
+    background-color: #f8f9fa;
+    color: #495057;
+    transform: translateY(-2px);
+}
+
+/* Responsive สำหรับมือถือ */
+@media (max-width: 991px) {
+    .feature-image-wrapper {
+        max-width: 400px;
+        margin-bottom: 30px;
+    }
+}
+@media (max-width: 768px) {
+    #features-tab-1 .btn {
+        width: 100%; /* ปุ่มเต็มจอในมือถือ */
+        justify-content: center;
+    }
+    .feature-list li {
+        margin-bottom: 1.5rem !important;
+    }
+}
+
+/* จัดการรูปภาพที่นำมาแทนที่ Icon ให้เป็นวงกลมพอดี */
+.icon .img-custom-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ทำให้รูปซูมพอดีกรอบ ไม่ยืด/หดเบี้ยว */
+    border-radius: 50%; /* ตัดขอบรูปให้เป็นวงกลม */
+}
+
+/* หากพื้นหลังเดิมของ .icon มีสีแล้วรูปบังไม่มิด สามารถตั้งค่าเพิ่มเติมตรงนี้ได้ (ถ้าตั้งไว้แล้วข้ามได้เลยครับ) */
+.icon {
+    overflow: hidden; /* ป้องกันขอบรูปภาพล้นออกนอกกรอบวงกลม */
+    padding: 0; /* เอา padding ออกเพื่อให้รูปภาพขยายเต็มกรอบ */
+}
+
+/* =========================================
+   Services Section (การ์ดคู่มือการประเมิน)
+   ========================================= */
+.custom-service-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #e2e8f0;
+    position: relative;
+    margin-top: 20px; /* เว้นที่ให้ไอคอนด้านบน */
+}
+
+.custom-service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    border-color: var(--primary-navy, #1f3b5c);
+}
+
+.card-img-wrapper {
+    width: 100%;
+    height: 220px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    overflow: hidden;
+}
+
+.card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.custom-service-card:hover .card-img-wrapper img {
+    transform: scale(1.05);
+}
+
+.card-content-wrapper {
+    position: relative;
+    padding: 50px 25px 30px; 
+    text-align: center;
+    background-color: #fff;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+
+/* ไอคอนรูปภาพวงกลมลอยทับ */
+.overlap-icon {
+    width: 75px;
+    height: 75px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%); /* ดึงให้ลอยทับกึ่งกลางเป๊ะ */
+    border: 5px solid #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    overflow: hidden; /* บังคับให้ภาพข้างในเป็นวงกลมตามกรอบ */
+    z-index: 2;
+}
+
+.overlap-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.service-title {
+    color: var(--primary-navy, #1f3b5c);
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    transition: color 0.3s;
+}
+
+.custom-service-card:hover .service-title {
+    color: var(--accent-orange, #E66A19);
+}
+
+.service-desc {
+    color: #6c757d;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
