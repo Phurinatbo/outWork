@@ -5,17 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Game BADL - SMART Nurse</title>
 
-        <!-- Favicons -->
         <link href="assets/img/พยาบาลศาสตร์.png" rel="icon">
         <link href="assets/img/พยาบาลศาสตร์.png" rel="apple-touch-icon">
 
-        <link
-            href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;700;900&display=swap"
-            rel="stylesheet">
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
-            rel="stylesheet">
-        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;700;900&display=swap" rel="stylesheet">
+        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
 
         <style>
         :root {
@@ -121,25 +116,20 @@
                 <div class="row align-items-center">
 
                     <div class="col-lg-7">
-                        <p
-                            class="game-subtitle">แบบประเมินความสามารถเชิงปฏิบัติในการ<br>ทำกิจวัตรประจำวันพื้นฐาน</p>
-                        <h1 class="game-main-title"
-                            onclick="openGame()">Games<br>BADL</h1>
+                        <p class="game-subtitle">แบบประเมินความสามารถเชิงปฏิบัติในการ<br>ทำกิจวัตรประจำวันพื้นฐาน</p>
+                        <h1 class="game-main-title" onclick="openGame()">Games<br>BADL</h1>
 
                         <div class="steps-container">
                             <div class="step-circle shadow-sm">
-                                <img src="assets/img/1. อุปกรณ์ล้างหน้า.jpg"
-                                    alt="Step 1">
+                                <img src="assets/img/1. อุปกรณ์ล้างหน้า.jpg" alt="Step 1">
                             </div>
                             <div class="step-line"></div>
                             <div class="step-circle shadow-sm">
-                                <img src="assets/img/2. walker.jpg"
-                                    alt="Step 2">
+                                <img src="assets/img/2. walker.jpg" alt="Step 2">
                             </div>
                             <div class="step-line"></div>
                             <div class="step-circle shadow-sm">
-                                <img src="assets/img/3. เซ็ตเสื้อผ้า.jpg"
-                                    alt="Step 3">
+                                <img src="assets/img/3. เซ็ตเสื้อผ้า.jpg" alt="Step 3">
                             </div>
                         </div>
                     </div>
@@ -147,73 +137,57 @@
                     <div class="col-lg-5">
                         <div class="big-circle-container">
                             <div class="big-circle shadow-lg">
-                                <img src="assets/img/สีเหลืองใหญ่.png"
-                                    alt="Nurse" style="max-width: 80%;">
+                                <img src="assets/img/สีเหลืองใหญ่.png" alt="Nurse" style="max-width: 80%;">
                             </div>
                         </div>
                     </div>
 
                 </div>
 
-                <button id="btn-next" class="btn btn-next-step"
-                    onclick="location.href='gameIADL.html'"
-                    disabled>Next</button>
+                <button id="btn-next" class="btn btn-next-step" onclick="location.href='gameIADL.html'" disabled>Next</button>
             </article>
         </main>
 
-        <div class="modal fade" id="gameModal" data-bs-backdrop="static"
-            data-bs-keyboard="false" tabindex="-1">
+        <div class="modal fade" id="gameModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title fw-bold">🎮 กิจกรรม Games BADL
-                            (ต้องเล่นให้จบเพื่อปลดล็อก)</h4>
-                        <button type="button" id="close-game-btn"
-                            class="btn-close" onclick="finishGame()"></button>
+                        <h4 class="modal-title fw-bold">🎮 กิจกรรม Games BADL (ต้องเล่นให้จบเพื่อปลดล็อก)</h4>
+                        <button type="button" id="close-game-btn" class="btn-close" onclick="finishGame()"></button>
                     </div>
                     <div class="modal-body p-0 text-center">
-                        <iframe id="game-frame"
-                            style="width:100%; height: 600px;" src
-                            frameborder="0" allowfullscreen></iframe>
+                        
+                        <iframe id="game-frame" style="width:100%; height: 600px;" 
+                                src="https://wordwall.net/embed/80c2a11422c6407f84b08393c8c1bba7?themeId=65&templateId=5&fontStackId=21" 
+                                frameborder="0" allowfullscreen>
+                        </iframe>
 
-                        <div
-                            class="p-3 bg-light border-top border-4 border-dark">
+                        <div class="p-3 bg-light border-top border-4 border-dark">
                             <div class="verify-box d-inline-block text-start">
-                                <p class="mb-2 fw-bold text-danger"><i
-                                        class="bi bi-exclamation-triangle-fill"></i>
-                                    ยืนยันสถานะการเล่น:</p>
+                                <p class="mb-2 fw-bold text-danger"><i class="bi bi-exclamation-triangle-fill"></i> ยืนยันสถานะการเล่น:</p>
                                 <div class="form-check">
-                                    <input class="form-check-input border-dark"
-                                        type="checkbox" id="check-played"
-                                        onchange="checkStatus()">
-                                    <label class="form-check-label"
-                                        for="check-played">ฉันได้เล่นเกมจนจบและทราบผลคะแนนแล้ว</label>
+                                    <input class="form-check-input border-dark" type="checkbox" id="check-played" onchange="checkStatus()">
+                                    <label class="form-check-label" for="check-played">ฉันได้เล่นเกมจนจบและทราบผลคะแนนแล้ว</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input border-dark"
-                                        type="checkbox" id="check-done"
-                                        onchange="checkStatus()">
-                                    <label class="form-check-label"
-                                        for="check-done">ฉันพร้อมที่จะทำแบบทดสอบหลังเรียน
-                                        (Post-test)</label>
+                                    <input class="form-check-input border-dark" type="checkbox" id="check-done" onchange="checkStatus()">
+                                    <label class="form-check-label" for="check-done">ฉันพร้อมที่จะทำแบบทดสอบหลังเรียน (Post-test)</label>
                                 </div>
                             </div>
-                            <div id="unlock-msg"
-                                class="mt-2 fw-bold text-secondary">กรุณาเล่นเกมและติ๊กยืนยันเพื่อปิดหน้าต่างนี้</div>
+                            <div id="unlock-msg" class="mt-2 fw-bold text-secondary">กรุณาเล่นเกมและติ๊กยืนยันเพื่อปิดหน้าต่างนี้</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <script
-            src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <script>
         let gameModal = new bootstrap.Modal(document.getElementById('gameModal'));
 
         function openGame() {
-            document.getElementById('game-frame').src = "https://wordwall.net/embed/80c2a11422c6407f84b08393c8c1bba7?themeId=65&templateId=5&fontStackId=21";
+            // ไม่ต้องใส่ .src ด้วย JS แล้ว ปล่อยให้มันโหลดจาก HTML มาเลย
             document.getElementById('check-played').checked = false;
             document.getElementById('check-done').checked = false;
             document.getElementById('close-game-btn').style.display = 'none';
