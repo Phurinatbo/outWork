@@ -2065,3 +2065,40 @@ section,
     font-size: 0.95rem;
     line-height: 1.6;
 }
+
+
+/* 1. กำหนดให้กรอบ Hero เป็นจุดอ้างอิง */
+#hero {
+    position: relative;
+    overflow: hidden;
+}
+
+/* 2. สร้างแผ่นฟิล์มดำโปร่งแสงมาบังทับวิดีโอ */
+#hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* ปรับความมืดตรงเลข 0.6 (0.1 สว่างสุด - 0.9 มืดสุด) */
+    z-index: 1; /* ให้อยู่เหนือวิดีโอ */
+}
+
+/* 3. จัดการตำแหน่งของวิดีโอให้อยู่หลังสุด */
+.hero-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0; /* ให้อยู่หลังแผ่นฟิล์ม */
+}
+
+/* 4. ดันให้กล่องข้อความและปุ่มลอยขึ้นมาอยู่หน้าสุด */
+#hero .container {
+    position: relative;
+    z-index: 2; /* ให้อยู่เหนือแผ่นฟิล์มดำ */
+}
+

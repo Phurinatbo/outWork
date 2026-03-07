@@ -43,13 +43,12 @@
         }
         .header-hidden { transform: translateY(-100%); }
 
-        /* --- พื้นหลังสไตล์ Game UI (ใส่รูปภาพพื้นหลังใหม่) --- */
+        /* --- พื้นหลังสไตล์ Game UI --- */
         .scenario-bg {
-            /* ใส่รูปพื้นหลังที่ได้มาใหม่ */
             background-image: url('assets/img/พื้นหลังCamGame.JPG');
-            background-size: cover; /* ให้รูปขยายเต็มหน้าจอพอดี */
-            background-position: center; /* ให้รูปอยู่กึ่งกลางเสมอ */
-            background-repeat: no-repeat; /* ไม่ให้รูปซ้ำกัน */
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
             
             min-height: 100vh;
             display: flex;
@@ -59,8 +58,6 @@
             position: relative;
             overflow: hidden; 
         }
-
-        /* (ลบเอฟเฟกต์วงกลมลอยไปมาออก เพราะมีรูปพื้นหลังใหม่แล้ว จะได้ไม่กวนสายตา) */
 
         /* ดันเนื้อหาให้อยู่เหนือพื้นหลัง */
         .content-container {
@@ -141,7 +138,7 @@
             color: var(--primary-navy);
             /* เพิ่มขอบตัวหนังสือให้เด่นขึ้น ตัดกับพื้นหลังที่เป็นรูปภาพ */
             text-shadow: 3px 3px 0px #fff, -1px -1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff, 4px 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 3rem;
+            line-height: 1.2;
         }
 
         /* Responsive สำหรับมือถือ */
@@ -163,7 +160,7 @@
             <nav id="navmenu" class="navmenu">
                 <ul class="d-flex list-unstyled m-0">
                     <li class="me-4"><a href="index.html" class="text-decoration-none">หน้าหลัก</a></li>
-                    <li><a href="#" class="active text-decoration-none fw-bold">เลือกสถานการณ์</a></li>
+                    <li><a href="#" class="active text-decoration-none fw-bold">สถานการณ์</a></li>
                 </ul>
             </nav>
         </div>
@@ -173,10 +170,10 @@
         
         <div class="container text-center content-container">
             
-            <h1 class="page-heading mb-2" data-aos="fade-down">คลิกเลือกสถานการณ์</h1>
-            <h1 class="page-heading mt-0" data-aos="fade-down" data-aos-delay="100">เพื่อเล่นเกม</h1>
+            <h1 class="page-heading mb-0" data-aos="fade-down">คลิกสถานการณ์</h1>
+            <h1 class="page-heading mt-0 mb-3" data-aos="fade-down" data-aos-delay="100">เพื่อเล่นเกม</h1>
 
-            <div class="row justify-content-center align-items-center mt-5 gap-4 gap-lg-5">
+            <div class="row justify-content-center align-items-center mt-2 gap-4 gap-lg-5">
                 
                 <div class="col-12 col-md-5 col-lg-auto character-card" data-aos="zoom-in" data-aos-delay="200" onclick="goToScenario(1)">
                     <div class="char-circle">
@@ -185,7 +182,7 @@
                     <div class="char-name">ยายสุดสวย สดใส</div>
                 </div>
 
-                </div>
+            </div>
 
         </div>
     </main>
