@@ -585,6 +585,25 @@
     }
     .restart-btn:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); }
 
+    .next-page-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary) 0%, #9067f5 100%);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 50px;
+      padding: 13px 44px;
+      font-family: var(--font-title);
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all .22s ease;
+      box-shadow: 0 8px 24px rgba(91,47,190,.38);
+      letter-spacing: .5px;
+    }
+    .next-page-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+
     /* ===================================================
        RESPONSIVE
     =================================================== */
@@ -765,7 +784,7 @@
         เข้ารับการทดสอบสภาพสมองเบื้องต้นเป็นครั้งแรก ในวันที่ 24 กุมภาพันธ์ พ.ศ. 2569 ณ โรงพยาบาลขอนแก่น
         ห้องตรวจ ชั้นที่ 1
       </div>
-      <button class="modal-btn modal-btn-secondary" onclick="closeModal()">เริ่มทำการแปลผล</button>
+      <button class="modal-btn modal-btn-secondary" onclick="closeModal()">เริ่มทำการแบบประเมิน</button>
     </div>
   </div>
 </div>
@@ -775,8 +794,8 @@
   <!-- ===== SIDEBAR ===== -->
   <aside class="sidebar">
     <div class="sidebar-label">แถบเมนู</div>
-    <a class="nav-item" href="#"><span class="nav-icon">🏠</span> Home</a>
-    <a class="nav-item" href="#"><span class="nav-icon">📋</span> Pretest</a>
+    <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span> Home</a>
+    <a class="nav-item" href="post-test_mmse.html"><span class="nav-icon">📋</span> Pretest</a>
     <a class="nav-item" href="mmse_game.html"><span class="nav-icon">🎯</span> เกมจับผิด</a>
     <a class="nav-item active" href="mmse_intepretation.html"><span class="nav-icon">🔄</span> เกมแปลผล</a>
     <a class="nav-item" href="#"><span class="nav-icon">📝</span> Post-test</a>
@@ -850,7 +869,7 @@
       <div class="question-card">
         <div class="step-badge">📍 ข้อ 2 / 11</div>
         <p class="question-label">2. Orientation for place <span class="point-tag">5 คะแนน</span></p>
-        <div class="question-subtitle">🎬 จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
+        <div class="question-subtitle">จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
         <div class="main-content">
           <div class="media-box">
             <span class="media-placeholder"><iframe width="560" height="315" src="https://www.youtube.com/embed/rnsDpisy9JI?si=u6fBRZ4qzFEieGg4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
@@ -888,7 +907,7 @@
       <div class="question-card">
         <div class="step-badge">📍 ข้อ 3 / 11</div>
         <p class="question-label">3. Registration <span class="point-tag">3 คะแนน</span></p>
-        <div class="question-subtitle">🎬 จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
+        <div class="question-subtitle">จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
         <div class="main-content">
           <div class="media-box">
             <span class="media-placeholder"><iframe width="560" height="315" src="https://www.youtube.com/embed/94YZJyOMZQo?si=zIeVbMDswpiU7AQx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
@@ -924,7 +943,7 @@
       <div class="question-card">
         <div class="step-badge">📍 ข้อ 4 / 11</div>
         <p class="question-label">4. Attention & Calculation <span class="point-tag">5 คะแนน</span></p>
-        <div class="question-subtitle">🎬 จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
+        <div class="question-subtitle">จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
         <div class="main-content">
           <div class="media-box">
             <span class="media-placeholder"><iframe width="560" height="315" src="https://www.youtube.com/embed/7c0Iz7rTH1w?si=kTKVfk0Chbk1jeeL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
@@ -962,7 +981,7 @@
       <div class="question-card">
         <div class="step-badge">📍 ข้อ 5 / 11</div>
         <p class="question-label">5. Recall <span class="point-tag">3 คะแนน</span></p>
-        <div class="question-subtitle">🎬 จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
+        <div class="question-subtitle">จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
         <div class="main-content">
           <div class="media-box">
             <span class="media-placeholder"><iframe width="560" height="315" src="https://www.youtube.com/embed/8xwrybWn1IY?si=fcZ_zBWtmOIf8UZ5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
@@ -998,7 +1017,7 @@
       <div class="question-card">
         <div class="step-badge">📍 ข้อ 6 / 11</div>
         <p class="question-label">6. Naming <span class="point-tag">2 คะแนน</span></p>
-        <div class="question-subtitle">🎬 จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
+        <div class="question-subtitle">จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
         <div class="main-content">
           <div class="media-box">
             <span class="media-placeholder"><iframe width="560" height="315" src="https://www.youtube.com/embed/TnWxu6hiFg0?si=D5cyQpfYzLRkU_tx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
@@ -1033,7 +1052,7 @@
       <div class="question-card">
         <div class="step-badge">📍 ข้อ 7 / 11</div>
         <p class="question-label">7. Repetition <span class="point-tag">1 คะแนน</span></p>
-        <div class="question-subtitle">🎬 จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
+        <div class="question-subtitle">จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
         <div class="main-content">
           <div class="media-box">
             <span class="media-placeholder"><iframe width="560" height="315" src="https://www.youtube.com/embed/ouG-aDQJx34?si=VpNMN7rRH_nww9eI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
@@ -1068,7 +1087,7 @@
       <div class="question-card">
         <div class="step-badge">📍 ข้อ 8 / 11</div>
         <p class="question-label">8. Comprehension (3-step command) <span class="point-tag">3 คะแนน</span></p>
-        <div class="question-subtitle">🎬 จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
+        <div class="question-subtitle">จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
         <div class="main-content">
           <div class="media-box">
             <span class="media-placeholder"><iframe width="560" height="315" src="https://www.youtube.com/embed/U2q2XD605lc?si=IP7npNDQr4aSle2k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
@@ -1104,7 +1123,7 @@
       <div class="question-card">
         <div class="step-badge">📍 ข้อ 9 / 11</div>
         <p class="question-label">9. Reading <span class="point-tag">1 คะแนน</span></p>
-        <div class="question-subtitle">🎬 จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
+        <div class="question-subtitle">จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
         <div class="main-content">
           <div class="media-box">
             <span class="media-placeholder"><iframe width="560" height="315" src="https://www.youtube.com/embed/lEn_xRvveSI?si=toujevV8aJR0YE8C" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
@@ -1139,7 +1158,7 @@
       <div class="question-card">
         <div class="step-badge">📍 ข้อ 10 / 11</div>
         <p class="question-label">10. Writing <span class="point-tag">1 คะแนน</span></p>
-        <div class="question-subtitle">🎬 จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
+        <div class="question-subtitle">จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
         <div class="main-content">
           <div class="media-box">
             <span class="media-placeholder"><iframe width="560" height="315" src="https://www.youtube.com/embed/kYsIa9IQuuM?si=YFVAU5BAk7ds6giv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
@@ -1174,7 +1193,7 @@
       <div class="question-card">
         <div class="step-badge">📍 ข้อ 11 / 11</div>
         <p class="question-label">11. Visuospatial <span class="point-tag">1 คะแนน</span></p>
-        <div class="question-subtitle">🎬 จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
+        <div class="question-subtitle">จากวิดีโอข้อนี้ ควรให้คะแนนเท่าใดตามเกณฑ์การให้คะแนน MMSE-Thai 2002</div>
         <div class="main-content">
           <div class="media-box">
             <span class="media-placeholder"><iframe width="560" height="315" src="https://www.youtube.com/embed/mHBPqvCPR58?si=GWN-8qkxm-31-W_7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></span>
@@ -1191,7 +1210,7 @@
           <button class="back-btn" onclick="goBack(11)">← ย้อนกลับ</button>
           <button class="next-btn hidden" id="next-11" onclick="showResult()">
             <img src="assets\img\portfolio\ไอคอน MMSE .PNG" alt="NEXT" class="next-img" onerror="this.style.display='none'" />
-            <span class="next-label">🏆 ดูผลคะแนน</span>
+            <span class="next-label">ดูผลคะแนน</span>
           </button>
         </div>
       </div>
@@ -1209,8 +1228,9 @@
           <div class="result-score-max">/ 30 คะแนน</div>
         </div>
         <div class="result-breakdown" id="result-breakdown"></div>
-        <div style="text-align:center;">
+        <div style="text-align:center; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
           <button class="restart-btn" onclick="restartGame()">🔄 เริ่มใหม่อีกครั้ง</button>
+          <a href="summary_intepretation.html" class="next-page-btn">NEXT <span style="display:inline-block; transition:transform .22s ease;">→</span></a>
         </div>
       </div>
     </div>
@@ -1301,6 +1321,7 @@
     document.getElementById('final-score').textContent = totalScore;
 
     const wrongItems = PAGES.filter(p => (userAnswers[p.id] ?? 0) !== p.correctAnswer);
+    sessionStorage.setItem('mmse_total_score', totalScore);
  
   }
 

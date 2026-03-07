@@ -302,10 +302,10 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-label">แถบเมนู</div>
-    <a class="nav-item" href="#"><span class="nav-icon">🏠</span> Home</a>
-    <a class="nav-item" href="#"><span class="nav-icon">📋</span> Pretest</a>
-    <a class="nav-item" href="#"><span class="nav-icon">🎯</span> เกมจับผิด</a>
-    <a class="nav-item active" href="#"><span class="nav-icon">🔄</span> เกมแปลผล</a>
+    <a class="nav-item" href="index.html"><span class="nav-icon">🏠</span> Home</a>
+    <a class="nav-item" href="post-test_mmse.html"><span class="nav-icon">📋</span> Pretest</a>
+    <a class="nav-item" href="mmse_game.html"><span class="nav-icon">🎯</span> เกมจับผิด</a>
+    <a class="nav-item active" href="mmse_intepretation.html"><span class="nav-icon">🔄</span> เกมแปลผล</a>
     <a class="nav-item" href="#"><span class="nav-icon">📝</span> Post-test</a>
   </aside>
 
@@ -357,9 +357,11 @@
         <span class="mascot-emoji">👵</span>
       </div>
       <button class="back-btn" onclick="alert('ย้อนกลับ')">← BACK</button>
-      <button class="next-btn hidden" id="next-btn" onclick="goNext()">
-        NEXT <span class="arrow">→</span>
+      <a href="index.html">
+      <button class="next-btn hidden" id="next-btn">
+        กลับสู่หน้าหลัก <span class="arrow">→</span>
       </button>
+      </a>
     </div>
 
   </main>
@@ -369,7 +371,7 @@
   // ==============================
   // CONFIG — ปรับตรงนี้ต่อหน้า
   // ==============================
-  const CORRECT_CARD = 'b'; // 'a' = มีความเสี่ยง | 'b' = ไม่มีความเสี่ยง
+  const CORRECT_CARD = 'a'; // 'a' = มีความเสี่ยง | 'b' = ไม่มีความเสี่ยง
   let answered = false;
 
   // ดึงคะแนน MMSE จาก test3.html ผ่าน sessionStorage
@@ -410,10 +412,7 @@
     }, 400);
   }
 
-  function goNext() {
-    // เชื่อมต่อหน้าถัดไป — แก้ URL ตามต้องการ
-    alert('ไปหน้าถัดไป →');
-  }
+
 </script>
 
 </body>
