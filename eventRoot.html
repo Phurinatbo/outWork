@@ -7,7 +7,6 @@
     <title>เลือกสถานการณ์ - SMART Nurse</title>
     <meta name="description" content="หน้าเลือกสถานการณ์ผู้ป่วย สำหรับการประเมินสุขภาวะผู้สูงอายุ">
 
-    <!-- Favicons -->
     <link href="assets/img/พยาบาลศาสตร์.png" rel="icon">
     <link href="assets/img/พยาบาลศาสตร์.png" rel="apple-touch-icon">
 
@@ -25,7 +24,7 @@
             --accent-orange: #E66A19;
             --card-yellow: #FCE686; 
             --tag-blue: #3b5cb8;    
-            --bg-cream: #FFF9E6; /* สีพื้นหลังครีมอ่อนๆ */
+            --bg-cream: #FFF9E6;
         }
 
         body {
@@ -33,7 +32,7 @@
             overflow-x: hidden;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-cream);
+            background-color: var(--bg-cream); /* เผื่อรูปโหลดไม่ขึ้น จะได้เห็นสีครีมก่อน */
         }
 
         /* Auto-hide Navbar */
@@ -44,38 +43,20 @@
         }
         .header-hidden { transform: translateY(-100%); }
 
-        /* --- พื้นหลังสไตล์ Game UI (Grid + Animation) --- */
+        /* --- พื้นหลังสไตล์ Game UI --- */
         .scenario-bg {
-            background-color: var(--bg-cream);
-            /* ลายตาราง (Grid Pattern) สีส้มอ่อนๆ */
-            background-image: 
-                linear-gradient(rgba(230, 106, 25, 0.07) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(230, 106, 25, 0.07) 2px, transparent 2px);
-            background-size: 40px 40px;
+            background-image: url('assets/img/พื้นหลังCamGame.JPG');
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding-top: 80px; 
             position: relative;
-            overflow: hidden; /* ซ่อนสิ่งที่ล้นจอออกไป */
-        }
-
-        /* เอฟเฟกต์วงกลมลอยไปมาด้านหลัง */
-        .bg-shape {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(252, 230, 134, 0.5); /* สีเหลืองโปร่งใส */
-            filter: blur(20px);
-            z-index: 0;
-            animation: float 6s ease-in-out infinite;
-        }
-        .shape-1 { width: 400px; height: 400px; top: -5%; left: -10%; }
-        .shape-2 { width: 300px; height: 300px; bottom: 5%; right: -5%; animation-delay: -3s; background: rgba(59, 92, 184, 0.1); /* สีฟ้าโปร่งใส */ }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-30px) scale(1.05); }
+            overflow: hidden; 
         }
 
         /* ดันเนื้อหาให้อยู่เหนือพื้นหลัง */
@@ -155,9 +136,9 @@
             font-size: 3.5rem;
             font-weight: 900;
             color: var(--primary-navy);
-            /* เพิ่มขอบตัวหนังสือให้เด่นขึ้น */
+            /* เพิ่มขอบตัวหนังสือให้เด่นขึ้น ตัดกับพื้นหลังที่เป็นรูปภาพ */
             text-shadow: 3px 3px 0px #fff, -1px -1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff, 4px 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 3rem;
+            line-height: 1.2;
         }
 
         /* Responsive สำหรับมือถือ */
@@ -179,31 +160,29 @@
             <nav id="navmenu" class="navmenu">
                 <ul class="d-flex list-unstyled m-0">
                     <li class="me-4"><a href="index.html" class="text-decoration-none">หน้าหลัก</a></li>
-                    <li><a href="#" class="active text-decoration-none fw-bold">เลือกสถานการณ์</a></li>
+                    <li><a href="#" class="active text-decoration-none fw-bold">สถานการณ์</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main class="scenario-bg">
-        <div class="bg-shape shape-1"></div>
-        <div class="bg-shape shape-2"></div>
-
+        
         <div class="container text-center content-container">
             
-            <h1 class="page-heading mb-2" data-aos="fade-down">คลิกเลือกสถานการณ์</h1>
-            <h1 class="page-heading mt-0" data-aos="fade-down" data-aos-delay="100">เพื่อเล่นเกม</h1>
+            <h1 class="page-heading mb-0" data-aos="fade-down">คลิกสถานการณ์</h1>
+            <h1 class="page-heading mt-0 mb-3" data-aos="fade-down" data-aos-delay="100">เพื่อเล่นเกม</h1>
 
-            <div class="row justify-content-center align-items-center mt-5 gap-4 gap-lg-5">
+            <div class="row justify-content-center align-items-center mt-2 gap-4 gap-lg-5">
                 
                 <div class="col-12 col-md-5 col-lg-auto character-card" data-aos="zoom-in" data-aos-delay="200" onclick="goToScenario(1)">
                     <div class="char-circle">
-                        <img src="assets/img/สกรีนช็อต 2026-03-06 122523.png" alt="ยายสุดสวย สดใส">
+                        <img src="assets/img/ไอคอน ยายสุดสวย หน้าเกม.PNG" alt="ยายสุดสวย สดใส">
                     </div>
                     <div class="char-name">ยายสุดสวย สดใส</div>
                 </div>
 
-                </div>
+            </div>
 
         </div>
     </main>

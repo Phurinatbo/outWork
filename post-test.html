@@ -7,7 +7,6 @@
     <title>แบบทดสอบหลังเรียน (Post-test) - SMART Nurse</title>
     <meta name="description" content="แบบทดสอบหลังเรียนพร้อมเฉลย สำหรับการประเมินสุขภาวะผู้สูงอายุ">
 
-    <!-- Favicons -->
     <link href="assets/img/พยาบาลศาสตร์.png" rel="icon">
     <link href="assets/img/พยาบาลศาสตร์.png" rel="apple-touch-icon">
 
@@ -26,6 +25,7 @@
             --bg-cream: #FCEFB4;
             --true-green: #28a745;
             --false-red: #dc3545;
+            --back-gray: #6c757d;
         }
 
         body {
@@ -116,13 +116,32 @@
         .mascot-aside { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
         .mascot-frame { width: 160px; height: 160px; background: #fff; border: 3px solid #000; border-radius: 50%; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
         
-        .btn-next-game {
-            background-color: var(--accent-orange); color: #fff; border: 3px solid #000; border-radius: 50px;
-            padding: 12px 40px; font-size: 1.5rem; font-weight: 800; box-shadow: 5px 5px 0px #000; transition: all 0.1s ease; width: 100%;
+        /* กลุ่มปุ่มกด ย้อนกลับ และ ไปข้างหน้า */
+        .action-buttons-group {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            justify-content: space-between;
         }
-        .btn-next-game:hover:not(:disabled) { background-color: #ff7a21; transform: translate(-1px, -1px); box-shadow: 7px 7px 0px #000; color: #fff; }
-        .btn-next-game:active:not(:disabled) { transform: translate(4px, 4px); box-shadow: 1px 1px 0px #000; }
-        .btn-next-game:disabled { background: #d1d5db; border-color: #9ca3af; box-shadow: none; cursor: not-allowed; opacity: 0.7; }
+
+        .btn-action-game {
+            color: #fff;
+            border: 3px solid #000;
+            border-radius: 50px;
+            padding: 12px 0;
+            font-size: 1.4rem;
+            font-weight: 800;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.2s;
+            flex-grow: 1; 
+            text-align: center;
+        }
+
+        .btn-next { background-color: var(--accent-orange); }
+        .btn-back { background-color: var(--back-gray); }
+
+        .btn-action-game:disabled { background: #d1d5db; border-color: #9ca3af; box-shadow: none; cursor: not-allowed; opacity: 0.7; color: #666; }
+        .btn-action-game:hover:not(:disabled) { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; color: #fff; }
 
         .progress { background-color: rgba(255, 255, 255, 0.5); border-radius: 50px; border: 2px solid #000; overflow: hidden; }
         #mcq-grid .row { --bs-gutter-y: 1.5rem; }
@@ -147,26 +166,19 @@
         @media (max-width: 768px) {
             .quiz-article { margin-top: 90px; padding: 20px; min-height: auto; }
             
-            /* ปรับแถบสถานะ (Progress) ด้านบน */
             #idx-view { font-size: 1rem !important; padding: 8px 16px !important; }
             .progress { height: 10px !important; }
             .mx-4 { margin-left: 1rem !important; margin-right: 1rem !important; }
 
-            /* ปรับกล่องคำถาม */
             .question-wrapper { min-height: 150px; padding: 20px; margin-bottom: 25px; }
             .question-wrapper h2 { font-size: 1.3rem; }
 
-            /* ปรับปุ่ม ถูก/ผิด */
             .btn-game-tf { font-size: 1.5rem; padding: 15px; }
-
-            /* ปรับปุ่มตัวเลือก MCQ */
             .btn-mcq-game { font-size: 1rem; padding: 12px 15px; margin-bottom: 10px; }
 
-            /* ปรับมาสคอตและปุ่ม Next */
             .mascot-frame { width: 120px; height: 120px; margin-bottom: 15px; }
-            .btn-next-game { font-size: 1.3rem; padding: 12px 0; width: 100%; text-align: center; }
+            .btn-action-game { font-size: 1.2rem; padding: 10px 0; }
             
-            /* หน้าสรุปผลและเฉลย */
             .display-1 { font-size: 4rem; }
             .review-card { padding: 15px; }
             .review-card h5 { font-size: 1.1rem; }
@@ -176,6 +188,7 @@
         @media (max-width: 480px) {
             .question-wrapper h2 { font-size: 1.15rem; }
             .btn-game-tf { font-size: 1.3rem; padding: 12px; }
+            .action-buttons-group { gap: 5px; }
         }
     </style>
 </head>
@@ -215,8 +228,8 @@
 
                         <div id="ui-area">
                             <div id="tf-grid" class="row g-4 mb-2">
-                                <div class="col-6"><button type="button" class="btn btn-game-tf btn-true-game" onclick="choose(0, this)">ถูก</button></div>
-                                <div class="col-6"><button type="button" class="btn btn-game-tf btn-false-game" onclick="choose(1, this)">ผิด</button></div>
+                                <div class="col-6"><button type="button" class="btn btn-game-tf btn-true-game" id="tf-opt0" onclick="choose(0, this)">ถูก</button></div>
+                                <div class="col-6"><button type="button" class="btn btn-game-tf btn-false-game" id="tf-opt1" onclick="choose(1, this)">ผิด</button></div>
                             </div>
 
                             <div id="mcq-grid" class="d-none mb-2">
@@ -234,7 +247,15 @@
                         <div class="mascot-frame">
                             <img src="assets/img/สีเหลืองใหญ่.png" alt="Mascot" class="img-fluid" id="mascot-img">
                         </div>
-                        <button type="button" id="next-action" class="btn btn-next-game" onclick="stepNext()" disabled>ข้อถัดไป</button>
+                        
+                        <div class="action-buttons-group">
+                            <button type="button" id="back-action" class="btn btn-action-game btn-back" onclick="stepBack()" disabled>
+                                <i class="bi bi-caret-left-fill"></i> Back
+                            </button>
+                            <button type="button" id="next-action" class="btn btn-action-game btn-next" onclick="stepNext()" disabled>
+                                Next <i class="bi bi-caret-right-fill"></i>
+                            </button>
+                        </div>
                     </aside>
                 </div>
             </div>
@@ -278,42 +299,50 @@
             { 
                 "q": "1. แบบประเมิน BADL คือแบบประเมินความสามารถในการทำกิจวัตรประจำวันพื้นฐาน", 
                 "type": "tf", "opts": ["ถูก", "ผิด"], "ans": 0,
-                "exp": "BADL (Basic Activities of Daily Living) เป็นการประเมินกิจวัตรประจำวันขั้นพื้นฐานที่จำเป็นต่อการดำรงชีวิต เช่น การกิน อาบน้ำ ขับถ่าย"
+                "exp": "BADL เป็นการประเมินความสาามารถในการดำเนินกิจวัตรประจำวันพื้นฐานเช่น การกินอาหาร การอาบน้ำ หรือแต่ตัวเป็นต้น"
             },
             { 
                 "q": "2. แบบประเมิน IADL คือแบบประเมินความสามารถในการทำกิจวัตรประจำวันพื้นฐาน", 
                 "type": "tf", "opts": ["ถูก", "ผิด"], "ans": 1,
-                "exp": "ผิด เพราะ IADL (Instrumental ADL) เป็นการประเมินกิจวัตรประจำวันที่ซับซ้อนขึ้น เช่น การจัดการเงิน ใช้โทรศัพท์ หรือเตรียมอาหาร ไม่ใช่ขั้นพื้นฐาน"
+                "exp": "ผิด เพราะ IADL เป็นการประเมินความสามารถในการดำเนินกิจวัตรประจำวันต่อเนื่อง/ต้องใช้อุปกรณ์ เช่น การทำความสะอาดบ้าน การปรุงอาหาร หรือการซักรีดเสื้อผ้า เป็นต้น"
             },
             { 
                 "q": "3. กิจกรรมใดต่อไปนี้เป็นการประเมิน BADL", 
-                "type": "mcq", "opts": ["การขึ้นลงบันได 1 ชั้น", "การใช้บริการรถเมล์หรือขับรถเอง", "การทำความสะอาดบ้าน ซักรีด", "การทอนเงิน แลกเงิน"], "ans": 0,
-                "exp": "การขึ้นลงบันได เป็นทักษะการเคลื่อนไหวร่างกายขั้นพื้นฐาน (BADL) ส่วนข้ออื่นๆ เป็นกิจวัตรที่ต่อเนื่องและซับซ้อน (IADL)"
+                "type": "mcq", "opts": ["การขึ้นลงบันได 1 ชั้น", "การหุงข้าว/อุ่นอาหาร", "การทำความสะอาดบ้าน", "การใช้โทรศัพท์"], "ans": 0,
+                "exp": "การขึ้นลงบันได 1 ขั้น เป็นกิจกรรมของ BADL ส่วนข้ออื่น ๆ เป็นกิจกรรมของ IADL"
             },
             { 
                 "q": "4. กิจกรรมใดต่อไปนี้เป็นการประเมิน IADL", 
-                "type": "mcq", "opts": ["การใช้ห้องสุขา", "การรับประทานอาหารที่เตรียมไว้", "การทำหรือเตรียมอาหาร หุงข้าว", "การสวมใส่เสื้อผ้า"], "ans": 2,
-                "exp": "การเตรียมอาหารต้องใช้ทักษะการคิดและจัดการสภาพแวดล้อม จึงจัดเป็น IADL ส่วนข้ออื่นเป็นกิจวัตรพื้นฐาน (BADL)"
+                "type": "mcq", "opts": ["การใช้ห้องน้ำ", "การรับประทานอาหารเมื่อเตรียมสำรับไว้ให้เรียบร้อยต่อหน้า", "การหุงข้าว/อุ่นอาหาร", "การสวมใส่เสื้อผ้า"], "ans": 2,
+                "exp": "การหุงข้าว/อุ่นอาหาร เป็นกิจกรรมของ IADL ส่วนข้ออื่นเป็นกิจกรรมของ BADL"
             },
             { 
                 "q": "5. บุคคลกลุ่มใดเหมาะสมในการใช้แบบประเมิน BADL & IADL มากที่สุด", 
-                "type": "mcq", "opts": ["ผู้ที่มีความวิตกกังวลสูง", "ผู้ที่มีปัญหาการสื่อสารอย่างเดียว", "ผู้ที่มีภาวะซึมเศร้า", "ผู้สูงอายุ/ผู้ป่วยที่มีข้อจำกัดในการช่วยตัวเอง"], "ans": 3,
-                "exp": "แบบประเมินนี้มีวัตถุประสงค์หลักเพื่อประเมินและคัดกรองระดับภาวะพึ่งพิงของผู้สูงอายุ หรือผู้ป่วยที่มีข้อจำกัดทางกายภาพเป็นหลัก"
+                "type": "mcq", "opts": ["ผู้ที่มีความวิตกกังวลสูง", "ผู้ที่มีปัญหาการสื่อสารอย่างเดียว", "ผู้ที่มีภาวะซึมเศร้า", "ผู้สูงอายุ/ผู้ป่วยที่มีข้อจำกัดในการช่วยเหลือตัวเอง"], "ans": 3,
+                "exp": "แบบประเมิน BADL & IADL มีวัตถุประสงค์หลักเพื่อประเมินระดับการพึ่งพิงของผู้สูงอายุ หรือผู้ป่วยที่มีข้อจำกัดในการช่วยเหลือตัวเองเป็นหลัก"
             }
         ];
 
         let curIdx = 0;
-        let totalScore = 0;
         let curPicked = null;
-        let userAnswers = []; // อาเรย์สำหรับเก็บคำตอบของผู้ใช้ในแต่ละข้อ
+        let userAnswers = new Array(quizData.length).fill(null); // เก็บคำตอบไว้ทบทวนและดูเฉลย
+        let timeoutId = null;
 
         function render() {
             const data = quizData[curIdx];
-            curPicked = null;
             
+            // ตั้งค่าปุ่ม กลับ 
+            document.getElementById('back-action').disabled = (curIdx === 0);
+            
+            // ตั้งค่าปุ่ม ถัดไป
             const nextBtn = document.getElementById('next-action');
-            nextBtn.disabled = true;
-            nextBtn.innerText = (curIdx === quizData.length - 1) ? "ดูผลคะแนน" : "ข้อถัดไป";
+            nextBtn.disabled = (userAnswers[curIdx] === null);
+            
+            if (curIdx === quizData.length - 1) {
+                nextBtn.innerHTML = 'ดูผล <i class="bi bi-check-circle-fill"></i>';
+            } else {
+                nextBtn.innerHTML = 'ต่อไป <i class="bi bi-caret-right-fill"></i>';
+            }
             
             document.getElementById('idx-view').innerText = `ข้อที่ ${curIdx + 1} / ${quizData.length}`;
             document.getElementById('txt-view').innerText = data.q;
@@ -327,28 +356,47 @@
             if (data.type === 'tf') {
                 document.getElementById('tf-grid').classList.remove('d-none');
                 document.getElementById('mcq-grid').classList.add('d-none');
+                
+                // ถ้าเคยตอบข้อนี้แล้ว ให้แสดงสถานะเดิม
+                if(userAnswers[curIdx] !== null) {
+                    document.getElementById(`tf-opt${userAnswers[curIdx]}`).classList.add('active-selection');
+                }
             } else {
                 document.getElementById('tf-grid').classList.add('d-none');
                 document.getElementById('mcq-grid').classList.remove('d-none');
-                data.opts.forEach((v, i) => document.getElementById(`opt${i}`).innerText = v);
+                data.opts.forEach((v, i) => {
+                    let btn = document.getElementById(`opt${i}`);
+                    btn.innerText = v;
+                    
+                    // ถ้าเคยตอบข้อนี้แล้ว ให้แสดงสถานะเดิม
+                    if(userAnswers[curIdx] === i) {
+                        btn.classList.add('active-selection');
+                    }
+                });
             }
         }
 
         function choose(val, btn) {
+            // เคลียร์การทำงานล่วงหน้าหากผู้ใช้กดรัวๆ
+            if(timeoutId) clearTimeout(timeoutId);
+
             curPicked = val;
+            userAnswers[curIdx] = val;
+            
             const parent = btn.closest('.row');
             parent.querySelectorAll('button').forEach(b => b.classList.remove('active-selection'));
             btn.classList.add('active-selection');
             document.getElementById('next-action').disabled = false;
+
+            // หน่วงเวลา 0.5 วิ แล้วเลื่อนไปข้อถัดไป
+            timeoutId = setTimeout(() => {
+                stepNext();
+            }, 500);
         }
 
         function stepNext() {
-            // บันทึกคำตอบและคำนวณคะแนน
-            userAnswers[curIdx] = curPicked;
-            if (curPicked === quizData[curIdx].ans) {
-                totalScore++;
-            }
-
+            if(timeoutId) clearTimeout(timeoutId); 
+            
             curIdx++;
             if (curIdx < quizData.length) {
                 render();
@@ -357,18 +405,40 @@
             }
         }
 
+        function stepBack() {
+            if(timeoutId) clearTimeout(timeoutId);
+            
+            if(curIdx > 0) {
+                curIdx--;
+                render();
+            }
+        }
+
         function showResult() {
+            // คำนวณคะแนนตอนสุดท้าย (เพื่อรองรับการย้อนกลับไปเปลี่ยนคำตอบ)
+            let totalScore = 0;
+            for(let i = 0; i < quizData.length; i++) {
+                if(userAnswers[i] === quizData[i].ans) {
+                    totalScore++;
+                }
+            }
+
             document.getElementById('quiz-flow').classList.add('d-none');
             document.getElementById('result-flow').classList.remove('d-none');
             document.getElementById('score-view').innerText = `${totalScore}/${quizData.length}`;
             
             const msg = document.getElementById('score-msg');
+            const scoreView = document.getElementById('score-view');
+            
+            // รีเซ็ตคลาสสีก่อน
+            scoreView.classList.remove('text-success', 'text-warning');
+
             if(totalScore >= 4) {
                 msg.innerHTML = "สุดยอดไปเลย! <br>คุณมีความเข้าใจเกี่ยวกับการประเมินเป็นอย่างดี";
-                document.getElementById('score-view').classList.add('text-success');
+                scoreView.classList.add('text-success');
             } else {
                 msg.innerHTML = "ไม่เป็นไร! <br>ลองดูเฉลยด้านล่างเพื่อทบทวนความเข้าใจอีกครั้งนะ";
-                document.getElementById('score-view').classList.replace('text-success', 'text-warning');
+                scoreView.classList.add('text-warning');
             }
 
             buildReview();
@@ -385,10 +455,13 @@
                 const statusClass = isCorrect ? "correct" : "wrong";
                 const icon = isCorrect ? '<i class="bi bi-check-circle-fill text-success"></i> ถูกต้อง' : '<i class="bi bi-x-circle-fill text-danger"></i> ผิด';
                 
+                // กันกรณีที่ผู้ใช้อาจจะข้ามโดยไม่ได้ตอบ (ถ้ามี)
+                const userText = (userAns !== null && data.opts[userAns]) ? data.opts[userAns] : "ไม่ได้ตอบ";
+
                 html += `
                     <div class="review-card shadow-sm ${statusClass}">
                         <h5 class="fw-bold mb-3">${data.q}</h5>
-                        <p class="mb-1"><strong>คำตอบของคุณ:</strong> <span class="${isCorrect ? 'text-success fw-bold' : 'text-danger text-decoration-line-through'}">${data.opts[userAns]}</span></p>
+                        <p class="mb-1"><strong>คำตอบของคุณ:</strong> <span class="${isCorrect ? 'text-success fw-bold' : 'text-danger text-decoration-line-through'}">${userText}</span></p>
                         ${!isCorrect ? `<p class="mb-1"><strong>คำตอบที่ถูกต้อง:</strong> <span class="text-success fw-bold">${data.opts[data.ans]}</span></p>` : ''}
                         <p class="mb-0 mt-2">${icon}</p>
                         

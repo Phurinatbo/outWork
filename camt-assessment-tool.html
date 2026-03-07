@@ -1,36 +1,31 @@
 <!DOCTYPE html>
 <html lang="th">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>แบบทดสอบก่อนเรียน CAM-T (Pre-test) - SMART Nurse</title>
-        <meta name="description"
-            content="แบบทดสอบก่อนเรียนสำหรับการประเมินภาวะสับสนเฉียบพลัน (CAM-T)">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบทดสอบก่อนเรียน CAM-T (Pre-test) - SMART Nurse</title>
+    <meta name="description" content="แบบทดสอบก่อนเรียนสำหรับการประเมินภาวะสับสนเฉียบพลัน (CAM-T)">
 
-        <!-- Favicons -->
-        <link href="assets/img/พยาบาลศาสตร์.png" rel="icon">
-        <link href="assets/img/พยาบาลศาสตร์.png" rel="apple-touch-icon">
+    <link href="assets/img/พยาบาลศาสตร์.png" rel="icon">
+    <link href="assets/img/พยาบาลศาสตร์.png" rel="apple-touch-icon">
 
-        <link href="https://fonts.googleapis.com" rel="preconnect">
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
-            rel="stylesheet">
-        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
-            rel="stylesheet">
-        <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
 
-        <style>
+    <style>
         :root {
             --primary-navy: #1f3b5c;
             --accent-orange: #E66A19;
             --bg-cream: #FCEFB4;
             --true-green: #28a745;
             --false-red: #dc3545;
+            --back-gray: #6c757d;
         }
 
         body {
@@ -123,7 +118,7 @@
 
         #mcq-grid .row { --bs-gutter-y: 1.5rem; }
 
-        /* Mascot & Next Button */
+        /* Mascot & Controls */
         .mascot-aside {
             display: flex;
             flex-direction: column;
@@ -145,22 +140,32 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
 
-        .btn-next-game {
-            background-color: var(--accent-orange);
+        /* กลุ่มปุ่มกด ย้อนกลับ และ ไปข้างหน้า */
+        .action-buttons-group {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .btn-action-game {
             color: #fff;
             border: 3px solid #000;
             border-radius: 50px;
-            padding: 12px 60px;
-            font-size: 1.6rem;
+            padding: 12px 0;
+            font-size: 1.4rem;
             font-weight: 800;
-            box-shadow: 5px 5px 0px #000;
-            transition: all 0.1s ease;
-            width: 100%;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.2s;
+            flex-grow: 1; 
+            text-align: center;
         }
 
-        .btn-next-game:hover:not(:disabled) { background-color: #ff7a21; transform: translate(-1px, -1px); box-shadow: 7px 7px 0px #000; color: #fff; }
-        .btn-next-game:active:not(:disabled) { transform: translate(4px, 4px); box-shadow: 1px 1px 0px #000; }
-        .btn-next-game:disabled { background: #d1d5db; border-color: #9ca3af; box-shadow: none; cursor: not-allowed; opacity: 0.7; }
+        .btn-next { background-color: var(--accent-orange); }
+        .btn-back { background-color: var(--back-gray); }
+
+        .btn-action-game:disabled { background: #d1d5db; border-color: #9ca3af; box-shadow: none; cursor: not-allowed; opacity: 0.7; color: #666; }
+        .btn-action-game:hover:not(:disabled) { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #000; color: #fff; }
 
         /* Progress Bar Customization */
         .progress { background-color: rgba(255, 255, 255, 0.5); border-radius: 50px; border: 2px solid #000; overflow: hidden; }
@@ -177,168 +182,122 @@
         @media (max-width: 768px) {
             .quiz-article { margin-top: 90px; padding: 20px; min-height: auto; }
             
-            /* ปรับแถบสถานะ (Progress) ด้านบน */
             #idx-view { font-size: 1rem !important; padding: 8px 16px !important; }
             .progress { height: 10px !important; }
             .mx-4 { margin-left: 1rem !important; margin-right: 1rem !important; }
 
-            /* ปรับกล่องคำถาม */
             .question-wrapper { min-height: 150px; padding: 20px; margin-bottom: 25px; }
-            .question-wrapper h2 { font-size: 1.3rem; }
+            .question-wrapper h2 { font-size: 1.4rem; }
 
-            /* ปรับปุ่ม ถูก/ผิด */
             .btn-game-tf { font-size: 1.5rem; padding: 15px; }
-
-            /* ปรับปุ่มตัวเลือก MCQ */
             .btn-mcq-game { font-size: 1rem; padding: 12px 15px; margin-bottom: 10px; }
 
-            /* ปรับมาสคอตและปุ่ม Next */
             .mascot-frame { width: 120px; height: 120px; margin-bottom: 15px; }
-            .btn-next-game { font-size: 1.3rem; padding: 12px 0; text-align: center; }
+            .btn-action-game { font-size: 1.2rem; padding: 10px 0; }
             
-            /* หน้าสรุปผล */
             .display-1 { font-size: 4rem; }
         }
 
         @media (max-width: 480px) {
-            .question-wrapper h2 { font-size: 1.15rem; }
+            .question-wrapper h2 { font-size: 1.2rem; }
             .btn-game-tf { font-size: 1.3rem; padding: 12px; }
+            .action-buttons-group { gap: 5px; }
         }
-        </style>
-    </head>
+    </style>
+</head>
 
-    <body>
+<body>
 
-        <header id="header"
-            class="header d-flex align-items-center fixed-top shadow-sm">
-            <div
-                class="container-fluid container-xl d-flex align-items-center justify-content-between">
-                <a href="index.html" class="logo d-flex align-items-center">
-                    <img
-                        src="assets/img/สกรีนช็อต 2026-01-30 203747-Photoroom.png"
-                        alt="โลโก้พยาบาลศาสตร์" style="max-height: 50px;">
-                </a>
-                <nav id="navmenu" class="navmenu">
-                    <ul class="d-flex list-unstyled m-0">
-                        <li class="me-4"><a href="index.html"
-                                class="text-decoration-none">หน้าหลัก</a></li>
-                        <li><a href="#"
-                                class="active text-decoration-none fw-bold">แบบทดสอบก่อนเรียน
-                                (CAM-T)</a></li>
-                    </ul>
-                </nav>
+    <header id="header" class="header d-flex align-items-center fixed-top shadow-sm">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/สกรีนช็อต 2026-01-30 203747-Photoroom.png" alt="โลโก้พยาบาลศาสตร์" style="max-height: 50px;">
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul class="d-flex list-unstyled m-0">
+                    <li class="me-4"><a href="index.html" class="text-decoration-none">หน้าหลัก</a></li>
+                    <li><a href="#" class="active text-decoration-none fw-bold">แบบทดสอบก่อนเรียน (CAM-T)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="quiz-article shadow-lg" data-aos="zoom-in">
+
+            <div id="quiz-flow">
+                <div class="row">
+                    <section class="col-lg-9">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <span class="badge bg-dark fs-5 px-4 py-2 rounded-pill" id="idx-view">ข้อที่ 1 / 5</span>
+                            <div class="progress flex-grow-1 mx-4" style="height: 15px;" role="progressbar" aria-label="สถานะการทำข้อสอบ" id="progress-container">
+                                <div id="bar-view" class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width: 20%"></div>
+                            </div>
+                        </div>
+
+                        <div class="question-wrapper" data-aos="fade-up">
+                            <h2 id="txt-view">เตรียมความพร้อม...</h2>
+                        </div>
+
+                        <div id="ui-area">
+                            <div id="tf-grid" class="row g-4 mb-4">
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-game-tf btn-true-game" id="tf-opt0" onclick="choose(0, this)">ถูก</button>
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-game-tf btn-false-game" id="tf-opt1" onclick="choose(1, this)">ผิด</button>
+                                </div>
+                            </div>
+
+                            <div id="mcq-grid" class="d-none">
+                                <div class="row g-4">
+                                    <div class="col-md-6"><button type="button" class="btn btn-mcq-game" id="opt0" onclick="choose(0, this)"></button></div>
+                                    <div class="col-md-6"><button type="button" class="btn btn-mcq-game" id="opt1" onclick="choose(1, this)"></button></div>
+                                    <div class="col-md-6"><button type="button" class="btn btn-mcq-game" id="opt2" onclick="choose(2, this)"></button></div>
+                                    <div class="col-md-6"><button type="button" class="btn btn-mcq-game" id="opt3" onclick="choose(3, this)"></button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <aside class="col-lg-3 mascot-aside" data-aos="fade-left">
+                        <div class="mascot-frame">
+                            <img src="assets/img/ไอคอน CAM-T .PNG" alt="Mascot พยาบาล" class="img-fluid" id="mascot-img">
+                        </div>
+                        
+                        <div class="action-buttons-group">
+                            <button type="button" id="back-action" class="btn btn-action-game btn-back" onclick="stepBack()" disabled>
+                                <i class="bi bi-caret-left-fill"></i> Back
+                            </button>
+                            <button type="button" id="next-action" class="btn btn-action-game btn-next" onclick="stepNext()" disabled>
+                                Next <i class="bi bi-caret-right-fill"></i>
+                            </button>
+                        </div>
+                    </aside>
+                </div>
             </div>
-        </header>
 
-        <main class="container">
-            <article class="quiz-article shadow-lg" data-aos="zoom-in">
-
-                <div id="quiz-flow">
-                    <div class="row">
-                        <section class="col-lg-9">
-                            <div
-                                class="d-flex justify-content-between align-items-center mb-4">
-                                <span
-                                    class="badge bg-dark fs-5 px-4 py-2 rounded-pill"
-                                    id="idx-view">ข้อที่ 1 / 5</span>
-                                <div class="progress flex-grow-1 mx-4"
-                                    style="height: 15px;" role="progressbar"
-                                    aria-label="สถานะการทำข้อสอบ"
-                                    id="progress-container">
-                                    <div id="bar-view"
-                                        class="progress-bar bg-success progress-bar-striped progress-bar-animated"
-                                        style="width: 20%"></div>
-                                </div>
-                            </div>
-
-                            <div class="question-wrapper" data-aos="fade-up">
-                                <h2 id="txt-view">เตรียมความพร้อม...</h2>
-                            </div>
-
-                            <div id="ui-area">
-                                <div id="tf-grid" class="row g-4 mb-4">
-                                    <div class="col-6">
-                                        <button type="button"
-                                            class="btn btn-game-tf btn-true-game"
-                                            onclick="choose(0, this)">ถูก</button>
-                                    </div>
-                                    <div class="col-6">
-                                        <button type="button"
-                                            class="btn btn-game-tf btn-false-game"
-                                            onclick="choose(1, this)">ผิด</button>
-                                    </div>
-                                </div>
-
-                                <div id="mcq-grid" class="d-none">
-                                    <div class="row g-4">
-                                        <div class="col-md-6"><button
-                                                type="button"
-                                                class="btn btn-mcq-game"
-                                                id="opt0"
-                                                onclick="choose(0, this)"></button></div>
-                                        <div class="col-md-6"><button
-                                                type="button"
-                                                class="btn btn-mcq-game"
-                                                id="opt1"
-                                                onclick="choose(1, this)"></button></div>
-                                        <div class="col-md-6"><button
-                                                type="button"
-                                                class="btn btn-mcq-game"
-                                                id="opt2"
-                                                onclick="choose(2, this)"></button></div>
-                                        <div class="col-md-6"><button
-                                                type="button"
-                                                class="btn btn-mcq-game"
-                                                id="opt3"
-                                                onclick="choose(3, this)"></button></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <aside class="col-lg-3 mascot-aside"
-                            data-aos="fade-left">
-                            <div class="mascot-frame">
-                                <img src="assets/img/สีเหลืองใหญ่.png"
-                                    alt="Mascot พยาบาล" class="img-fluid"
-                                    id="mascot-img">
-                            </div>
-                            <button type="button" id="next-action"
-                                class="btn btn-next-game" onclick="stepNext()"
-                                disabled>Next</button>
-                        </aside>
-                    </div>
+            <div id="result-flow" class="d-none py-5 text-center">
+                <div class="bg-white p-4 p-md-5 rounded-4 border border-5 border-navy mx-auto" style="max-width: 600px;">
+                    <h2 class="fw-bold mb-4 fs-3">สรุปผลการทดสอบก่อนเรียน</h2>
+                    <div class="display-1 fw-bold text-success mb-2" id="score-view">0/5</div>
+                    <p class="fs-5 text-muted mb-5">คะแนนความรู้พื้นฐานของคุณ</p>
+                    <a href="eventRoot.html" class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold w-100 shadow">เข้าสู่หน้าถัดไป</a>
                 </div>
+            </div>
 
-                <div id="result-flow" class="d-none py-5 text-center">
-                    <div
-                        class="bg-white p-4 p-md-5 rounded-4 border border-5 border-navy mx-auto"
-                        style="max-width: 600px;">
-                        <h2
-                            class="fw-bold mb-4 fs-3">สรุปผลการทดสอบก่อนเรียน</h2>
-                        <div class="display-1 fw-bold text-success mb-2"
-                            id="score-view">0/5</div>
-                        <p
-                            class="fs-5 text-muted mb-5">คะแนนความรู้พื้นฐานของคุณ</p>
-                        <a href="eventRoot.html"
-                            class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold w-100 shadow">เข้าสู่หน้าถัดไป</a>
-                    </div>
-                </div>
+        </article>
+    </main>
 
-            </article>
-        </main>
+    <footer class="text-center py-4">
+        <p class="text-muted small m-0">© 2026 SMART Nurse - คณะพยาบาลศาสตร์ มหาวิทยาลัยขอนแก่น</p>
+    </footer>
 
-        <footer class="text-center py-4">
-            <p class="text-muted small m-0">© 2026 SMART Nurse - คณะพยาบาลศาสตร์
-                มหาวิทยาลัยขอนแก่น</p>
-        </footer>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
 
-        <script
-            src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/aos/aos.js"></script>
-
-        <script>
-        // ข้อมูลโจทย์ CAM-T (แบบถูก-ผิด ทั้ง 5 ข้อ)
+    <script>
+        // ข้อมูลโจทย์ CAM-T
         const quizData = [
             { "q": "1. ภาวะ Delirium คือ การทำหน้าที่ของสมองที่ส่งผลให้เกิดการเปลี่ยนแปลงความรู้สึกตัว การรู้คิดหรือการรับรู้ที่ผิดปกติ", "type": "tf", "opts": ["ถูก", "ผิด"], "ans": 0 },
             { "q": "2. อาการทางคลินิกที่สำคัญของภาวะ Delirium คือ ความจำระยะยาวบกพร่อง", "type": "tf", "opts": ["ถูก", "ผิด"], "ans": 1 },
@@ -347,44 +306,92 @@
             { "q": "5. การแปลผล CAM-T ถ้ามีข้อ 1 ข้อ 3 และ ข้อ 4 แปลผลเท่ากับ มีภาวะสับสนเฉียบพลัน", "type": "tf", "opts": ["ถูก", "ผิด"], "ans": 1 }
         ];
 
-        let curIdx = 0, totalScore = 0, curPicked = null;
+        let curIdx = 0;
+        let userAnswers = new Array(quizData.length).fill(null); // อาเรย์สำหรับเก็บคำตอบของผู้ใช้
+        let timeoutId = null;
 
         function render() {
             const data = quizData[curIdx];
-            curPicked = null;
-            document.getElementById('next-action').disabled = true;
+            
+            document.getElementById('back-action').disabled = (curIdx === 0);
+            document.getElementById('next-action').disabled = (userAnswers[curIdx] === null);
+
             document.getElementById('idx-view').innerText = `ข้อที่ ${curIdx + 1} / ${quizData.length}`;
             document.getElementById('txt-view').innerText = data.q;
             document.getElementById('bar-view').style.width = `${((curIdx + 1) / quizData.length) * 100}%`;
 
+            // ล้างสไตล์การถูกเลือกทั้งหมดก่อน
+            document.querySelectorAll('.btn-game-tf, .btn-mcq-game').forEach(b => b.classList.remove('active-selection'));
+
             if (data.type === 'tf') {
                 document.getElementById('tf-grid').classList.remove('d-none');
                 document.getElementById('mcq-grid').classList.add('d-none');
+                
+                // ถ้าเคยตอบข้อนี้แล้ว ให้แสดงสถานะที่เคยเลือก
+                if(userAnswers[curIdx] !== null) {
+                    document.getElementById(`tf-opt${userAnswers[curIdx]}`).classList.add('active-selection');
+                }
+
             } else {
                 document.getElementById('tf-grid').classList.add('d-none');
                 document.getElementById('mcq-grid').classList.remove('d-none');
-                data.opts.forEach((v, i) => document.getElementById(`opt${i}`).innerText = v);
+                data.opts.forEach((v, i) => {
+                    let btn = document.getElementById(`opt${i}`);
+                    btn.innerText = v;
+                    if(userAnswers[curIdx] === i) {
+                        btn.classList.add('active-selection');
+                    }
+                });
             }
-            document.querySelectorAll('.btn-game-tf, .btn-mcq-game').forEach(b => b.classList.remove('active-selection'));
         }
 
         function choose(val, btn) {
-            curPicked = val;
+            if(timeoutId) clearTimeout(timeoutId);
+
+            userAnswers[curIdx] = val;
+
             const parent = btn.closest('.row') || btn.parentElement;
             parent.querySelectorAll('button').forEach(b => b.classList.remove('active-selection'));
             btn.classList.add('active-selection');
             document.getElementById('next-action').disabled = false;
+
+            // หน่วงเวลา 0.5 วินาที แล้วเลื่อนไปข้อถัดไป
+            timeoutId = setTimeout(() => {
+                stepNext();
+            }, 500); 
         }
 
         function stepNext() {
-            if (curPicked === quizData[curIdx].ans) totalScore++;
+            if(timeoutId) clearTimeout(timeoutId); 
+            
             curIdx++;
-            if (curIdx < quizData.length) render();
-            else {
-                document.getElementById('quiz-flow').classList.add('d-none');
-                document.getElementById('result-flow').classList.remove('d-none');
-                document.getElementById('score-view').innerText = `${totalScore}/${quizData.length}`;
+            if (curIdx < quizData.length) {
+                render();
+            } else {
+                calculateAndShowResult();
             }
+        }
+
+        function stepBack() {
+            if(timeoutId) clearTimeout(timeoutId);
+            
+            if(curIdx > 0) {
+                curIdx--;
+                render();
+            }
+        }
+
+        function calculateAndShowResult() {
+            let totalScore = 0;
+            for(let i = 0; i < quizData.length; i++) {
+                if(userAnswers[i] === quizData[i].ans) {
+                    totalScore++;
+                }
+            }
+
+            document.getElementById('quiz-flow').classList.add('d-none');
+            document.getElementById('result-flow').classList.remove('d-none');
+            document.getElementById('score-view').innerText = `${totalScore}/${quizData.length}`;
         }
 
         // Auto-hide Navbar logic
@@ -396,6 +403,7 @@
         document.onmousemove = (e) => { if (e.clientY < 60) header.classList.remove('header-hidden'); };
 
         document.addEventListener('DOMContentLoaded', () => { AOS.init(); render(); });
-        </script>
-    </body>
+    </script>
+</body>
+
 </html>

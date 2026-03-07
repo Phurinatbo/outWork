@@ -7,7 +7,6 @@
     <title>แบบประเมิน CAM-T - SMART Nurse</title>
     <meta name="description" content="หน้าทำแบบประเมินภาวะสับสนเฉียบพลัน CAM-T">
 
-    <!-- Favicons -->
     <link href="assets/img/พยาบาลศาสตร์.png" rel="icon">
     <link href="assets/img/พยาบาลศาสตร์.png" rel="apple-touch-icon">
 
@@ -160,7 +159,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.8rem; /* เพิ่มขนาดเครื่องหมายถูก */
+            font-size: 2.8rem; 
             line-height: 1;
             color: #000;
             font-weight: bold;
@@ -225,7 +224,7 @@
         }
         
         /* =========================================
-           RESPONSIVE (ปรับปรุงใหม่ตามภาพ)
+           RESPONSIVE (ปรับให้พอดีกับมือถือ)
            ========================================= */
         @media (max-width: 991px) {
             .assessment-container { padding: 40px 30px; margin-top: 100px; }
@@ -236,8 +235,8 @@
             .assessment-container { padding: 25px 15px; margin-top: 85px; border-radius: 15px; }
             .page-title { font-size: 1.8rem; margin-bottom: 25px; }
             
-            .question-block { padding: 15px; border-radius: 12px; margin-bottom: 15px; }
-            .q-title { font-size: 1.1rem; line-height: 1.4; }
+            .question-block { padding: 15px 15px 15px 25px; margin-bottom: 15px; border-radius: 12px; }
+            .q-title { font-size: 1.1rem; line-height: 1.4; margin-bottom: 5px; }
             .q-desc { font-size: 0.9rem; padding-left: 10px; margin-bottom: 3px; }
 
             .opt-wrapper { padding: 8px 12px; width: 100%; border-radius: 8px; margin-bottom: 8px; }
@@ -282,7 +281,7 @@
         <div class="row question-block" data-aos="fade-up" data-aos-delay="100">
             <div class="col-lg-8 mb-3 mb-lg-0">
                 <div class="q-title">1. เริ่มต้นอาการอย่างเฉียบพลัน (Acute onset and fluctuation course)</div>
-                <p class="q-desc">- มีหลักฐานว่ามีการเปลี่ยนแปลงสภาพจิตใจของผู้ป่วย ไปจากเดิมอย่างเฉียบพลันหรือไม่</p>
+                <p class="q-desc">- มีหลักฐานว่ามีการเปลี่ยนแปลงสภาพจิตใจของผู้ป่วยไปจากเดิมอย่างเฉียบพลันหรือไม่</p>
                 <p class="q-desc">- มีพฤติกรรมที่ผิดปกติไปจากเดิม แนวโน้มอาการขึ้นๆ ลงๆ ในช่วงวัน</p>
             </div>
             <div class="col-lg-4 d-flex flex-column justify-content-center mt-2 mt-lg-0">
@@ -370,19 +369,25 @@
                 <div class="col-md-4">
                     <div class="opt-wrapper" onclick="toggleEval('hyper', this)">
                         <div class="color-box bg-yellow-box eval-box" id="eval-hyper"></div>
-                        <span class="opt-text">Hyperdelirium</span>
+                        <span class="opt-text">Hyperactive delirium</span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="opt-wrapper" onclick="toggleEval('hypo', this)">
                         <div class="color-box bg-yellow-box eval-box" id="eval-hypo"></div>
-                        <span class="opt-text">Hypodelirium</span>
+                        <span class="opt-text">Hypoactive delirium</span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="opt-wrapper" onclick="toggleEval('mixed', this)">
                         <div class="color-box bg-yellow-box eval-box" id="eval-mixed"></div>
-                        <span class="opt-text">Mixed form Delirium</span>
+                        <span class="opt-text">Mixed delirium</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="opt-wrapper" onclick="toggleEval('Normal', this)">
+                        <div class="color-box bg-yellow-box eval-box" id="eval-Normal"></div>
+                        <span class="opt-text">Normal consciousness delirium</span>
                     </div>
                 </div>
             </div>

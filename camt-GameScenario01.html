@@ -7,7 +7,6 @@
     <title>วิดีโอสถานการณ์ - SMART Nurse</title>
     <meta name="description" content="ดูวิดีโอสถานการณ์ผู้ป่วย เพื่อทำการประเมิน">
 
-    <!-- Favicons -->
     <link href="assets/img/พยาบาลศาสตร์.png" rel="icon">
     <link href="assets/img/พยาบาลศาสตร์.png" rel="apple-touch-icon">
 
@@ -23,17 +22,18 @@
         :root {
             --primary-navy: #1f3b5c;
             --accent-orange: #E66A19;
-            --bg-yellow: #FFFAE4; /* สีพื้นหลังตามที่เคยตกลงกันไว้ */
+            --bg-cream: #FFF9E6; /* สีพื้นหลังสำรอง */
         }
 
         body {
             font-family: 'Prompt', sans-serif;
-            background-color: var(--bg-yellow);
             color: var(--primary-navy);
             overflow-x: hidden;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            margin: 0;
+            padding: 0;
         }
 
         /* Auto-hide Navbar */
@@ -44,28 +44,40 @@
         }
         .header-hidden { transform: translateY(-100%); }
 
-        /* Main Content Layout */
+        /* Main Content Layout + พื้นหลังใหม่ */
         .main-content {
             flex-grow: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 120px 0 60px 0;
+            
+            /* ตั้งค่าพื้นหลัง */
+            background-color: var(--bg-cream);
+            background-image: url('assets/img/พื้นหลังCamGame.JPG');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
 
+        /* กล่องเนื้อหาแบบ Glassmorphism (โปร่งแสงเบลอๆ) */
         .scenario-box {
-            background: #fff;
-            border: 4px solid #000;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 4px solid var(--primary-navy);
             border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
             position: relative;
         }
 
         .title-text {
-            font-size: 2.2rem;
-            font-weight: 800;
+            font-size: 2.4rem;
+            font-weight: 900;
             margin-bottom: 5px;
+            color: var(--primary-navy);
+            text-shadow: 1px 1px 0px #fff;
         }
 
         .warning-text {
@@ -84,7 +96,7 @@
             border: 4px solid #000;
             border-radius: 15px;
             background-color: #000;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         .video-wrapper iframe {
@@ -100,21 +112,21 @@
             background-color: var(--primary-navy);
             color: #fff;
             border: 3px solid #000;
-            border-radius: 12px;
-            padding: 15px 50px;
+            border-radius: 50px; /* ทำให้ปุ่มมนขึ้นให้เข้ากับ Theme */
+            padding: 12px 50px;
             font-size: 1.5rem;
             font-weight: 800;
             box-shadow: 5px 5px 0px #000;
             transition: all 0.3s;
             margin-top: 30px;
-            float: right; /* จัดชิดขวาตามแบบ */
+            float: right; 
         }
 
         /* สถานะตอนล็อกปุ่ม */
         .btn-assess:disabled {
-            background-color: #ccc;
-            color: #666;
-            border-color: #999;
+            background-color: #e2e8f0;
+            color: #94a3b8;
+            border-color: #cbd5e1;
             box-shadow: none;
             cursor: not-allowed;
         }
@@ -129,7 +141,12 @@
             transform: translate(-2px, -2px);
             box-shadow: 7px 7px 0px #000;
             color: #fff;
-            animation: none; /* ปิดเด้งตอนเอาเมาส์ชี้ */
+            animation: none; 
+        }
+        
+        .btn-assess:active:not(:disabled) {
+            transform: translate(3px, 3px);
+            box-shadow: 1px 1px 0px #000;
         }
 
         @keyframes pulse-ready {
@@ -138,11 +155,19 @@
             100% { transform: scale(1); box-shadow: 5px 5px 0px #000; }
         }
 
-        /* Clearfix สำหรับ float */
         .clearfix::after {
             content: "";
             clear: both;
             display: table;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content { padding: 100px 15px 40px 15px; }
+            .scenario-box { padding: 25px 15px; }
+            .title-text { font-size: 1.8rem; }
+            .warning-text { font-size: 0.95rem; }
+            .btn-assess { width: 100%; float: none; font-size: 1.4rem; padding: 12px 0; text-align: center; }
         }
     </style>
 </head>
@@ -233,7 +258,7 @@
             btn.innerHTML = '<i class="bi bi-clipboard2-check-fill me-2"></i>พร้อมประเมินผู้ป่วย';
             
             // แจ้งเตือนผู้ใช้ด้วยเสียง (ตัวเลือกเสริม) หรือเปลี่ยนข้อความเตือน
-            document.querySelector('.warning-text').innerHTML = '<span class="text-success"><i class="bi bi-check-circle-fill"></i> รับชมจบแล้ว กรุณากดปุ่มประเมินด้านล่าง</span>';
+            document.querySelector('.warning-text').innerHTML = '<span class="text-success fw-bold"><i class="bi bi-check-circle-fill"></i> รับชมจบแล้ว กรุณากดปุ่มประเมินด้านล่าง</span>';
         }
 
         // ฟังก์ชันเมื่อกดปุ่มประเมิน
