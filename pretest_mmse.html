@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="th">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>แบบทดสอบก่อนเรียน (Pre-test) - SMART Nurse</title>
+        <meta name="description"
+            content="แบบทดสอบก่อนเรียนสำหรับการประเมินสุขภาวะผู้สูงอายุ">
+
+        <!-- Favicons -->
+        <link href="assets/img/พยาบาลศาสตร์.png" rel="icon">
+        <link href="assets/img/พยาบาลศาสตร์.png" rel="apple-touch-icon">
+
+        <link href="https://fonts.googleapis.com" rel="preconnect">
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+
+        <link href="assets/vendor/bootstrap/css/bootstrap.min.css"
+            rel="stylesheet">
+        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+            rel="stylesheet">
+        <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+        <style>
+        :root {
+            --primary-navy: #1f3b5c;
+            --accent-orange: #E66A19;
+            --bg-cream: #FCEFB4;
+            --true-green: #28a745;
+            --false-red: #dc3545;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--primary-navy);
+            overflow-x: hidden;
+        }
+
+        /* Auto-hide Navbar */
+        #header {
+            transition: all 0.4s ease-in-out;
+            background: rgba(255, 255, 255, 0.98);
+        }
+        .header-hidden { transform: translateY(-100%); }
+
+        /* ── Centered page layout ── */
+        .quiz-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 16px 40px;
+        }
+
+        /* ── Fixed-size quiz card ── */
+        .quiz-article {
+            border: 4px solid #000;
+            background-color: var(--bg-cream);
+            border-radius: 1rem;
+            width: 100%;
+            max-width: 820px;
+            min-height: 560px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.18);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Quiz flow fills card ── */
+        #quiz-flow {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        /* Question box */
+        .question-wrapper {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px 36px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+            min-height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 28px;
+            flex: 1;
+        }
+        .question-wrapper h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* True/False buttons */
+        .btn-game-tf {
+            font-size: 1.8rem;
+            font-weight: 700;
+            padding: 20px;
+            border: none;
+            border-bottom: 5px solid rgba(0,0,0,0.22);
+            border-radius: 14px;
+            transition: filter .12s, transform .12s, border-bottom-width .12s;
+            color: #fff;
+            width: 100%;
+            cursor: pointer;
+        }
+        .btn-true-game  { background-color: #2ecc71; }
+        .btn-false-game { background-color: #e74c3c; }
+        .btn-game-tf:hover { filter: brightness(.93); }
+        .btn-game-tf.pressed {
+            filter: brightness(.70) !important;
+            border-bottom-width: 2px !important;
+            transform: translateY(3px) !important;
+        }
+        .btn-game-tf.dimmed {
+            filter: brightness(.45) saturate(.3) !important;
+            pointer-events: none;
+        }
+
+        /* MCQ buttons */
+        .btn-mcq-game {
+            background: #fff;
+            border: 2px solid var(--primary-navy);
+            border-bottom: 4px solid var(--primary-navy);
+            text-align: left;
+            padding: 14px 22px;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            transition: all .12s;
+            width: 100%;
+            cursor: pointer;
+            display: block;
+        }
+        .btn-mcq-game:hover { background: #eef2f7; }
+        .btn-mcq-game.pressed {
+            background: #162d47 !important;
+            color: #fff !important;
+            border-color: #0d1f30 !important;
+            border-bottom-width: 2px !important;
+            transform: translateY(2px) !important;
+        }
+        .btn-mcq-game.dimmed {
+            opacity: .30 !important;
+            pointer-events: none;
+        }
+
+        /* Progress bar */
+        .progress { background-color: rgba(0,0,0,0.05); border-radius: 50px; border: 1px solid #000; }
+
+        /* ── Mascot aside: hidden during quiz, shown when done ── */
+        .mascot-aside {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .mascot-aside.show { display: flex; }
+
+        .mascot-frame {
+            width: 180px;
+            height: 180px;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+
+        /* Next / ดูผลคะแนน button */
+        .btn-next-game {
+            background-color: var(--accent-orange);
+            color: #fff;
+            border: 3px solid #000;
+            border-radius: 50px;
+            padding: 12px 48px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            box-shadow: 5px 5px 0px #000;
+            transition: all .2s;
+            white-space: nowrap;
+        }
+        .btn-next-game:hover { transform: translate(3px,3px); box-shadow: 2px 2px 0 #000; color: #fff; }
+
+        /* Result screen */
+        #result-flow { display: none; flex: 1; align-items: center; justify-content: center; }
+        #result-flow.show { display: flex; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .quiz-page { padding: 88px 12px 32px; }
+            .quiz-article { padding: 24px 20px; min-height: 480px; }
+            .question-wrapper { padding: 20px; min-height: 120px; margin-bottom: 20px; }
+            .question-wrapper h2 { font-size: 1.15rem; }
+            #idx-view { font-size: .9rem !important; padding: 6px 12px !important; }
+            .progress { height: 10px !important; }
+            .btn-game-tf { font-size: 1.4rem; padding: 16px 10px; }
+            .btn-mcq-game { font-size: .92rem; padding: 12px 16px; }
+            .btn-next-game { font-size: 1.2rem; padding: 12px 36px; }
+            .mascot-frame { width: 140px; height: 140px; }
+        }
+
+        @media (max-width: 480px) {
+            .quiz-article { padding: 18px 14px; min-height: 440px; }
+            .question-wrapper h2 { font-size: 1rem; }
+            .btn-game-tf { font-size: 1.2rem; padding: 13px 8px; }
+            .btn-mcq-game { font-size: .86rem; }
+            .btn-next-game { font-size: 1.1rem; padding: 11px 28px; }
+        }
+        </style>
+    </head>
+
+    <body>
+
+        <header id="header"
+            class="header d-flex align-items-center fixed-top shadow-sm">
+            <div
+                class="container-fluid container-xl d-flex align-items-center justify-content-between">
+                <a href="index.html" class="logo d-flex align-items-center">
+                    <img
+                        src="assets/img/สกรีนช็อต 2026-01-30 203747-Photoroom.png"
+                        alt="โลโก้พยาบาลศาสตร์" style="max-height: 50px;">
+                </a>
+                <nav id="navmenu" class="navmenu">
+                    <ul class="d-flex list-unstyled m-0">
+                        <li class="me-4"><a href="index.html"
+                                class="text-decoration-none">หน้าหลัก</a></li>
+                        <li><a href="#"
+                                class="active text-decoration-none fw-bold">แบบทดสอบก่อนเรียน</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main class="quiz-page">
+            <article class="quiz-article" data-aos="zoom-in">
+
+                <!-- ── QUIZ FLOW ── -->
+                <div id="quiz-flow">
+
+                    <!-- Progress row -->
+                    <div class="d-flex justify-content-between align-items-center mb-4" id="progress-row">
+                        <span class="badge bg-dark fs-6 px-3 py-2 rounded-pill" id="idx-view">ข้อที่ 1 / 5</span>
+                        <div class="progress flex-grow-1 mx-3" style="height:14px;" role="progressbar">
+                            <div id="bar-view" class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:20%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Question -->
+                    <div class="question-wrapper">
+                        <h2 id="txt-view">เตรียมความพร้อม...</h2>
+                    </div>
+
+                    <!-- Answer buttons -->
+                    <div id="ui-area">
+                        <div id="tf-grid" class="row g-3">
+                            <div class="col-6">
+                                <button type="button" class="btn btn-game-tf btn-true-game" onclick="choose(0,this)">ถูก</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn btn-game-tf btn-false-game" onclick="choose(1,this)">ผิด</button>
+                            </div>
+                        </div>
+                        <div id="mcq-grid" class="d-none">
+                            <button type="button" class="btn btn-mcq-game" id="opt0" onclick="choose(0,this)"></button>
+                            <button type="button" class="btn btn-mcq-game" id="opt1" onclick="choose(1,this)"></button>
+                            <button type="button" class="btn btn-mcq-game" id="opt2" onclick="choose(2,this)"></button>
+                            <button type="button" class="btn btn-mcq-game" id="opt3" onclick="choose(3,this)"></button>
+                        </div>
+                    </div>
+
+                    <!-- Done state: mascot + button (hidden until quiz complete) -->
+                    <div class="mascot-aside mt-4" id="done-panel">
+                        <div class="mascot-frame">
+                            <img src="assets/img/สีเหลืองใหญ่.png" alt="Mascot พยาบาล" class="img-fluid">
+                        </div>
+                        <button type="button" class="btn btn-next-game" onclick="showResult()">ดูผลคะแนน ✦</button>
+                    </div>
+
+                </div>
+
+                <!-- ── RESULT FLOW ── -->
+                <div id="result-flow">
+                    <div class="text-center w-100">
+                        <div class="mascot-frame mx-auto mb-4">
+                            <img src="assets/img/สีเหลืองใหญ่.png" alt="Mascot" class="img-fluid">
+                        </div>
+                        <h2 class="fw-bold mb-3 fs-3">สรุปผลการทดสอบก่อนเรียน</h2>
+                        <div class="display-2 fw-bold text-success mb-1" id="score-view">0/5</div>
+                        <p class="fs-5 text-muted mb-4">คะแนนความรู้พื้นฐานของคุณ</p>
+                        <a href="mmse_game.html" class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold w-100">เข้าสู่หน้าถัดไป →</a>
+                    </div>
+                </div>
+
+            </article>
+        </main>
+
+        <footer class="text-center py-4">
+            <p class="text-muted small m-0">© 2026 SMART Nurse - คณะพยาบาลศาสตร์
+                มหาวิทยาลัยขอนแก่น</p>
+        </footer>
+
+        <script
+            src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/vendor/aos/aos.js"></script>
+
+        <script>
+        // ข้อมูลชุดคำถามที่ฝังไว้โดยตรง (แก้ปัญหา CORS Error)
+        const quizData = [
+            { "q": "ข้อที่ 1 จากสถานการณ์ต่อไปนี้นักศึกษาพยาบาลบอกกับผู้สูงอายุว่า “นักศึกษาจะให้คุณยายคิดเลขในใจนะคะ โดยเอา 100 ตั้ง ลบออกทีละ 7 ต่อเนื่อง 5 ครั้ง ”ผู้สูงอายุตอบว่า  “93, 85, 78, 71, 64” จากผลการตอบคำถามดังกล่าว ผู้สูงอายุรายนี้จะได้รับคะแนนจำนวน 3 คะแนน", "type": "tf", "opts": ["ถูก", "ผิด"], "ans": 0 },
+            { "q": "ข้อที่ 2 ผู้สูงอายุที่ไม่สามารถอ่านออกเขียนได้ ไม่มีความจำเป็นต้องทำแบบทดสอบในข้อที่ 4 ของแบบประเมิน MMSE", "type": "tf", "opts": ["ถูก", "ผิด"], "ans": 1 },
+            { "q": "ข้อที่ 3 ในกรณีที่ผู้ถูกประเมินตอบคำถามไม่ถูกต้อง ผู้ประเมินควรให้คำใบ้แก่ผู้ถูกประเมินในทุกข้อคำถาม เพื่อให้สามารถตอบคำถามและได้รับคะแนนตามความเป็นจริง ", "type":"tf", "opts": ["ถูก", "ผิด"], "ans": 0 },
+            { "q": "ข้อที่ 4 หากผลการประเมินด้วยแบบทดสอบ MMSE ได้คะแนนต่ำ สามารถสรุปได้ทันทีว่าผู้ถูกประเมินมีภาวะสมองเสื่อม ", "type":"tf", "opts": ["ถูก", "ผิด"], "ans": 0 },
+            { "q": "ข้อที่ 5 คะแนนจุดตัด (Cut-off point) ของผู้สูงอายุที่มีสภาพปกติและไม่ได้รับการศึกษา (ไม่สามารถอ่านออกเขียนได้) คือ มากกว่าหรือเท่ากับ 14 คะแนน ", "type":"tf", "opts": ["ถูก", "ผิด"], "ans": 0 }
+        ];
+
+        let curIdx = 0, totalScore = 0, isLocked = false;
+
+        function render() {
+            const data = quizData[curIdx];
+            isLocked = false;
+            document.getElementById('idx-view').innerText = `ข้อที่ ${curIdx + 1} / ${quizData.length}`;
+            document.getElementById('txt-view').innerText = data.q;
+            document.getElementById('bar-view').style.width = `${((curIdx + 1) / quizData.length) * 100}%`;
+
+            if (data.type === 'tf') {
+                document.getElementById('tf-grid').classList.remove('d-none');
+                document.getElementById('mcq-grid').classList.add('d-none');
+            } else {
+                document.getElementById('tf-grid').classList.add('d-none');
+                document.getElementById('mcq-grid').classList.remove('d-none');
+                data.opts.forEach((v, i) => document.getElementById(`opt${i}`).innerText = v);
+            }
+            document.querySelectorAll('.btn-game-tf, .btn-mcq-game').forEach(b => {
+                b.classList.remove('pressed', 'dimmed');
+                b.style.pointerEvents = '';
+            });
+        }
+
+        function choose(val, btn) {
+            if (isLocked) return;
+            isLocked = true;
+
+            if (val === quizData[curIdx].ans) totalScore++;
+            curIdx++;
+
+            // Visual: press chosen, dim others
+            const allBtns = btn.closest('#ui-area').querySelectorAll('.btn-game-tf, .btn-mcq-game');
+            allBtns.forEach(b => { b.style.pointerEvents = 'none'; b.classList.add('dimmed'); });
+            btn.classList.remove('dimmed');
+            btn.classList.add('pressed');
+
+            setTimeout(() => {
+                if (curIdx < quizData.length) {
+                    render();
+                } else {
+                    // Quiz done: hide quiz UI, reveal mascot + button
+                    document.getElementById('progress-row').style.display = 'none';
+                    document.getElementById('ui-area').style.display = 'none';
+                    document.getElementById('txt-view').closest('.question-wrapper').style.display = 'none';
+                    document.getElementById('done-panel').classList.add('show');
+                }
+            }, 600);
+        }
+
+        function showResult() {
+            document.getElementById('quiz-flow').style.display = 'none';
+            document.getElementById('result-flow').classList.add('show');
+            document.getElementById('score-view').innerText = `${totalScore}/${quizData.length}`;
+        }
+
+        // Auto-hide Navbar
+        const header = document.getElementById('header');
+        window.onscroll = () => { header.classList.toggle('header-hidden', window.scrollY > 80); };
+        document.onmousemove = (e) => { if (e.clientY < 60) header.classList.remove('header-hidden'); };
+
+        document.addEventListener('DOMContentLoaded', () => { AOS.init(); render(); });
+    </script>
+    </body>
+</html>

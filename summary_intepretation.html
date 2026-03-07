@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แปลผลตามระดับการศึกษา</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #5B2FBE;
+      --secondary: #F7A831;
+      --accent: #E8425A;
+      --teal: #2BBFB0;
+      --correct: #22c55e;
+      --wrong: #ef4444;
+      --sidebar-w: 230px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Kanit', sans-serif;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, #FFE68D 0%, transparent 80%),
+        radial-gradient(ellipse 60% 50% at 95% 5%, #ffcce0 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 80% 90%, #b6f0ea 0%, transparent 55%),
+        radial-gradient(ellipse 70% 50% at 20% 95%, #ffe0a8 0%, transparent 55%),
+        #f3eeff;
+      overflow-x: hidden;
+    }
+
+    /* BG DECORATIONS */
+    .bg-shape { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; }
+    .bg-shape-1 { width: 340px; height: 340px; background: rgba(108,63,197,0.08); top: -100px; right: 80px; }
+    .bg-shape-2 { width: 220px; height: 220px; background: rgba(247,168,49,0.10); bottom: -60px; left: 260px; }
+    .bg-shape-3 { width: 160px; height: 160px; background: rgba(43,191,176,0.10); top: 45%; right: 8%; }
+
+    .dot { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; }
+    .d1 { width:12px; height:12px; background:var(--secondary); top:18%; right:22%; opacity:.35; }
+    .d2 { width:7px; height:7px; background:var(--accent); top:28%; right:18%; opacity:.28; }
+    .d3 { width:16px; height:16px; background:var(--teal); bottom:24%; left:34%; opacity:.30; }
+    .d4 { width:9px; height:9px; background:var(--primary); bottom:18%; left:44%; opacity:.22; }
+
+    /* LAYOUT */
+    .page {
+      position: relative; z-index: 1; min-height: 100vh;
+      display: flex; animation: fadeUp 0.65s ease both;
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: var(--sidebar-w); flex-shrink: 0;
+      padding: 36px 18px 36px 24px;
+      display: flex; flex-direction: column; gap: 4px;
+      background: rgba(255,255,255,0.38);
+      backdrop-filter: blur(16px);
+      border-right: 1.5px solid rgba(255,255,255,0.55);
+      position: sticky; top: 0; height: 100vh;
+    }
+    .sidebar-label {
+      font-size: 10px; color: var(--primary); letter-spacing: 2.5px;
+      text-transform: uppercase; font-weight: 700; margin-bottom: 14px;
+      opacity: 0.6; padding-left: 6px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 11px;
+      padding: 12px 16px; border-radius: 14px; color: #4a3880;
+      font-size: 15px; font-weight: 500; cursor: pointer;
+      transition: all 0.22s ease; text-decoration: none;
+    }
+    .nav-item:hover { background: rgba(91,47,190,0.09); color: var(--primary); transform: translateX(4px); }
+    .nav-item.active {
+      background: linear-gradient(130deg, var(--secondary) 0%, #f08c1a 100%);
+      color: #3a1f00; font-weight: 700;
+      box-shadow: 0 6px 20px rgba(247,168,49,0.38);
+    }
+    .nav-icon { font-size: 17px; flex-shrink: 0; }
+
+    /* MAIN */
+    .main {
+      flex: 1; padding: 42px 52px 36px 52px;
+      display: flex; flex-direction: column;
+      position: relative;
+    }
+
+    /* PAGE TITLE */
+    .page-title {
+      font-size: 32px; font-weight: 800; color: var(--primary);
+      letter-spacing: -0.3px; margin-bottom: 32px;
+      display: inline-flex; align-items: center; gap: 12px; position: relative;
+    }
+    .page-title::after {
+      content: ''; position: absolute; bottom: -10px; left: 0;
+      width: 64px; height: 5px; border-radius: 5px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+    }
+
+    /* MMSE SCORE FROM TEST3 */
+    .mmse-score-bar {
+      display: flex; align-items: center; gap: 16px;
+      background: rgba(255,255,255,0.55); backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255,255,255,0.8);
+      border-radius: 18px; padding: 16px 24px;
+      margin-bottom: 26px;
+      box-shadow: 0 4px 18px rgba(91,47,190,0.08);
+    }
+    .mmse-score-label { font-size: 15px; font-weight: 600; color: var(--primary); opacity: 0.75; }
+    .mmse-score-value {
+      font-size: 28px; font-weight: 800; color: var(--primary);
+      background: linear-gradient(135deg, var(--primary), #9067f5);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .mmse-score-max { font-size: 15px; color: rgba(91,47,190,0.45); font-weight: 600; }
+
+    /* CARDS AREA */
+    .cards-area {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+      flex: 1;
+    }
+
+    /* CHOICE CARD */
+    .choice-card {
+      border-radius: 22px;
+      border: 2.5px solid rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 8px 32px rgba(91,47,190,0.09), 0 2px 0 rgba(255,255,255,0.9) inset;
+      min-height: 200px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative; overflow: hidden;
+      padding: 28px 24px;
+      user-select: none;
+    }
+
+    .choice-card::before {
+      content: ''; position: absolute;
+      inset: 0; border-radius: 20px;
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .choice-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 48px rgba(91,47,190,0.16), 0 2px 0 rgba(255,255,255,0.9) inset;
+      border-color: rgba(91,47,190,0.35);
+    }
+
+    /* Card accent corners */
+    .choice-card .corner-tl {
+      position: absolute; top: 0; left: 0;
+      width: 48px; height: 48px;
+      border-top: 3px solid rgba(91,47,190,0.2);
+      border-left: 3px solid rgba(91,47,190,0.2);
+      border-radius: 22px 0 0 0;
+    }
+    .choice-card .corner-br {
+      position: absolute; bottom: 0; right: 0;
+      width: 48px; height: 48px;
+      border-bottom: 3px solid rgba(43,191,176,0.25);
+      border-right: 3px solid rgba(43,191,176,0.25);
+      border-radius: 0 0 22px 0;
+    }
+
+    .card-icon {
+      font-size: 48px; margin-bottom: 14px;
+      display: block;
+    }
+
+    .card-text {
+      font-size: 20px; font-weight: 700; color: var(--primary);
+      text-align: center; line-height: 1.4;
+      z-index: 1;
+    }
+    .card-sub {
+      font-size: 13px; color: rgba(91,47,190,0.45);
+      margin-top: 6px; font-family: 'Sarabun', sans-serif;
+      text-align: center;
+    }
+
+    /* SELECTED STATES */
+    .choice-card.selected-correct {
+      border-color: var(--correct);
+      background: rgba(34,197,94,0.12);
+      box-shadow: 0 12px 40px rgba(34,197,94,0.25), 0 2px 0 rgba(255,255,255,0.9) inset;
+      transform: translateY(-4px) scale(1.02);
+    }
+    .choice-card.selected-correct .card-text { color: #166534; }
+
+    .choice-card.selected-wrong {
+      border-color: var(--wrong);
+      background: rgba(239,68,68,0.10);
+      box-shadow: 0 12px 40px rgba(239,68,68,0.22), 0 2px 0 rgba(255,255,255,0.9) inset;
+      animation: shake 0.45s ease;
+    }
+    .choice-card.selected-wrong .card-text { color: #991b1b; }
+
+    @keyframes shake {
+      0%,100%{transform:translateX(0);}
+      20%{transform:translateX(-8px);}
+      40%{transform:translateX(8px);}
+      60%{transform:translateX(-5px);}
+      80%{transform:translateX(5px);}
+    }
+
+    /* RESULT BADGE on card */
+    .result-badge {
+      position: absolute; top: 14px; right: 14px;
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; opacity: 0;
+      transform: scale(0); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .result-badge.show { opacity: 1; transform: scale(1); }
+    .result-badge.correct { background: var(--correct); }
+    .result-badge.wrong { background: var(--wrong); }
+
+    /* FEEDBACK LABEL */
+    .feedback-label {
+      display: none; align-items: center; justify-content: center; gap: 12px;
+      font-size: 22px; font-weight: 800; margin-bottom: 20px;
+      padding: 14px 28px; border-radius: 16px;
+    }
+    .feedback-label.show { display: flex; }
+    .feedback-label.correct { background: rgba(34,197,94,0.15); color: #166534; }
+    .feedback-label.wrong   { background: rgba(239,68,68,0.12); color: #991b1b; }
+
+    /* BOTTOM BAR */
+    .bottom-bar {
+      display: flex; align-items: center; justify-content: flex-end;
+      gap: 18px;
+    }
+    .mascot {
+      display: flex; align-items: flex-end; gap: 2px;
+      background: rgba(255,255,255,0.5); backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255,255,255,0.75);
+      border-radius: 50px; padding: 8px 18px;
+    }
+    .mascot-emoji { font-size: 34px; line-height: 1; }
+
+    .back-btn {
+      background: rgba(255,255,255,0.65); backdrop-filter: blur(10px);
+      color: var(--primary); border: 2px solid rgba(91,47,190,0.2);
+      border-radius: 50px; padding: 14px 28px;
+      font-family: 'Kanit', sans-serif; font-size: 16px; font-weight: 700;
+      letter-spacing: 1px; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(91,47,190,0.10);
+      transition: all 0.25s ease;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .back-btn:hover { background: rgba(91,47,190,0.08); border-color: var(--primary); transform: translateY(-3px); }
+
+    .next-btn {
+      background: linear-gradient(135deg, var(--primary) 0%, #9067f5 100%);
+      color: #fff; border: none; border-radius: 50px;
+      padding: 14px 38px; font-family: 'Kanit', sans-serif;
+      font-size: 16px; font-weight: 700; letter-spacing: 1.5px;
+      cursor: pointer; box-shadow: 0 8px 28px rgba(91,47,190,0.38);
+      transition: all 0.25s ease;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .next-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(91,47,190,0.48); }
+    .next-btn.hidden { opacity: 0; pointer-events: none; }
+    .arrow { font-size: 18px; transition: transform 0.22s ease; }
+    .next-btn:hover .arrow { transform: translateX(5px); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .page { flex-direction: column; }
+      .sidebar { width: 100%; flex-direction: row; justify-content: space-around; padding: 14px; height: auto; position: static; }
+      .sidebar-label { display: none; }
+      .main { padding: 28px 24px; }
+      .page-title { font-size: 26px; }
+      .score-badge { top: 16px; right: 24px; }
+    }
+    @media (max-width: 640px) {
+      .main { padding: 20px 14px; }
+      .page-title { font-size: 22px; }
+      .cards-area { grid-template-columns: 1fr; gap: 16px; }
+      .card-text { font-size: 17px; }
+      .score-badge { position: static; margin-bottom: 12px; display: inline-flex; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-shape bg-shape-1"></div>
+<div class="bg-shape bg-shape-2"></div>
+<div class="bg-shape bg-shape-3"></div>
+<div class="dot d1"></div>
+<div class="dot d2"></div>
+<div class="dot d3"></div>
+<div class="dot d4"></div>
+
+<div class="page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-label">แถบเมนู</div>
+    <a class="nav-item" href="#"><span class="nav-icon">🏠</span> Home</a>
+    <a class="nav-item" href="#"><span class="nav-icon">📋</span> Pretest</a>
+    <a class="nav-item" href="#"><span class="nav-icon">🎯</span> เกมจับผิด</a>
+    <a class="nav-item active" href="#"><span class="nav-icon">🔄</span> เกมแปลผล</a>
+    <a class="nav-item" href="#"><span class="nav-icon">📝</span> Post-test</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TITLE -->
+    <h1 class="page-title">🧠 แปลผลตามระดับการศึกษา</h1>
+
+    <!-- MMSE SCORE FROM TEST3 -->
+    <div class="mmse-score-bar">
+      <span class="mmse-score-label">คะแนน MMSE จากเกมแปลผล</span>
+      <span class="mmse-score-value" id="mmse-score-value">—</span>
+      <span class="mmse-score-max">/ 30 คะแนน</span>
+    </div>
+
+    <!-- FEEDBACK LABEL (แสดงหลังตอบ) -->
+    <div class="feedback-label" id="feedback-label"></div>
+
+    <!-- CARDS -->
+    <div class="cards-area" id="cards-area">
+
+      <!-- CARD A: มีความเสี่ยง -->
+      <div class="choice-card" id="card-a" onclick="selectCard('a')">
+        <div class="corner-tl"></div>
+        <div class="corner-br"></div>
+        <div class="result-badge" id="badge-a"></div>
+        <span class="card-icon">⚠️</span>
+        <div class="card-text">มีความเสี่ยง<br>ภาวะสมองเสื่อม</div>
+        <div class="card-sub">คะแนนต่ำกว่าเกณฑ์</div>
+      </div>
+
+      <!-- CARD B: ไม่มีความเสี่ยง -->
+      <div class="choice-card" id="card-b" onclick="selectCard('b')">
+        <div class="corner-tl"></div>
+        <div class="corner-br"></div>
+        <div class="result-badge" id="badge-b"></div>
+        <span class="card-icon">✅</span>
+        <div class="card-text">ไม่มีความเสี่ยง<br>ภาวะสมองเสื่อม</div>
+        <div class="card-sub">คะแนนอยู่ในเกณฑ์ปกติ</div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM BAR -->
+    <div class="bottom-bar">
+      <div class="mascot">
+        <span class="mascot-emoji">👴</span>
+        <span class="mascot-emoji">👵</span>
+      </div>
+      <button class="back-btn" onclick="alert('ย้อนกลับ')">← BACK</button>
+      <button class="next-btn hidden" id="next-btn" onclick="goNext()">
+        NEXT <span class="arrow">→</span>
+      </button>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // ==============================
+  // CONFIG — ปรับตรงนี้ต่อหน้า
+  // ==============================
+  const CORRECT_CARD = 'b'; // 'a' = มีความเสี่ยง | 'b' = ไม่มีความเสี่ยง
+  let answered = false;
+
+  // ดึงคะแนน MMSE จาก test3.html ผ่าน sessionStorage
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = sessionStorage.getItem('mmse_total_score');
+    const el = document.getElementById('mmse-score-value');
+    el.textContent = (saved !== null) ? saved : '—';
+  });
+
+  function selectCard(choice) {
+    if (answered) return;
+    answered = true;
+
+    const isCorrect = (choice === CORRECT_CARD);
+    const chosenCard  = document.getElementById('card-' + choice);
+    const chosenBadge = document.getElementById('badge-' + choice);
+
+    chosenCard.classList.add(isCorrect ? 'selected-correct' : 'selected-wrong');
+    chosenBadge.innerHTML = isCorrect ? '✓' : '✕';
+    chosenBadge.classList.add('show', isCorrect ? 'correct' : 'wrong');
+
+    if (!isCorrect) {
+      const correctCard  = document.getElementById('card-' + CORRECT_CARD);
+      const correctBadge = document.getElementById('badge-' + CORRECT_CARD);
+      correctCard.classList.add('selected-correct');
+      correctBadge.innerHTML = '✓';
+      correctBadge.classList.add('show', 'correct');
+    }
+
+    // แสดง feedback label ถูก/ผิด
+    const fb = document.getElementById('feedback-label');
+    fb.textContent = isCorrect ? '✅ ถูกต้อง!' : '❌ ไม่ถูกต้อง';
+    fb.className = 'feedback-label show ' + (isCorrect ? 'correct' : 'wrong');
+
+    // แสดงปุ่ม NEXT
+    setTimeout(() => {
+      document.getElementById('next-btn').classList.remove('hidden');
+    }, 400);
+  }
+
+  function goNext() {
+    // เชื่อมต่อหน้าถัดไป — แก้ URL ตามต้องการ
+    alert('ไปหน้าถัดไป →');
+  }
+</script>
+
+</body>
+</html>
