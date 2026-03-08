@@ -1,0 +1,1284 @@
+.page{
+    display:flex;
+    min-height:100vh;
+}
+
+/* sidebar */
+.sidebar{
+    width:220px;
+}
+
+/* main */
+.main{
+    flex:1;
+    padding:30px;
+}
+
+/* เกม */
+.game-box iframe{
+    width:100%;
+    height:500px;
+}
+@media (max-width:1024px){
+
+.sidebar{
+    width:180px;
+}
+
+.page-title{
+    font-size:28px;
+}
+
+}
+@media (max-width:768px){
+
+.page{
+    flex-direction:column;
+}
+
+.sidebar{
+    width:100%;
+    display:flex;
+    overflow-x:auto;
+}
+
+.nav-item{
+    white-space:nowrap;
+    margin-right:10px;
+}
+
+.main{
+    padding:20px;
+}
+
+.game-box iframe{
+    height:350px;
+}
+
+.page-title{
+    font-size:22px;
+}
+
+}
+.hero-lines h1{
+    font-size:18px;   /* ขนาดหัวข้อ */
+}
+
+.hero-lines p{
+    font-size:12px;   /* ขนาดเนื้อหา */
+    line-height:1.7;  /* ระยะห่างบรรทัด อ่านง่าย */
+}
+/* =============================================
+   SMART Nurse Website Template – style.css
+   ============================================= */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --blue-dark:   #1a3a8c;   /* แถบ navbar / banner */
+  --blue-mid:    #2952c8;
+  --red-circle:  #8b2020;   /* วงกลมสีแดงรูปผู้สูงอายุ */
+  --gold:        #e8c84a;   /* กล่องชื่อ hero */
+  --text-dark:   #1a1a1a;
+  --text-gray:   #555;
+  --white:       #ffffff;
+  --bg-page:     #f5f5f5;
+  --font-main:   'Sarabun', sans-serif;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-page);
+  color: var(--text-dark);
+  min-height: 100vh;
+}
+
+/* =============================================
+   NAVBAR
+   ============================================= */
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: var(--white);
+  padding: 12px 32px;
+  border-bottom: 3px solid #ddd;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* --- Left: Logo + About crossed --- */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.logo-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid var(--blue-dark);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eaf0ff;
+}
+
+.logo-circle .logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* About ขีดฆ่า */
+.about-crossed {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--text-gray);
+  border-radius: 50%;
+  width: 72px;
+  height: 72px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  overflow: hidden;
+}
+
+.cross-line {
+  position: absolute;
+  width: 130%;
+  height: 3px;
+  background-color: var(--text-dark);
+  transform-origin: center;
+}
+
+.cross-line-1 { transform: rotate(45deg); }
+.cross-line-2 { transform: rotate(-45deg); }
+
+/* --- Center: Title --- */
+.navbar-title {
+  flex: 1;
+  text-align: center;
+}
+
+.navbar-title h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #c0392b;          /* สีแดง-ส้ม ตามภาพ */
+  letter-spacing: 0.5px;
+}
+
+/* --- Right: Nav links --- */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-shrink: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-gray);
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--blue-dark);
+}
+
+/* =============================================
+   HERO BANNER
+   ============================================= */
+.hero-banner {
+  background-color: var(--blue-dark);
+  display: flex;
+  align-items: center;
+  padding: 30px 40px;
+  gap: 40px;
+  min-height: 220px;
+}
+
+/* --- รูปการ์ตูนผู้สูงอายุ --- */
+.hero-images {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  /* ซ้อนกันเล็กน้อยเหมือนในภาพ */
+  position: relative;
+  width: 260px;
+  height: 165px;
+}
+
+/* .elderly-circle {
+  position: absolute;
+  width: 155px;
+  height: 155px;
+  border-radius: 50%;
+  background-color: var(--red-circle);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.elderly-circle img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+}
+
+.elderly-circle-1 {
+  left: 0;
+  z-index: 2;
+}
+
+.elderly-circle-2 {
+  left: 100px;
+  z-index: 1;
+}
+
+/* --- เนื้อหาขวา --- */
+.hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hero-title-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--gold);
+  border-radius: 40px;
+  padding: 10px 28px;
+  width: fit-content;
+}
+
+.star {
+  font-size: 22px;
+  color: var(--white);
+}
+
+.hero-title-text {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-dark);
+  white-space: nowrap;
+}
+
+/* เส้นประ placeholder สำหรับเนื้อหา */
+.hero-lines {
+    color: #ccc;
+}
+.hero-lines h1{
+    color: #f5f5f5;
+}
+
+.hero-line {
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  width: 100%;
+}
+
+/* =============================================
+   MENU CARDS
+   ============================================= */
+.menu-cards {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  padding: 48px 40px 56px;
+  background-color: var(--white);
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.card-circle {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+  background-color: var(--white);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card-circle img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+}
+
+.card-label {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+  letter-spacing: 0.2px;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .navbar-title h1 {
+    font-size: 20px;
+  }
+
+  .navbar-links {
+    gap: 20px;
+  }
+
+  .hero-banner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px 20px;
+  }
+
+  .hero-images {
+    width: 240px;
+    height: 155px;
+  }
+
+  .hero-title-text {
+    font-size: 17px;
+  }
+
+  .menu-cards {
+    gap: 30px;
+    padding: 32px 20px 40px;
+  }
+
+  .card-circle {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+/* pretest */
+*{box-sizing:border-box;}
+
+/* body{
+    font-family:"Tahoma", sans-serif;
+    background:#e6e6e6;
+    text-align:center;
+    padding:20px;
+    margin:0;
+} */
+
+h1{
+    color:#1e40af;
+    margin-bottom:20px;
+    font-size:clamp(22px,5vw,32px);
+}
+
+/* กล่องคำถาม */
+.box{
+    width:100%;
+    max-width:700px;
+    margin:auto;
+    border:4px solid black;
+    background:white;
+    padding:30px 20px;
+    border-radius:14px;
+    font-size:clamp(18px,4.5vw,22px);
+    min-height:120px;
+}
+
+/* แถบเตือน */
+.warning{
+    margin:18px auto;
+    background:#fff3a0;
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:20px;
+    color:red;
+    font-weight:bold;
+}
+
+/* ปุ่มตอบ */
+.btn-area{
+    margin-top:25px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.quiz-btn{
+    width:min(40vw,180px);
+    height:min(22vw,100px);
+    border-radius:22px;
+    font-size:clamp(32px,8vw,50px);
+    cursor:pointer;
+    transition:.15s;
+    touch-action:manipulation;
+}
+
+.quiz-btn:active{
+    transform:scale(.95);
+}
+
+.correct{
+    width: clamp(120px, 35vw, 180px);   /* กว้างขั้นต่ำ 120px, สูงสุด 180px */
+    height: clamp(60px, 20vw, 100px);   /* สูงขั้นต่ำ 60px, สูงสุด 100px */
+    background:#009900;
+    border-color:#009900;
+    color:#c7f07a;
+}
+
+.wrong{
+    width: clamp(120px, 35vw, 180px);   /* กว้างขั้นต่ำ 120px, สูงสุด 180px */
+    height: clamp(60px, 20vw, 100px);   /* สูงขั้นต่ำ 60px, สูงสุด 100px */
+    background:#cc0000;
+    border-color:#cc0000;
+    color:#f4a3a3;
+}
+
+/* ===== MODAL ===== */
+.modal-custom{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.modal-box{
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    width:90%;
+    max-width:420px;
+    text-align:center;
+    animation:pop .25s ease;
+}
+
+@keyframes pop{
+    from{transform:scale(.8);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+
+/* .next-icon {
+    width: 48px;         
+    height: 48px;
+    display: none;       
+    position: fixed;      
+    bottom: 70px;         
+    right: 20px;
+    z-index: 1001;
+
+} */
+
+/* #nextBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: none; 
+    text-align: center;
+    padding: 10px 15px;
+} */
+
+#nextBtn {
+    display: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    flex-direction: column; /* วางรูป + ข้อความแนวตั้ง */
+    align-items: center;
+}
+
+.next-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.next-text {
+    font-size: 14px;
+    color: #000;
+}
+
+/* =============================================
+   คู่มือแบบประเมิน – manual.css
+   ============================================= */
+
+:root {
+  --blue-dark:   #1a3a8c;
+  --blue-mid:    #2952c8;
+  --gold:        #e8c84a;
+  --white:       #ffffff;
+  --bg-page:     #f5f5f5;
+  --text-dark:   #1a1a1a;
+  --text-gray:   #555;
+  --card-border: #ccc;
+  --pink-bg:     #f9ddd8;   /* สีพื้นหลังการ์ด MMSE ในภาพ */
+  --font-main:   'Sarabun', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-page);
+  color: var(--text-dark);
+  min-height: 100vh;
+}
+
+/* =============================================
+   NAVBAR
+   ============================================= */
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: var(--white);
+  padding: 12px 32px;
+  border-bottom: 3px solid #ddd;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.logo-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid var(--blue-dark);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eaf0ff;
+  flex-shrink: 0;
+}
+
+.logo-circle .logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ชื่อหน้า navbar แบบลายมือ */
+.navbar-page-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.asterisk {
+  font-size: 28px;
+  color: #e040a0;   /* สีชมพูเหมือนลายมือในภาพ */
+  font-weight: 900;
+  line-height: 1;
+}
+
+.page-title-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: #e040a0;
+  letter-spacing: 0.3px;
+}
+
+/* Nav links */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-shrink: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-gray);
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--blue-dark);
+}
+
+/* =============================================
+   HERO BANNER
+   ============================================= */
+.hero-banner {
+  background-color: var(--blue-dark);
+  display: flex;
+  align-items: center;
+  padding: 28px 60px;
+  gap: 50px;
+  min-height: 200px;
+}
+
+/* วงกลมรูปหนังสือ */
+.hero-book-circle {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background-color: var(--white);
+  border: 4px solid var(--white);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+
+.hero-book-circle img {
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+}
+
+/* กล่องชื่อสีทอง */
+.hero-title-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--gold);
+  border-radius: 50px;
+  padding: 18px 48px;
+}
+
+.star {
+  font-size: 32px;
+  color: var(--white);
+}
+
+.hero-title-text {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--text-dark);
+  white-space: nowrap;
+}
+
+/* =============================================
+   CONTENT SECTION (3 การ์ด)
+   ============================================= */
+.content-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 48px 40px 60px;
+  background-color: var(--white);
+  flex-wrap: wrap;
+}
+
+.content-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  max-width: 340px;
+  min-width: 240px;
+}
+
+/* ===== กล่องสื่อ (รูป / วิดีโอ) ===== */
+.card-media {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 2px solid var(--card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--pink-bg);
+  
+}
+
+/* ---- คลิกเพื่อดูรูป ---- */
+.clickable-image {
+  cursor: pointer;
+  position: relative;
+}
+
+.clickable-image .card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.clickable-image:hover .card-img {
+  transform: scale(1.04);
+}
+
+/* Overlay ข้อความ */
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 58, 140, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.clickable-image:hover .card-overlay {
+  opacity: 1;
+}
+
+.card-overlay span {
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  padding: 8px 16px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 20px;
+}
+
+/* ---- YouTube iframe ---- */
+.video-wrapper {
+  background-color: #111;
+}
+
+.video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+
+
+/* ===== ป้ายชื่อการ์ด ===== */
+.card-label {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+/* =============================================
+   LIGHTBOX
+   ============================================= */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox-inner {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.lightbox-inner img {
+  max-width: 90vw;
+  max-height: 88vh;
+  border-radius: 8px;
+  object-fit: contain;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+  transition: opacity 0.2s;
+}
+
+.lightbox-close:hover {
+  opacity: 0.7;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 900px) {
+  .hero-banner {
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .hero-title-text {
+    font-size: 26px;
+  }
+
+  .content-section {
+    gap: 28px;
+    padding: 32px 20px 40px;
+  }
+
+  .content-card {
+    max-width: 100%;
+    min-width: 280px;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-links {
+    gap: 20px;
+  }
+
+  .hero-title-text {
+    font-size: 20px;
+  }
+}
+
+
+.image-modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.8);
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+.image-container{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.image-container img{
+    max-width:400px;
+    border-radius:15px;
+}
+
+.close{
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:30px;
+    color:white;
+    cursor:pointer;
+}
+
+.card-link{
+  text-decoration: none;  /* เอาเส้นใต้ออก */
+  color: inherit;         /* ใช้สีเดิม */
+}
+
+/* =============================================
+   เกมแปลผล MMSE – game.css
+   ============================================= */
+
+:root {
+  --white:        #ffffff;
+  --bg:           #f8f8f8;
+  --border:       #222;
+  --blue:         #1a3a8c;
+  --blue-light:   #e8eeff;
+  --gold:         #e8c84a;
+  --green:        #2ecc71;
+  --green-light:  #d4f5e4;
+  --red:          #e74c3c;
+  --red-light:    #fde8e6;
+  --gray:         #888;
+  --gray-light:   #eee;
+  --text:         #111;
+  --font:         'Sarabun', sans-serif;
+  --radius:       10px;
+  --shadow:       0 4px 18px rgba(0,0,0,0.10);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background-color: var(--white);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* =============================================
+   WRAPPER + PAGE VISIBILITY
+   ============================================= */
+.game-wrapper {
+  width: 100%;
+  max-width: 900px;
+}
+
+.game-page {
+  display: none;
+  background: transparent;
+  border-radius: 0;
+  padding: 36px 44px 40px;
+  box-shadow: none;
+  position: relative;
+  animation: fadeIn 0.35s ease;
+}
+
+.game-page.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =============================================
+   SCORE BOX (มุมบนขวา)
+   ============================================= */
+.score-box{
+  position:absolute;
+  top:clamp(10px,3vw,28px);
+  right:clamp(10px,4vw,40px);
+  border:2.5px solid var(--border);
+  border-radius:var(--radius);
+  padding:clamp(6px,1.5vw,12px) clamp(12px,3vw,24px);
+  font-size:clamp(14px,1.6vw,18px);
+  font-weight:700;
+  text-align:center;
+  line-height:1.4;
+  background:var(--white);
+}
+
+.score-display {
+  display: block;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1.1;
+}
+
+/* =============================================
+   TITLE
+   ============================================= */
+.game-title {
+  font-size: 32px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 18px;
+  letter-spacing: 0.3px;
+}
+
+/* =============================================
+   QUESTION LABEL
+   ============================================= */
+.question-label {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  color: var(--text);
+}
+
+.point-tag {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray);
+  margin-left: 8px;
+}
+
+/* =============================================
+   MAIN CONTENT (media + choices side by side)
+   ============================================= */
+.main-content {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* --- Media box --- */
+.media-box {
+  flex: 0 0 340px;
+  min-height: 220px;
+  border: 2.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--gray-light);
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.media-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.media-box iframe {
+  width: 100%;
+  min-height: 220px;
+  border: none;
+  display: block;
+}
+
+/* .media-placeholder {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray);
+  text-align: center;
+  line-height: 2;
+  padding: 20px;
+} */
+
+/* --- Choices grid --- */
+.choices-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  align-content: start;
+}
+
+.choice-btn {
+  border: 2.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  font-family: var(--font);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  padding: 22px 10px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.choice-btn:hover {
+  background: var(--blue-light);
+  border-color: var(--blue);
+  color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(26,58,140,0.15);
+}
+
+/* ปุ่มคำตอบที่เลือก — แค่ highlight สีน้ำเงิน ไม่บอกถูก/ผิด */
+.choice-btn.selected {
+  background: var(--blue-light);
+  border-color: var(--blue);
+  color: var(--blue);
+  transform: scale(1.04);
+  font-size: 28px;
+  box-shadow: 0 6px 18px rgba(26,58,140,0.15);
+}
+
+/* =============================================
+   NEXT BUTTON
+   ============================================= */
+.next-area {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 32px;
+}
+
+.next-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.next-btn:hover { transform: scale(1.08); }
+
+.next-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--gray-light);
+}
+
+.next-label {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+
+.hidden { display: none !important; }
+
+/* =============================================
+   RESULT PAGE
+   ============================================= */
+.result-page {
+  text-align: center;
+}
+
+.result-card {
+  background: var(--blue-light);
+  border: 2.5px solid var(--blue);
+  border-radius: 18px;
+  padding: 32px 48px;
+  display: inline-block;
+  margin: 24px auto;
+}
+
+.result-score-label {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.result-score-value {
+  font-size: 80px;
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+  margin: 8px 0 4px;
+}
+
+.result-score-max {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gray);
+}
+
+.result-interpret {
+  margin-top: 16px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  padding: 10px 24px;
+  border-radius: 30px;
+  background: var(--white);
+  display: inline-block;
+}
+
+/* ตารางสรุปรายข้อ */
+.result-breakdown {
+  margin: 24px 0 28px;
+  overflow-x: auto;
+}
+
+.breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  text-align: center;
+}
+
+.breakdown-table th {
+  background: var(--blue);
+  color: var(--white);
+  padding: 10px 14px;
+  font-weight: 700;
+}
+
+.breakdown-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.breakdown-table td:nth-child(2) { text-align: left; }
+
+.row-ok  td { background: var(--green-light); }
+.row-off td { background: var(--red-light); }
+.row-total td {
+  background: var(--gold);
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.restart-btn {
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 40px;
+  padding: 14px 48px;
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+
+.restart-btn:hover {
+  background: #0f2460;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26,58,140,0.25);
+}
