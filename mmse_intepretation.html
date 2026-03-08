@@ -375,7 +375,7 @@
       font-size: 26px;
       font-weight: 800;
       color: var(--primary);
-      padding: 18px 10px;
+      padding: 14px 10px 10px;
       cursor: pointer;
       transition: all .2s cubic-bezier(.22,.68,0,1.2);
       text-align: center;
@@ -383,7 +383,25 @@
       position: relative;
       overflow: hidden;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      line-height: 1;
+    }
 
+    .choice-btn .btn-score-unit {
+      font-size: 11px;
+      font-weight: 600;
+      opacity: 0.65;
+      letter-spacing: 0.3px;
+      font-family: var(--font-body);
+      line-height: 1;
+    }
+
+    .choice-btn.selected .btn-score-unit {
+      opacity: 0.85;
     }
 
     .choice-btn:hover {
@@ -839,11 +857,11 @@
           <div class="choices-area">
             <div class="choices-label">เลือกคะแนน</div>
             <div class="choices-grid" id="choices-1">
-              <button class="choice-btn" data-page="1" data-value="1">1</button>
-              <button class="choice-btn" data-page="1" data-value="2">2</button>
-              <button class="choice-btn" data-page="1" data-value="3">3</button>
-              <button class="choice-btn" data-page="1" data-value="4">4</button>
-              <button class="choice-btn" data-page="1" data-value="5">5</button>
+              <button class="choice-btn" data-page="1" data-value="1"><span class="btn-score-num">1</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="1" data-value="2"><span class="btn-score-num">2</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="1" data-value="3"><span class="btn-score-num">3</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="1" data-value="4"><span class="btn-score-num">4</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="1" data-value="5"><span class="btn-score-num">5</span><span class="btn-score-unit">คะแนน</span></button>
             </div>
           </div>
         </div>
@@ -877,11 +895,11 @@
           <div class="choices-area">
             <div class="choices-label">เลือกคะแนน</div>
             <div class="choices-grid" id="choices-2">
-              <button class="choice-btn" data-page="2" data-value="1">1</button>
-              <button class="choice-btn" data-page="2" data-value="2">2</button>
-              <button class="choice-btn" data-page="2" data-value="3">3</button>
-              <button class="choice-btn" data-page="2" data-value="4">4</button>
-              <button class="choice-btn" data-page="2" data-value="5">5</button>
+              <button class="choice-btn" data-page="2" data-value="1"><span class="btn-score-num">1</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="2" data-value="2"><span class="btn-score-num">2</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="2" data-value="3"><span class="btn-score-num">3</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="2" data-value="4"><span class="btn-score-num">4</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="2" data-value="5"><span class="btn-score-num">5</span><span class="btn-score-unit">คะแนน</span></button>
             </div>
           </div>
         </div>
@@ -915,9 +933,9 @@
           <div class="choices-area">
             <div class="choices-label">เลือกคะแนน</div>
             <div class="choices-grid" id="choices-3">
-              <button class="choice-btn" data-page="3" data-value="1">1</button>
-              <button class="choice-btn" data-page="3" data-value="2">2</button>
-              <button class="choice-btn" data-page="3" data-value="3">3</button>
+              <button class="choice-btn" data-page="3" data-value="1"><span class="btn-score-num">1</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="3" data-value="2"><span class="btn-score-num">2</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="3" data-value="3"><span class="btn-score-num">3</span><span class="btn-score-unit">คะแนน</span></button>
             </div>
           </div>
         </div>
@@ -951,11 +969,11 @@
           <div class="choices-area">
             <div class="choices-label">เลือกคะแนน</div>
             <div class="choices-grid" id="choices-4">
-              <button class="choice-btn" data-page="4" data-value="1">1</button>
-              <button class="choice-btn" data-page="4" data-value="2">2</button>
-              <button class="choice-btn" data-page="4" data-value="3">3</button>
-              <button class="choice-btn" data-page="4" data-value="4">4</button>
-              <button class="choice-btn" data-page="4" data-value="5">5</button>
+              <button class="choice-btn" data-page="4" data-value="1"><span class="btn-score-num">1</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="4" data-value="2"><span class="btn-score-num">2</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="4" data-value="3"><span class="btn-score-num">3</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="4" data-value="4"><span class="btn-score-num">4</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="4" data-value="5"><span class="btn-score-num">5</span><span class="btn-score-unit">คะแนน</span></button>
             </div>
           </div>
         </div>
@@ -989,9 +1007,9 @@
           <div class="choices-area">
             <div class="choices-label">เลือกคะแนน</div>
             <div class="choices-grid" id="choices-5">
-              <button class="choice-btn" data-page="5" data-value="1">1</button>
-              <button class="choice-btn" data-page="5" data-value="2">2</button>
-              <button class="choice-btn" data-page="5" data-value="3">3</button>
+              <button class="choice-btn" data-page="5" data-value="1"><span class="btn-score-num">1</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="5" data-value="2"><span class="btn-score-num">2</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="5" data-value="3"><span class="btn-score-num">3</span><span class="btn-score-unit">คะแนน</span></button>
             </div>
           </div>
         </div>
@@ -1025,8 +1043,8 @@
           <div class="choices-area">
             <div class="choices-label">เลือกคะแนน</div>
             <div class="choices-grid" id="choices-6">
-              <button class="choice-btn" data-page="6" data-value="1">1</button>
-              <button class="choice-btn" data-page="6" data-value="2">2</button>
+              <button class="choice-btn" data-page="6" data-value="1"><span class="btn-score-num">1</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="6" data-value="2"><span class="btn-score-num">2</span><span class="btn-score-unit">คะแนน</span></button>
             </div>
           </div>
         </div>
@@ -1060,8 +1078,8 @@
           <div class="choices-area">
             <div class="choices-label">เลือกคะแนน</div>
             <div class="choices-grid" id="choices-7">
-              <button class="choice-btn" data-page="7" data-value="0">0</button>
-              <button class="choice-btn" data-page="7" data-value="1">1</button>
+              <button class="choice-btn" data-page="7" data-value="0"><span class="btn-score-num">0</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="7" data-value="1"><span class="btn-score-num">1</span><span class="btn-score-unit">คะแนน</span></button>
             </div>
           </div>
         </div>
@@ -1095,9 +1113,9 @@
           <div class="choices-area">
             <div class="choices-label">เลือกคะแนน</div>
             <div class="choices-grid" id="choices-8">
-              <button class="choice-btn" data-page="8" data-value="1">1</button>
-              <button class="choice-btn" data-page="8" data-value="2">2</button>
-              <button class="choice-btn" data-page="8" data-value="3">3</button>
+              <button class="choice-btn" data-page="8" data-value="1"><span class="btn-score-num">1</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="8" data-value="2"><span class="btn-score-num">2</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="8" data-value="3"><span class="btn-score-num">3</span><span class="btn-score-unit">คะแนน</span></button>
             </div>
           </div>
         </div>
@@ -1131,8 +1149,8 @@
           <div class="choices-area">
             <div class="choices-label">เลือกคะแนน</div>
             <div class="choices-grid" id="choices-9">
-              <button class="choice-btn" data-page="9" data-value="0">0</button>
-              <button class="choice-btn" data-page="9" data-value="1">1</button>
+              <button class="choice-btn" data-page="9" data-value="0"><span class="btn-score-num">0</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="9" data-value="1"><span class="btn-score-num">1</span><span class="btn-score-unit">คะแนน</span></button>
             </div>
           </div>
         </div>
@@ -1166,8 +1184,8 @@
           <div class="choices-area">
             <div class="choices-label">เลือกคะแนน</div>
             <div class="choices-grid" id="choices-10">
-              <button class="choice-btn" data-page="10" data-value="0">0</button>
-              <button class="choice-btn" data-page="10" data-value="1">1</button>
+              <button class="choice-btn" data-page="10" data-value="0"><span class="btn-score-num">0</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="10" data-value="1"><span class="btn-score-num">1</span><span class="btn-score-unit">คะแนน</span></button>
             </div>
           </div>
         </div>
@@ -1201,8 +1219,8 @@
           <div class="choices-area">
             <div class="choices-label">เลือกคะแนน</div>
             <div class="choices-grid" id="choices-11">
-              <button class="choice-btn" data-page="11" data-value="0">0</button>
-              <button class="choice-btn" data-page="11" data-value="1">1</button>
+              <button class="choice-btn" data-page="11" data-value="0"><span class="btn-score-num">0</span><span class="btn-score-unit">คะแนน</span></button>
+              <button class="choice-btn" data-page="11" data-value="1"><span class="btn-score-num">1</span><span class="btn-score-unit">คะแนน</span></button>
             </div>
           </div>
         </div>
@@ -1223,14 +1241,13 @@
       </div>
       <div class="question-card">
         <div class="result-hero">
-          <div class="result-score-label">คะแนนที่ได้</div>
+          <div class="result-score-label">คะแนนที่ให้</div>
           <div class="result-score-value" id="final-score">0</div>
           <div class="result-score-max">/ 30 คะแนน</div>
         </div>
-        <div class="result-breakdown" id="result-breakdown"></div>
-        <div style="text-align:center; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <div style="text-align:center; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; align-items:center;">
           <button class="restart-btn" onclick="restartGame()">🔄 เริ่มใหม่อีกครั้ง</button>
-          <a href="summary_intepretation.html" class="next-page-btn">NEXT <span style="display:inline-block; transition:transform .22s ease;">→</span></a>
+          <a href="summary_intepretation.html" class="next-page-btn" id="result-next-btn">NEXT <span style="display:inline-block; transition:transform .22s ease;">→</span></a>
         </div>
       </div>
     </div>
@@ -1239,11 +1256,14 @@
 </div><!-- /layout -->
 
 <script>
+  // -------------------------------------------------------
+  // PAGES CONFIG — correctAnswer = เฉลย (ไม่แสดงระหว่างทำ)
+  // -------------------------------------------------------
   const PAGES = [
     { id: 1,  title: "Orientation for time",           maxScore: 5, correctAnswer: 1 },
     { id: 2,  title: "Orientation for place",          maxScore: 5, correctAnswer: 5 },
     { id: 3,  title: "Registration",                   maxScore: 3, correctAnswer: 3 },
-    { id: 4,  title: "Attention & Calculation",        maxScore: 1, correctAnswer: 1 },
+    { id: 4,  title: "Attention & Calculation",        maxScore: 5, correctAnswer: 1 },
     { id: 5,  title: "Recall",                         maxScore: 3, correctAnswer: 3 },
     { id: 6,  title: "Naming",                         maxScore: 2, correctAnswer: 2 },
     { id: 7,  title: "Repetition",                     maxScore: 1, correctAnswer: 0 },
@@ -1256,6 +1276,9 @@
   const userAnswers = {};
   let totalScore = 0;
 
+  // -------------------------------------------------------
+  // ผูก event listener กับปุ่มเลือกคะแนน (ไม่แสดงเฉลย)
+  // -------------------------------------------------------
   document.querySelectorAll('.choice-btn').forEach(btn => {
     btn.addEventListener('click', function () {
       const page  = parseInt(this.dataset.page);
@@ -1266,15 +1289,23 @@
 
   function selectAnswer(page, value, clickedBtn) {
     const container = document.getElementById('choices-' + page);
-    container.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+    // ลบ selected ออกจากทุกปุ่มในข้อนั้น (ไม่แสดง correct/wrong)
+    container.querySelectorAll('.choice-btn').forEach(b => {
+      b.classList.remove('selected');
+    });
     clickedBtn.classList.add('selected');
     userAnswers[page] = value;
+
+    // คำนวณคะแนนรวมจากสิ่งที่ผู้ใช้เลือก (ไม่ตรวจเฉลย)
     recalcScore();
     updateScoreDisplays();
+
+    // แสดงปุ่ม Next
     document.getElementById('next-' + page).classList.remove('hidden');
   }
 
   function recalcScore() {
+    // คะแนนรวม = ผลรวมของคะแนนที่ผู้ใช้เลือกในทุกข้อ
     totalScore = Object.values(userAnswers).reduce((sum, v) => sum + v, 0);
   }
 
@@ -1319,23 +1350,40 @@
     document.getElementById('progress-bar').style.display = 'none';
     document.getElementById('page-result').classList.add('active');
     document.getElementById('final-score').textContent = totalScore;
-
-    const wrongItems = PAGES.filter(p => (userAnswers[p.id] ?? 0) !== p.correctAnswer);
     sessionStorage.setItem('mmse_total_score', totalScore);
- 
+
+    // ตรวจว่าตอบถูกทุกข้อหรือไม่ (ไม่แสดงรายละเอียด)
+    const hasWrong = PAGES.some(p => (userAnswers[p.id] ?? -1) !== p.correctAnswer);
+    const nextBtn  = document.getElementById('result-next-btn');
+    if (nextBtn) {
+      if (hasWrong) {
+        nextBtn.style.pointerEvents = 'none';
+        nextBtn.style.opacity = '0.35';
+        nextBtn.title = 'กรุณากลับไปประเมินใหม่ให้ถูกต้องก่อน';
+      } else {
+        nextBtn.style.pointerEvents = '';
+        nextBtn.style.opacity = '';
+        nextBtn.title = '';
+      }
+    }
   }
 
+  // -------------------------------------------------------
+  // Restart = เริ่มใหม่ทั้งหมด + แสดง modal
+  // -------------------------------------------------------
   function restartGame() {
     Object.keys(userAnswers).forEach(k => delete userAnswers[k]);
     totalScore = 0;
     updateScoreDisplays();
     document.querySelectorAll('.game-page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.next-btn').forEach(b => b.classList.add('hidden'));
-    document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('.choice-btn').forEach(b => {
+      b.classList.remove('selected');
+    });
     document.getElementById('progress-bar').style.display = 'flex';
     updateDots(1);
     document.getElementById('page-1').classList.add('active');
-    // Re-show modal on restart
+    // Re-show modal
     document.getElementById('modal-step-1').classList.add('visible');
     document.getElementById('modal-step-2').classList.remove('visible');
     document.getElementById('intro-modal').style.display = 'flex';
